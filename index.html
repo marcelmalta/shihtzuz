@@ -307,6 +307,70 @@
     from { transform:translateX(0); }
     to   { transform:translateX(-50%); }
   }
+  /* ================================
+   OVERRIDES — espaço e logo maior
+   ================================ */
+
+/* 1) Ao ativar o filtro, esconda COMPLETAMENTE
+      as seções dos banners (não só o conteúdo)  */
+body.modo-filtro section:has(#bannerA),
+body.modo-filtro section:has(#bannerB){
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+/* 2) Diminui a “folga” entre o filtro e o título da listagem */
+body.modo-filtro main .text-center > .bg-gradient-to-r{
+  margin-top: 6px !important;   /* estava mt-3 no HTML */
+}
+
+/* 3) Compacta levemente a própria barra quando ativa
+      para ganhar mais viewport, principalmente no mobile */
+body.modo-filtro #barraFiltros{
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+/* ================================
+   LOGO MAIS LARGO NO TOPO DO CARD
+   ================================ */
+
+/* Faixa do selo ocupa melhor a largura */
+.card-selo{
+  padding: 4px 6px !important;
+  min-height: 34px;
+  border-radius: .5rem;
+}
+
+/* Desktop deixa a faixa um pouco mais alta */
+@media (min-width:1024px){
+  .card-selo{ min-height: 42px; }
+}
+
+/* O logo passa a usar praticamente toda a faixa
+   (mantendo proporção por object-fit: contain) */
+.card-logo{
+  width: 100% !important;      /* ocupa toda a faixa */
+  height: 28px !important;     /* mobile */
+  max-width: none !important;
+  object-fit: contain !important;
+}
+
+/* Tablet / Desktop: aumenta a altura do logo para preencher melhor */
+@media (min-width:640px){
+  .card-logo{ height: 32px !important; }
+}
+@media (min-width:1024px){
+  .card-logo{ height: 36px !important; }
+}
+
+/* Ajuste fino: remove “pulos” na expansão do card ao passar o mouse */
+.card-selo:hover .card-logo{ transform: none !important; }
+
   </style>
 
   <!-- OVERRIDE de layout dos botões (linhas/colunas fixas) -->
