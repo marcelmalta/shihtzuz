@@ -9,18 +9,19 @@
   document.querySelector(`style[data-${id}]`)?.remove();
 
   const css = `
+    /* Container dos filtros */
     #filtroOrigem{
       display:flex; flex-wrap:wrap; gap:12px; width:100%; align-items:center;
     }
 
-    /* cápsula que se ajusta ao conteúdo, com limites MAIORES */
+    /* Cápsula responsiva (ajusta ao conteúdo), agora ~30% maior */
     #filtroOrigem label{
       display:inline-flex; align-items:center; justify-content:center;
       padding:12px 14px;
       border-radius:16px; border:1.5px solid #e5e7eb; background:#fff;
       cursor:pointer; user-select:none; overflow:hidden;
-      max-width:182px;   /* was 140px */
-      min-width:83px;    /* was 64px  */
+      max-width:182px;   /* +30% (era ~140px) */
+      min-width:83px;    /* +30% (era ~64px)  */
       transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
     @media (min-width:1025px){
@@ -30,12 +31,11 @@
       }
     }
 
-    /* logo cresce ~30% mas nunca ultrapassa a cápsula */
+    /* Logo cresce ~30% e nunca ultrapassa a cápsula */
     #filtroOrigem label img.filtro-logo{
       display:block; object-fit:contain; pointer-events:none;
-      max-width:100%;
-      height:auto;
-      max-height:57px;   /* was 44px */
+      max-width:100%; height:auto;
+      max-height:57px;   /* +30% (era ~44px) */
     }
 
     /* Tablet */
@@ -43,10 +43,10 @@
       #filtroOrigem{ gap:11px; }
       #filtroOrigem label{
         padding:11px 12px; border-radius:14px;
-        max-width:156px;   /* was 120px */
-        min-width:78px;    /* was 60px  */
+        max-width:156px;   /* +30% (era ~120px) */
+        min-width:78px;    /* +30% (era ~60px)  */
       }
-      #filtroOrigem label img.filtro-logo{ max-height:52px; } /* was 40px */
+      #filtroOrigem label img.filtro-logo{ max-height:52px; } /* +30% (era ~40px) */
     }
 
     /* Mobile */
@@ -54,16 +54,16 @@
       #filtroOrigem{ gap:9px; }
       #filtroOrigem label{
         padding:10px 11px; border-radius:12px;
-        max-width:135px;   /* was 104px */
-        min-width:73px;    /* was 56px  */
+        max-width:135px;   /* +30% (era ~104px) */
+        min-width:73px;    /* +30% (era ~56px)  */
       }
-      #filtroOrigem label img.filtro-logo{ max-height:47px; } /* was 36px */
+      #filtroOrigem label img.filtro-logo{ max-height:47px; } /* +30% (era ~36px) */
     }
 
-    /* SEM texto sempre */
+    /* Nunca mostrar texto nas cápsulas dos filtros */
     #filtroOrigem label .texto{ display:none !important; }
 
-    /* borda por marca quando ativa */
+    /* Borda por marca quando ativa */
     #filtroOrigem label.ativo[data-src="shopee"]       { border-color:#EE4D2D; }
     #filtroOrigem label.ativo[data-src="petlove"]      { border-color:#00AEEF; }
     #filtroOrigem label.ativo[data-src="amazon"]       { border-color:#232F3E; }
@@ -82,6 +82,7 @@
   style.textContent = css;
   document.head.appendChild(style);
 })();
+
 
 /* ================== IDENTIDADE POR LOJA ================== */
 const STORE_META = {
