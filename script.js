@@ -443,7 +443,7 @@ function criarBarraFiltros(){
         <option value="2">+ R$ 150</option>
       </select>
 
-      <select id="filtroCategoria" class="select-pill px-3 py-1.5 rounded-full border h-10">
+      <select id="filtroCategoria" class="px-3 py-1.5 rounded-full border min-w-[180px] md:min-w-[160px] sm:min-w-[140px] h-10 font-semibold">
         <option value="">Categoria</option>
         <option>Roupas</option><option>Acessórios</option><option>Higiene</option><option>Camas</option><option>Rações</option>
       </select>

@@ -514,7 +514,15 @@ body.modo-filtro #barraFiltros{ margin-bottom:0 !important; padding-bottom:4px !
 @media (max-width:640px){
   .search-wrap{ min-width: 100%; }
 }
-
+/* Esconde a lupa do campo de busca (cobre SVG inline e ícones com classe .icon) */
+.search-wrap .icon,
+.search-wrap svg {
+  display: none !important;
+}
+#filtroCategoria {
+  height: 40px;
+  font-weight: 600;
+}
 
   /* Garante que qualquer texto dentro do botão permaneça oculto */
   #filtroOrigem label .texto{ display:none !important; }
