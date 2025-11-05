@@ -444,8 +444,77 @@ body.modo-filtro main .text-center > .bg-gradient-to-r {
 /* encosta o fim do filtro no título (sem folga inferior) */
 body.modo-filtro #barraFiltros {
   margin-bottom: 0 !important;
-  padding-bottom: 4px !important;   /* pode reduzir para 0 se quiser ainda mais colado */
+  padding-bottom: 0px !important;   /* pode reduzir para 0 se quiser ainda mais colado */
 }
+/* ===== Filtro compacto + estética premium ===== */
+#barraFiltros{
+  padding: 8px 10px !important;      /* menos altura */
+  gap: 8px !important;
+  border-radius: 14px;
+}
+
+/* linha de controles (busca + selects) */
+#barraFiltros .f-controls{
+  display:flex; flex-wrap:wrap;
+  align-items:center; justify-content:center;
+  gap: 8px 10px;                      /* bem juntinho */
+}
+
+/* === Busca em pílula com ícone e botão limpar === */
+.search-wrap{
+  position:relative; min-width: 240px; max-width: 680px; width:100%;
+}
+.search-wrap .icon{
+  position:absolute; left:12px; top:50%; transform:translateY(-50%);
+  width:18px; height:18px; opacity:.65; pointer-events:none;
+}
+.search-wrap input{
+  width:100%; height:40px; padding:0 40px 0 36px;
+  border-radius:9999px; border:1.5px solid rgba(214,167,92,.45);
+  background:rgba(255,255,255,.95);
+  font-weight:600; letter-spacing:.1px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
+  transition:.2s;
+}
+.search-wrap input::placeholder{ color:#9ca3af; font-weight:500; }
+.search-wrap input:focus{
+  outline:0; border-color:#d6a75c; box-shadow:0 0 0 3px rgba(214,167,92,.25);
+}
+.search-wrap .clear{
+  position:absolute; right:8px; top:50%; transform:translateY(-50%);
+  width:28px; height:28px; border-radius:9999px; border:1px solid #e5e7eb;
+  background:#fff; display:none; place-items:center; font-weight:900;
+}
+.search-wrap .clear.show{ display:grid; }
+
+/* === Selects em pílula (Preço/Categoria) === */
+.select-pill{
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  height:40px; padding:0 36px 0 14px; border-radius:9999px;
+  border:1.5px solid #e5e7eb; background:#fff; font-weight:700;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="%236b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-repeat:no-repeat; background-position:right 10px center;
+}
+.select-pill:focus{ outline:0; border-color:#d6a75c; box-shadow:0 0 0 3px rgba(214,167,92,.2); }
+
+/* === Espaçamentos do grupo de marcas (não altera tamanho dos botões) === */
+#filtroOrigem{ gap:8px !important; margin-top:6px !important; }
+#filtroOrigem label{ margin:0 !important; }
+
+/* ===== Colar título nos botões do filtro (sem “respiro”) ===== */
+body.modo-filtro main.space-y-4 > :not([hidden]) ~ :not([hidden]){ margin-top:0 !important; }
+body.modo-filtro main .text-center > .bg-gradient-to-r{ margin-top:0 !important; }
+body.modo-filtro #barraFiltros{ margin-bottom:0 !important; padding-bottom:4px !important; }
+
+/* responsivo – deixa tudo compacto também em telas menores */
+@media (max-width:1024px){
+  #barraFiltros{ padding:8px !important; gap:6px !important; }
+  .search-wrap input, .select-pill{ height:38px; }
+}
+@media (max-width:640px){
+  .search-wrap{ min-width: 100%; }
+}
+
 
   /* Garante que qualquer texto dentro do botão permaneça oculto */
   #filtroOrigem label .texto{ display:none !important; }

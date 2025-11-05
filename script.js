@@ -416,27 +416,34 @@ function criarBarraFiltros(){
   barra.className = "hidden rounded-xl mt-1.5 p-2 shadow-md flex flex-col items-center justify-center gap-2 max-w-6xl mx-auto";
 
   // origem com LOGO-only (sem texto visível)
-const origemHTML = Object.entries(STORE_META).map(([k,v])=>`
-  <label data-src="${k}" class="ativo" aria-label="${v.nome}" title="${v.nome}">
-    <input type="checkbox" class="origemCheck" value="${k}" checked />
-    <img src="${v.logo}" alt="" class="filtro-logo" />
-  </label>
-`).join("");
+  const origemHTML = Object.entries(STORE_META).map(([k,v])=>`
+    <label data-src="${k}" class="ativo" aria-label="${v.nome}" title="${v.nome}">
+      <input type="checkbox" class="origemCheck" value="${k}" checked />
+      <img src="${v.logo}" alt="" class="filtro-logo" />
+    </label>
+  `).join("");
 
   barra.innerHTML = `
-    <div class="w-full">
-      <input id="buscaInput" type="text" placeholder="Buscar (ex: laço, cama, shampoo)..." class="w-full" />
-    </div>
+    <div class="f-controls w-full flex flex-wrap items-center justify-center gap-2">
+      <!-- Busca com botão limpar (IDs preservados) -->
+      <div class="search-wrap relative min-w-[240px] max-w-[680px] w-full">
+        <svg class="icon absolute left-3 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" width="18" height="18" fill="none">
+          <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input id="buscaInput" type="text" placeholder="Buscar (ex: laço, cama, shampoo)..." class="w-full h-10 rounded-full border px-9 pr-9" />
+        <button id="clearBusca" type="button"
+                class="clear hidden absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full border grid place-items-center leading-none">×</button>
+      </div>
 
-    <div class="flex flex-wrap justify-center items-center gap-2 w-full">
-      <select id="filtroPreco" class="px-3 py-1.5 rounded-full border">
+      <!-- Selects (IDs preservados) -->
+      <select id="filtroPreco" class="select-pill px-3 py-1.5 rounded-full border h-10">
         <option value="">Preço</option>
         <option value="0">Até R$ 50</option>
         <option value="1">R$ 50–R$ 150</option>
         <option value="2">+ R$ 150</option>
       </select>
 
-      <select id="filtroCategoria" class="px-3 py-1.5 rounded-full border">
+      <select id="filtroCategoria" class="select-pill px-3 py-1.5 rounded-full border h-10">
         <option value="">Categoria</option>
         <option>Roupas</option><option>Acessórios</option><option>Higiene</option><option>Camas</option><option>Rações</option>
       </select>
@@ -450,11 +457,26 @@ const origemHTML = Object.entries(STORE_META).map(([k,v])=>`
   if (selo) selo.insertAdjacentElement("afterend", barra);
   else document.body.insertBefore(barra, document.body.firstChild);
 
-  ["buscaInput","filtroPreco","filtroCategoria"].forEach(id=>{
-    const elx = barra.querySelector(`#${id}`);
-    if (!elx) return;
-    ["input","change"].forEach(evt=> elx.addEventListener(evt, aplicarFiltros));
+  // eventos (IDs preservados)
+  const busca = barra.querySelector("#buscaInput");
+  const clear = barra.querySelector("#clearBusca");
+  const showClear = () => {
+    if (!clear) return;
+    clear.classList.toggle("hidden", !busca.value);
+  };
+
+  ["input","change"].forEach(evt=>{
+    if (busca) busca.addEventListener(evt, ()=>{ showClear(); aplicarFiltros(); });
   });
+  if (clear) clear.addEventListener("click", ()=>{
+    busca.value = ""; showClear(); aplicarFiltros();
+  });
+
+  ["filtroPreco","filtroCategoria"].forEach(id=>{
+    const elx = barra.querySelector(`#${id}`);
+    if (elx) elx.addEventListener("change", aplicarFiltros);
+  });
+
   barra.querySelectorAll(".origemCheck").forEach(chk=>{
     const label = chk.closest("label");
     chk.addEventListener("change", ()=>{
