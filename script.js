@@ -3,75 +3,71 @@
    (ATUALIZADO: filtros LOGO-only em mobile/tablet, fix erros)
    ========================================================= */
 
-/* ========= CSS responsivo para os botões de origem (LOGO-only, maior) ========= */
+/* ========= CSS responsivo: botões só com LOGO bem grande ========= */
 (function injectFiltroCSS(){
   const id = 'filtros-logo-only';
   const prev = document.querySelector(`style[data-${id}]`);
   if (prev) prev.remove();
 
   const css = `
-    /* barra de filtros: ocupar largura total e permitir rolagem vertical */
-    #barraFiltros{
-      display:flex !important;
-      flex-direction:column;
-      align-items:center;
-      gap:12px;
-      width:100%;
-      max-width:72rem;              /* ~ max-w-6xl */
-      margin:0 auto;
-      max-height:calc(100vh - 120px);
-      overflow-y:auto;              /* <- garante que TODAS as logos ficam acessíveis */
-      overscroll-behavior:contain;
-      padding-bottom:8px;
-    }
-
-    /* Grid fluido com botões largos */
+    /* GRID dos botões */
     #filtroOrigem{
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
       gap:12px; width:100%;
     }
 
-    /* Botão (apenas logo) — desktop maior */
+    /* Botão base (quadrado arredondado) */
     #filtroOrigem label{
       display:flex; align-items:center; justify-content:center;
-      height:84px;
-      border-radius:18px;
+      aspect-ratio: 1 / 1;              /* vira quadrado perfeito */
+      min-height: 92px;                  /* desktop */
+      border-radius: 18px;
       border:1.5px solid #e5e7eb;
       background:#fff;
+      padding: 8px;                      /* pequena margem interna */
       transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-      cursor:pointer; user-select:none; padding:0;
+      cursor:pointer; user-select:none;
     }
-    #filtroOrigem label:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 6px 14px rgba(0,0,0,.08);
-    }
-    #filtroOrigem input{ position:absolute; opacity:0; width:0; height:0; }
 
-    /* LOGO bem preenchido */
+    /* LOGO ocupa ~82% do botão (preenche como no seu exemplo) */
     #filtroOrigem label img.filtro-logo{
       display:block; object-fit:contain; pointer-events:none;
-      width:56px; height:56px;
-      max-width:80%; max-height:80%;
+      width:82%; height:82%;
+    }
+
+    /* Hover só no desktop */
+    @media (min-width:1025px){
+      #filtroOrigem label:hover{
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 10px 18px rgba(0,0,0,.10);
+      }
     }
 
     /* Tablet */
     @media (max-width:1024px){
-      #filtroOrigem{ grid-template-columns: repeat(auto-fit, minmax(64px, 1fr)); gap:10px; }
-      #filtroOrigem label{ height:72px; border-radius:16px; }
-      #filtroOrigem label img.filtro-logo{ width:48px; height:48px; }
+      #filtroOrigem{
+        grid-template-columns: repeat(auto-fit, minmax(68px, 1fr));
+        gap:10px;
+      }
+      #filtroOrigem label{ min-height: 80px; border-radius:16px; padding:7px; }
+      #filtroOrigem label img.filtro-logo{ width:82%; height:82%; }
     }
 
     /* Mobile */
     @media (max-width:640px){
-      #filtroOrigem{ grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap:8px; }
-      #filtroOrigem label{ height:64px; border-radius:14px; }
-      #filtroOrigem label img.filtro-logo{ width:44px; height:44px; }
+      #filtroOrigem{
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap:8px;
+      }
+      #filtroOrigem label{ min-height: 70px; border-radius:14px; padding:6px; }
+      #filtroOrigem label img.filtro-logo{ width:82%; height:82%; }
     }
 
+    /* SEM texto */
     #filtroOrigem label .texto{ display:none !important; }
 
-    /* Estado ativo: borda colorida por marca */
+    /* Estado ativo: só borda colorida por marca */
     #filtroOrigem label.ativo[data-src="shopee"]       { border-color:#EE4D2D; }
     #filtroOrigem label.ativo[data-src="petlove"]      { border-color:#00AEEF; }
     #filtroOrigem label.ativo[data-src="amazon"]       { border-color:#232F3E; }
@@ -90,6 +86,7 @@
   style.textContent = css;
   document.head.appendChild(style);
 })();
+
 
 /* ================== IDENTIDADE POR LOJA ================== */
 const STORE_META = {
