@@ -3,40 +3,34 @@
    (ATUALIZADO: filtros LOGO-only em mobile/tablet, fix erros)
    ========================================================= */
 
-/* ========= CSS responsivo: botões só com LOGO bem grande ========= */
+/* ========= CSS: botão se ajusta ao tamanho da logo (sem quadrado) ========= */
 (function injectFiltroCSS(){
   const id = 'filtros-logo-only';
   const prev = document.querySelector(`style[data-${id}]`);
   if (prev) prev.remove();
 
   const css = `
-    /* GRID dos botões */
+    /* Container flexível que apenas quebra linha */
     #filtroOrigem{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
-      gap:12px; width:100%;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      width:100%;
+      align-items:center;
     }
 
-    /* Botão base (quadrado arredondado) */
+    /* Botão = cápsula que se ajusta ao conteúdo (logo) */
     #filtroOrigem label{
-      display:flex; align-items:center; justify-content:center;
-      aspect-ratio: 1 / 1;              /* vira quadrado perfeito */
-      min-height: 92px;                  /* desktop */
-      border-radius: 18px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;              /* espaço ao redor da logo */
+      border-radius:16px;
       border:1.5px solid #e5e7eb;
       background:#fff;
-      padding: 8px;                      /* pequena margem interna */
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
       cursor:pointer; user-select:none;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
-
-    /* LOGO ocupa ~82% do botão (preenche como no seu exemplo) */
-    #filtroOrigem label img.filtro-logo{
-      display:block; object-fit:contain; pointer-events:none;
-      width:82%; height:82%;
-    }
-
-    /* Hover só no desktop */
     @media (min-width:1025px){
       #filtroOrigem label:hover{
         transform: translateY(-2px) scale(1.02);
@@ -44,27 +38,28 @@
       }
     }
 
+    /* Logo determina o tamanho do botão */
+    #filtroOrigem label img.filtro-logo{
+      display:block; object-fit:contain; pointer-events:none;
+      height: var(--logo-h, 44px);    /* desktop default */
+      width: auto;                    /* respeita proporção da marca */
+    }
+
     /* Tablet */
     @media (max-width:1024px){
-      #filtroOrigem{
-        grid-template-columns: repeat(auto-fit, minmax(68px, 1fr));
-        gap:10px;
-      }
-      #filtroOrigem label{ min-height: 80px; border-radius:16px; padding:7px; }
-      #filtroOrigem label img.filtro-logo{ width:82%; height:82%; }
+      #filtroOrigem{ gap:10px; }
+      #filtroOrigem label{ padding:9px 10px; border-radius:14px; }
+      #filtroOrigem label img.filtro-logo{ height:40px; }
     }
 
     /* Mobile */
     @media (max-width:640px){
-      #filtroOrigem{
-        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-        gap:8px;
-      }
-      #filtroOrigem label{ min-height: 70px; border-radius:14px; padding:6px; }
-      #filtroOrigem label img.filtro-logo{ width:82%; height:82%; }
+      #filtroOrigem{ gap:8px; }
+      #filtroOrigem label{ padding:8px 9px; border-radius:12px; }
+      #filtroOrigem label img.filtro-logo{ height:36px; }
     }
 
-    /* SEM texto */
+    /* SEM texto sempre */
     #filtroOrigem label .texto{ display:none !important; }
 
     /* Estado ativo: só borda colorida por marca */
@@ -86,7 +81,6 @@
   style.textContent = css;
   document.head.appendChild(style);
 })();
-
 
 /* ================== IDENTIDADE POR LOJA ================== */
 const STORE_META = {
