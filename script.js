@@ -10,53 +10,68 @@
   if (prev) prev.remove();
 
   const css = `
+    /* barra de filtros: ocupar largura total e permitir rolagem vertical */
+    #barraFiltros{
+      display:flex !important;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      width:100%;
+      max-width:72rem;              /* ~ max-w-6xl */
+      margin:0 auto;
+      max-height:calc(100vh - 120px);
+      overflow-y:auto;              /* <- garante que TODAS as logos ficam acessíveis */
+      overscroll-behavior:contain;
+      padding-bottom:8px;
+    }
+
+    /* Grid fluido com botões largos */
     #filtroOrigem{
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); /* ↑ colunas mais largas */
+      grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
       gap:12px; width:100%;
     }
 
-    /* Botão base (apenas logo) — MAIOR */
+    /* Botão (apenas logo) — desktop maior */
     #filtroOrigem label{
       display:flex; align-items:center; justify-content:center;
-      height:84px;                      /* ↑ desktop AINDA maior */
+      height:84px;
       border-radius:18px;
       border:1.5px solid #e5e7eb;
       background:#fff;
       transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
       cursor:pointer; user-select:none; padding:0;
     }
+    #filtroOrigem label:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(0,0,0,.08);
+    }
+    #filtroOrigem input{ position:absolute; opacity:0; width:0; height:0; }
 
     /* LOGO bem preenchido */
     #filtroOrigem label img.filtro-logo{
       display:block; object-fit:contain; pointer-events:none;
-      width:56px; height:56px;          /* ↑ desktop AINDA maior */
-      max-width:80%; max-height:80%;    /* evita estourar em SVGs muito largos */
+      width:56px; height:56px;
+      max-width:80%; max-height:80%;
     }
 
     /* Tablet */
     @media (max-width:1024px){
-      #filtroOrigem{
-        grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
-        gap:10px;
-      }
+      #filtroOrigem{ grid-template-columns: repeat(auto-fit, minmax(64px, 1fr)); gap:10px; }
       #filtroOrigem label{ height:72px; border-radius:16px; }
       #filtroOrigem label img.filtro-logo{ width:48px; height:48px; }
     }
 
     /* Mobile */
     @media (max-width:640px){
-      #filtroOrigem{
-        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-        gap:8px;
-      }
+      #filtroOrigem{ grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap:8px; }
       #filtroOrigem label{ height:64px; border-radius:14px; }
       #filtroOrigem label img.filtro-logo{ width:44px; height:44px; }
     }
 
     #filtroOrigem label .texto{ display:none !important; }
 
-    /* Estado ativo: só borda colorida por marca (mantido) */
+    /* Estado ativo: borda colorida por marca */
     #filtroOrigem label.ativo[data-src="shopee"]       { border-color:#EE4D2D; }
     #filtroOrigem label.ativo[data-src="petlove"]      { border-color:#00AEEF; }
     #filtroOrigem label.ativo[data-src="amazon"]       { border-color:#232F3E; }
