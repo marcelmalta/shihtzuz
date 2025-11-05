@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- =========================================================
+       META & TITLE
+       ========================================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShihTzuShop — Tudo para o seu Shih Tzu</title>
+
+  <!-- =========================================================
+       Tailwind (CDN)
+       ========================================================= -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- =========================================================
+       STYLES (CSS)
+       Observação: Mantido extenso para preservar estrutura e
+       evitar regressões. IDs/Classes compatíveis com script.js
+       ========================================================= -->
+  <style>
+  /* =========================
+     Base e variáveis
+     ========================= */
+  html { scroll-behavior: smooth; }
+  ::-webkit-scrollbar { height: 6px; width: 6px; }
+  ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+
+  :root{
+    --marrom:#8B5E3C;
+    --bege:#F3E9DC;
+    --dourado:#D6A75C;
+    --creme:#FFF8ED;
+  }
+
+  /* =========================
+     Skeleton (efeito shimmer)
+     ========================= */
+  .skel {
+    position: relative;
+    overflow: hidden;
+    background: #f3f4f6;
+  }
+  .skel::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 1.2s infinite;
+  }
+  @keyframes shimmer{ 100% { transform: translateX(100%); } }
+
+  /* =========================================================
+     Cabeçalhos, textos etc (mantidos simples para Tailwind)
+     ========================================================= */
+
+  /* =========================
+     Card — Imagem Produto
+     ========================= */
+  .card-img-wrap{
+    position:relative;
+    border-radius:.6rem;
+  }
+  .card-img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+
+  /* =========================
+     Ribbon de desconto (se usar)
+     ========================= */
+  .ribbon {
+    position:absolute;
+    top:6px; left:-6px;
+    z-index:5;
+    background:#16a34a;
+    color:#fff;
+    font-weight:800;
+    font-size:10px;
+    padding:4px 10px;
+    border-radius:.4rem;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+    transform: rotate(-3deg);
+  }
+
+  /* =========================
+     Botão filtro flutuante
+     ========================= */
+  #btnBuscaFlutuante{
+    position:fixed; left:18px; bottom:18px; z-index:60;
+    display:flex; align-items:center; gap:6px;
+    padding:10px 18px; font-size:14px; font-weight:800;
+    color:#fff; border-radius:9999px;
+    background:linear-gradient(120deg,#2b1b12,#3a2518,#1d140f);
+    border:1.5px solid rgba(255,255,255,.18);
+    box-shadow:0 3px 10px rgba(0,0,0,.4);
+    transition:.3s;
+  }
+  #btnBuscaFlutuante.ativo{
+    background:linear-gradient(120deg,#7f1d1d,#b91c1c,#dc2626);
+  }
+  @media (min-width:641px){
+    #btnBuscaFlutuante{ left:25px; bottom:25px; transform:scale(.92); }
+  }
+
+  /* =========================
+     Lista de Produtos — Grid fluido
+     ========================= */
+  #listaProdutos{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:6px;
+    padding-bottom:8px;
+    transition: all .35s ease;
+  }
+
+  .card-geral{
+    position:relative;
+    background:#fff;
+    border-radius:.7rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transition:transform .25s ease, box-shadow .25s ease;
+    width:23%;
+  }
+  .card-geral:hover{
+    transform:scale(1.035);
+    box-shadow:0 6px 16px rgba(0,0,0,.12);
+  }
+
+  .card-img-wrap{
+    width:100%;
+    height:84px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    border-radius:.55rem;
+  }
+  .card-img{
+    max-height:84px;
+    object-fit:contain;
+    transition:transform .3s ease;
+  }
+  .card-geral:hover .card-img{
+    transform:scale(1.04);
+  }
+
+  /* =========================
+     Selo com logo da loja
+     (altura generosa para não cortar logo)
+     ========================= */
+  .card-selo{
+    width:100%;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    background:#fff; border:1px solid #e5e7eb; border-radius:.45rem;
+    margin-top:3px; height:auto; min-height:32px; padding:4px 8px;
+  }
+
+  /* =========================
+     Logos nos cards e modais
+     ========================= */
+  .card-logo{
+    height:24px; width:auto; max-width:90px;
+    object-fit:contain; transition:transform .25s ease;
+  }
+  .card-selo:hover .card-logo{ transform:scale(1.1); }
+
+  /* Ajuste fino (logos mais “finas” levemente maiores) */
+  .card-logo.amz, .card-logo.pnt, .card-logo.mgl { height:26px; }
+
+  /* =========================
+     Textos do card
+     ========================= */
+  .card-nome{
+    font-size:10px; line-height:1.1rem; height:34px;
+    overflow:hidden; text-align:center; margin-top:4px;
+    font-weight:700; color:#1f2937;
+  }
+  .card-old{ font-size:10px; color:#6b7280; text-decoration:line-through; }
+  .card-price{ font-size:13px; font-weight:900; }
+  .card-off{ font-size:11px; font-weight:800; }
+
+  /* =========================
+     Responsivo: qtd por linha
+     ========================= */
+  @media (max-width:640px){ .card-geral{ width:23%; } }
+  @media (min-width:641px) and (max-width:1024px){ .card-geral{ width:18%; } }
+  @media (min-width:1025px){ .card-geral{ width:11.5%; } }
+
+  /* =========================
+     Modo filtro (banners escondem)
+     ========================= */
+  #bannerA, #bannerB{ transition: all .35s ease; }
+  .modo-filtro #bannerA, .modo-filtro #bannerB{
+    opacity:0; transform: translateY(-16px) scale(.96);
+    height:0; margin:0; padding:0; overflow:hidden; pointer-events:none;
+  }
+
+  /* =========================
+     Barra de filtros (inserida via JS)
+     ========================= */
+  #barraFiltros{
+    display:none !important; opacity:0; transform: translateY(-10px);
+    position:relative; width:100%;
+    backdrop-filter: blur(10px) brightness(1.05);
+    background: linear-gradient(180deg,#fff3d6 0%, var(--creme) 40%, #ffffff 100%);
+    border-top:1px solid rgba(214,167,92,.35); border-bottom:1px solid rgba(200,200,200,.35);
+    box-shadow: inset 0 2px 8px rgba(255,255,255,.6), 0 2px 14px rgba(0,0,0,.08);
+    color:#222; padding:8px 12px;
+  }
+  body.modo-filtro #barraFiltros{
+    display:flex !important; opacity:1; transform: translateY(0);
+  }
+  #buscaInput{
+    background:rgba(255,255,255,.92); color:#111;
+    border:1.5px solid rgba(214,167,92,.45); border-radius:9999px; padding:9px 12px;
+  }
+
+  /* =========================
+     Origem buttons (marcas) – via JS
+     ========================= */
+  #filtroOrigem{
+    display:grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap:8px; width:100%;
+  }
+  #filtroOrigem label{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    padding:7px 10px; border-radius:9999px; font-weight:800; font-size:13px;
+    border:1.5px solid #e5e7eb; background:#fff;
+  }
+  #filtroOrigem input{ position:absolute; opacity:0; width:0; height:0; }
+  #filtroOrigem label.ativo[data-src="shopee"]{
+    background:linear-gradient(145deg,#ee4d2d,#ff8a70); color:#fff; border-color:#ee4d2d;
+  }
+  #filtroOrigem label.ativo[data-src="petlove"]{
+    background:linear-gradient(145deg,#00AEEF,#b3ecff); color:#00324a; border-color:#00AEEF;
+  }
+  #filtroOrigem label.ativo[data-src="amazon"]{
+    background:linear-gradient(145deg,#ff9900,#232f3e); color:#fff; border-color:#232f3e;
+  }
+  #filtroOrigem label.ativo[data-src="mercadolivre"]{
+    background:linear-gradient(145deg,#fff6a6,#ffe600); color:#0b4ea2; border-color:#ffe600;
+  }
+
+  /* =========================
+     Modal
+     ========================= */
+  .modal-bg{ background:rgba(0,0,0,.7); }
+  .modal-box{
+    background:linear-gradient(135deg,#ffffff 0%, #FFF8ED 100%);
+    border:1px solid rgba(214,167,92,.45);
+  }
+
+  /* Logo do modal maior e centralizado */
+  #modalStoreLogo{ height:40px; margin-left:auto; margin-right:auto; display:block; }
+
+  /* Mantém compat c/ script.js se ele ler #modalStoreName */
+  .sr-only{
+    position:absolute !important;
+    width:1px; height:1px;
+    padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  /* =========================================================
+     CARROSSEL INFINITO — SELO MULTIMARCAS
+     (CSS puro: leve, responsivo, sem JS extra)
+     ========================================================= */
+  .ml-selo {
+    overflow:hidden;
+    position:relative;
+  }
+  .logos-container {
+    display:flex;
+    gap:32px;
+    align-items:center;
+    animation:slide 40s linear infinite;
+    width:max-content;
+  }
+  .logos-container:hover { animation-play-state: paused; } /* pausa no hover */
+  .logos-container img {
+    height:26px;
+    object-fit:contain;
+    transition:transform .3s;
+  }
+  .logos-container img:hover { transform:scale(1.1); }
+  @keyframes slide {
+    from { transform:translateX(0); }
+    to   { transform:translateX(-50%); } /* -50% porque duplicamos o bloco */
+  }
+  </style>
+</head>
+
+<body class="bg-[var(--bege)] text-gray-900 font-sans">
+
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
+  <header class="sticky top-0 z-50 shadow-md">
+    <!-- faixa topo -->
+    <div class="bg-[var(--marrom)] text-[var(--bege)] text-[10px] flex justify-center gap-4 py-0.5 font-medium">
+      <span>🛡️ Loja Verificada</span>
+      <span>🐾 Itens selecionados para Shih Tzu</span>
+    </div>
+
+    <!-- branding -->
+    <div class="bg-white px-2 py-2 flex flex-col sm:flex-row items-center justify-between border-b border-[var(--dourado)]/40">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🐶</span>
+        <h1 class="text-xl sm:text-2xl font-extrabold text-[var(--marrom)] tracking-tight">
+          ShihTzuShop
+        </h1>
+        <span class="hidden sm:inline text-[12px] text-[var(--marrom)]/70 font-semibold">
+          — Tudo para o seu Shih Tzu
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       SELO MULTIMARCAS — CARROSSEL INFINITO (logos locais)
+       ========================================================= -->
+  <section
+    class="ml-selo bg-gradient-to-r from-[#fff3d6] via-[#b3e5fc] to-[#ffecb3]
+           py-3 border-b border-[var(--dourado)]/40 shadow">
+    <div class="logos-container">
+      <!-- Bloco A -->
+      <div class="flex items-center gap-8 px-4">
+        <img src="logos/shopee.svg"       class="h-6" alt="Shopee" />
+        <img src="logos/petlove.svg"      class="h-6" alt="Petlove" />
+        <img src="logos/amazon.svg"       class="h-6" alt="Amazon" />
+        <img src="logos/mercadolivre.svg" class="h-6" alt="Mercado Livre" />
+        <img src="logos/magalu.svg"       class="h-6" alt="Magalu" />
+        <img src="logos/petz.svg"         class="h-6" alt="Petz" />
+        <img src="logos/cobasi.svg"       class="h-6" alt="Cobasi" />
+        <img src="logos/americanas.svg"   class="h-6" alt="Americanas" />
+        <img src="logos/aliexpress.svg"   class="h-6" alt="AliExpress" />
+        <img src="logos/carrefour.svg"    class="h-6" alt="Carrefour" />
+        <img src="logos/casasbahia.svg"   class="h-6" alt="Casas Bahia" />
+        <img src="logos/ponto.svg"        class="h-6" alt="Ponto" />
+      </div>
+      <!-- Bloco B (cópia) para loop contínuo -->
+      <div class="flex items-center gap-8 px-4">
+        <img src="logos/shopee.svg"       class="h-6" alt="Shopee" />
+        <img src="logos/petlove.svg"      class="h-6" alt="Petlove" />
+        <img src="logos/amazon.svg"       class="h-6" alt="Amazon" />
+        <img src="logos/mercadolivre.svg" class="h-6" alt="Mercado Livre" />
+        <img src="logos/magalu.svg"       class="h-6" alt="Magalu" />
+        <img src="logos/petz.svg"         class="h-6" alt="Petz" />
+        <img src="logos/cobasi.svg"       class="h-6" alt="Cobasi" />
+        <img src="logos/americanas.svg"   class="h-6" alt="Americanas" />
+        <img src="logos/aliexpress.svg"   class="h-6" alt="AliExpress" />
+        <img src="logos/carrefour.svg"    class="h-6" alt="Carrefour" />
+        <img src="logos/casasbahia.svg"   class="h-6" alt="Casas Bahia" />
+        <img src="logos/ponto.svg"        class="h-6" alt="Ponto" />
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       BANNERS (A e B) — preenchidos pelo script.js
+       ========================================================= -->
+  <section class="bg-white py-2 px-2 overflow-x-auto flex gap-3 scrollbar-thin scrollbar-thumb-gray-300">
+    <div id="bannerA" class="flex gap-2 w-full"></div>
+  </section>
+
+  <section class="bg-white py-2 px-2 overflow-x-auto flex gap-3 border-t border-blue-100">
+    <div id="bannerB" class="flex gap-2 w-full"></div>
+  </section>
+
+  <!-- =========================================================
+       BOTÃO FLUTUANTE (FILTRO)
+       ========================================================= -->
+  <button id="btnBuscaFlutuante">
+    🔍 Buscar / Filtrar
+  </button>
+
+  <!-- =========================================================
+       LISTA DE PRODUTOS
+       ========================================================= -->
+  <main class="p-2 space-y-4 max-w-6xl mx-auto">
+    <section class="text-center">
+
+      <!-- Título da listagem -->
+      <div
+        class="bg-gradient-to-r from-[var(--marrom)] via-[#3a2518] to-[var(--marrom)]
+               text-[var(--bege)] font-bold text-[13px] sm:text-[14px] tracking-wide
+               flex items-center justify-center gap-2 py-1 rounded-md mt-3 mb-2
+               shadow-md border border-[var(--marrom)]/40">
+        <span>📦</span>
+        <span>Todos os Produtos para Shih Tzu</span>
+      </div>
+
+      <!-- Lista de Cards (JS popula) -->
+      <div id="listaProdutos" class="faixa-geral"></div>
+
+    </section>
+  </main>
+
+  <!-- =========================================================
+       MODAL ÚNICO PADRONIZADO
+       ========================================================= -->
+  <div id="productModal" class="fixed inset-0 hidden items-center justify-center z-50 modal-bg">
+    <div id="modalBox"
+         class="modal-box rounded-2xl max-w-2xl w-[92%] sm:w-[90%]
+                overflow-y-auto max-h-[85vh] p-5 sm:p-6 shadow-2xl
+                transform scale-95 opacity-0 transition-all duration-300">
+
+      <!-- Fechar -->
+      <button id="closeModal"
+              class="absolute top-2 right-3 text-gray-700 hover:text-black
+                     text-2xl font-bold bg-white/80 rounded-full p-2 sm:p-2.5 shadow-md">
+        ✖
+      </button>
+
+      <div class="flex flex-col sm:flex-row gap-5">
+        <!-- Imagem principal -->
+        <div class="flex-1 flex items-center justify-center bg-white rounded-xl p-3 border border-yellow-200 shadow-inner">
+          <img id="modalImage" src="" alt="Produto"
+               class="w-full rounded-lg shadow-md max-h-[300px] object-contain" />
+        </div>
+
+        <!-- Detalhes -->
+        <div class="flex-1 flex flex-col gap-3">
+
+          <!-- Logo da loja (somente logo, centralizado) -->
+          <div class="flex items-center justify-center mb-1">
+            <img id="modalStoreLogo" class="" alt="Loja" />
+          </div>
+          <!-- Mantido para compatibilidade com script.js (fica invisível) -->
+          <span id="modalStoreName" class="sr-only"></span>
+
+          <!-- Título -->
+          <h2 id="modalTitle"
+              class="text-lg sm:text-xl font-bold text-gray-800 leading-tight text-center">
+          </h2>
+
+          <!-- Preços / Desconto -->
+          <div class="flex items-center justify-center gap-2 mt-1">
+            <span id="modalOldPrice" class="line-through text-gray-500 text-sm"></span>
+            <span id="modalDiscount" class="font-semibold"></span>
+          </div>
+
+          <div id="modalPrice"
+               class="text-3xl sm:text-4xl font-extrabold text-center">
+          </div>
+
+          <p id="modalParcelas" class="text-sm text-gray-700 text-center"></p>
+
+          <!-- Lista de detalhes -->
+          <ul id="modalDetails" class="list-disc pl-5 text-sm text-gray-700 space-y-1 text-left"></ul>
+
+          <!-- CTA -->
+          <a id="modalLink" href="#" target="_blank"
+             class="mt-2 text-center py-3 rounded-md font-extrabold shadow-md transition-all">
+            🔒 Comprar com segurança
+          </a>
+
+          <!-- Compartilhar -->
+          <button id="btnCompartilhar"
+                  class="mt-2 bg-gray-900 text-white font-semibold py-2.5 rounded-md shadow-md">
+            🔗 Compartilhar Oferta
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       SCRIPTS
+       ========================================================= -->
+  <script src="script.js" defer></script>
+</body>
+</html>
