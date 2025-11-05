@@ -429,6 +429,23 @@ body.modo-filtro #barraFiltros{
     }
     #filtroOrigem label img.filtro-logo{ height:56px; }
   }
+  /* ======= COLAR o título na barra de filtros quando o filtro está ativo ======= */
+
+/* zera o "space-y-4" do Tailwind dentro do <main> */
+body.modo-filtro main.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 0 !important;
+}
+
+/* remove totalmente a margem de cima do título "Todos os Produtos..." */
+body.modo-filtro main .text-center > .bg-gradient-to-r {
+  margin-top: 0 !important;
+}
+
+/* encosta o fim do filtro no título (sem folga inferior) */
+body.modo-filtro #barraFiltros {
+  margin-bottom: 0 !important;
+  padding-bottom: 4px !important;   /* pode reduzir para 0 se quiser ainda mais colado */
+}
 
   /* Garante que qualquer texto dentro do botão permaneça oculto */
   #filtroOrigem label .texto{ display:none !important; }
