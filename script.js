@@ -7,62 +7,56 @@
 (function injectFiltroCSS(){
   const id = 'filtros-logo-only';
   const prev = document.querySelector(`style[data-${id}]`);
-  if (prev) prev.remove(); // garante override
+  if (prev) prev.remove();
 
   const css = `
-    /* Grid fluido com botões mais "largos" */
     #filtroOrigem{
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); /* ↑ colunas mais largas */
       gap:12px; width:100%;
     }
 
     /* Botão base (apenas logo) — MAIOR */
     #filtroOrigem label{
       display:flex; align-items:center; justify-content:center;
-      height:72px;                    /* ↑ desktop maior */
-      border-radius:16px;
+      height:84px;                      /* ↑ desktop AINDA maior */
+      border-radius:18px;
       border:1.5px solid #e5e7eb;
-      background:#fff;                /* sem fundo da marca */
+      background:#fff;
       transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
       cursor:pointer; user-select:none; padding:0;
     }
-    #filtroOrigem label:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 6px 14px rgba(0,0,0,.08);
-    }
-    #filtroOrigem input{ position:absolute; opacity:0; width:0; height:0; }
 
     /* LOGO bem preenchido */
     #filtroOrigem label img.filtro-logo{
       display:block; object-fit:contain; pointer-events:none;
-      width:48px; height:48px;        /* ↑ desktop maior */
+      width:56px; height:56px;          /* ↑ desktop AINDA maior */
+      max-width:80%; max-height:80%;    /* evita estourar em SVGs muito largos */
     }
 
     /* Tablet */
     @media (max-width:1024px){
       #filtroOrigem{
-        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
         gap:10px;
       }
-      #filtroOrigem label{ height:64px; border-radius:14px; }
-      #filtroOrigem label img.filtro-logo{ width:42px; height:42px; }
+      #filtroOrigem label{ height:72px; border-radius:16px; }
+      #filtroOrigem label img.filtro-logo{ width:48px; height:48px; }
     }
 
     /* Mobile */
     @media (max-width:640px){
       #filtroOrigem{
-        grid-template-columns: repeat(auto-fit, minmax(56px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
         gap:8px;
       }
-      #filtroOrigem label{ height:56px; border-radius:12px; }
-      #filtroOrigem label img.filtro-logo{ width:36px; height:36px; }
+      #filtroOrigem label{ height:64px; border-radius:14px; }
+      #filtroOrigem label img.filtro-logo{ width:44px; height:44px; }
     }
 
-    /* SEM texto sempre */
     #filtroOrigem label .texto{ display:none !important; }
 
-    /* Estado ativo: só borda colorida por marca */
+    /* Estado ativo: só borda colorida por marca (mantido) */
     #filtroOrigem label.ativo[data-src="shopee"]       { border-color:#EE4D2D; }
     #filtroOrigem label.ativo[data-src="petlove"]      { border-color:#00AEEF; }
     #filtroOrigem label.ativo[data-src="amazon"]       { border-color:#232F3E; }
@@ -76,7 +70,6 @@
     #filtroOrigem label.ativo[data-src="casasbahia"]   { border-color:#0033A0; }
     #filtroOrigem label.ativo[data-src="ponto"]        { border-color:#111111; }
   `;
-
   const style = document.createElement('style');
   style.setAttribute(`data-${id}`,'true');
   style.textContent = css;
