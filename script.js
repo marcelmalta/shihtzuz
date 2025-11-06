@@ -680,7 +680,7 @@ function syncOpenButton(){
   if (open){
     open.classList.toggle("ativo", isOn);
     open.setAttribute("aria-expanded", isOn ? "true" : "false");
-    open.textContent = isOn ? "⨯ Fechar Filtro" : "🔍 Buscar / Filtrar";
+    open.textContent = isOn ? "⨯ Fechar Filtro" : "🔍 Buscar / Filtrar / Comparar";
   }
 }
 

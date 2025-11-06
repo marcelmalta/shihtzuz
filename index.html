@@ -31,6 +31,94 @@
     --creme:#FFF8ED;
   }
 
+  /* ===== HEADER COMPACTO (1 linha) ===== */
+.hdr-inner { min-height: 48px; }
+@media (min-width: 640px){ .hdr-inner { min-height: 56px; } }
+
+.hdr-pitch{
+  max-width: clamp(40%, 72vw, 78%);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Quando o modo filtro está ativo, ocultar o header (já integrado ao script.js) */
+body.modo-filtro #hdr{ display:none; }
+
+/* ===== Header compacto segue igual ===== */
+.hdr-inner { min-height: 48px; }
+@media (min-width: 640px){ .hdr-inner { min-height: 56px; } }
+
+/* ===== Pitch em 1 linha com ênfase sem “pular” ===== */
+.hdr-pitch.smartPitch{
+  display:flex; align-items:center; gap:.5ch;
+  max-width: clamp(40%, 72vw, 78%);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-weight: 600; color:#111827; /* gray-900 */
+  line-height: 1;
+}
+
+.smartPitch .brandMark{
+  font-weight: 900;
+  letter-spacing: .2px;
+  background: linear-gradient(90deg,#111827,#0f766e 55%,#065f46);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.smartPitch .dash{ opacity:.55; }
+.smartPitch .claim{ color:#1f2937; }         /* gray-800 */
+.smartPitch .claim .muted{ opacity:.75; }
+.smartPitch .claim .highlight{
+  font-weight: 800;
+  position: relative;
+}
+.smartPitch .claim .highlight::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-2px; height:8px;
+  background: linear-gradient(90deg, rgba(250,204,21,.28), rgba(16,185,129,.25));
+  border-radius:6px; z-index:-1;
+}
+
+/* ===== Pílulas explicativas curtas (somem no mobile) ===== */
+.smartPitch .pills{ display:inline-flex; align-items:center; gap:.5ch; margin-left:.5ch; }
+.smartPitch .pills .sep{ opacity:.5; }
+.smartPitch .pill{
+  font-size: 11.5px; font-weight: 800; letter-spacing:.2px;
+  padding: 2px 8px; border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: #f9fafb; /* gray-50 */
+  color: #0f172a;      /* slate-900 */
+}
+
+/* ===== Pontos de legenda por loja ===== */
+.smartPitch .dot{
+  display:inline-block; width:.6em; height:.6em; border-radius:50%;
+  margin: 0 .25ch 0 .5ch; transform: translateY(1px);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset;
+}
+.smartPitch .dot.ml  { background:#facc15; }  /* Mercado Livre amarelo */
+.smartPitch .dot.amz { background:#111827; }  /* Amazon preto */
+.smartPitch .dot.mag { background:#2563eb; }  /* Magalu azul */
+.smartPitch .dot.shp { background:#ef4444; }  /* Shopee vermelho/laranja */
+
+/* ===== Responsividade fina ===== */
+@media (max-width: 360px){
+  .hdr-pitch.smartPitch{ max-width: 64vw; font-size: 11px; }
+}
+@media (min-width: 361px) and (max-width: 639px){
+  .hdr-pitch.smartPitch{ font-size: 12px; }
+}
+@media (min-width: 640px){
+  .hdr-pitch.smartPitch{ font-size: 12.5px; }
+}
+@media (min-width: 1024px){
+  .hdr-pitch.smartPitch{ font-size: 13px; }
+}
+
+/* Ocultar header quando filtros estiverem abertos (coerente com seu fluxo) */
+body.modo-filtro #hdr{ display:none; }
+
+
+
   /* Skeleton */
   .skel { position: relative; overflow: hidden; background: #f3f4f6; }
   .skel::after{
@@ -300,56 +388,44 @@ body.modo-filtro #btnFecharFiltro { display: inline-flex; }
 <body class="bg-[var(--bege)] text-gray-900 font-sans">
 
   <!-- =========================================================
-       HEADER
-       ========================================================= -->
-  <header class="sticky top-0 z-50 shadow-md">
-    <!-- faixa topo -->
-    <div class="bg-[var(--marrom)] text-[var(--bege)] text-[10px] flex justify-center gap-4 py-0.5 font-medium">
-      <span>🛡️ Loja Verificada</span>
-      <span>🐾 Itens selecionados para Cães e Gatos</span>
-    </div>
+     HEADER (compacto, 1 linha, sem logos)
+     ========================================================= -->
+<header id="hdr" class="sticky top-0 z-50 bg-white border-b border-[var(--dourado)]/40">
+  <div class="hdr-inner h-12 sm:h-14 max-w-6xl mx-auto px-2 flex items-center justify-between gap-2">
 
-    <!-- branding -->
-    <div class="bg-white px-2 pt-2 pb-0 flex flex-col border-b border-[var(--dourado)]/40">
-      <div class="flex flex-col sm:flex-row items-center justify-between">
-        <div class="flex items-center gap-2">
-          <!-- LOGO RESPONSIVO (sem emoji) -->
-          <a href="/" class="block">
-            <link rel="preload" as="image" href="logos/petshopplus-logo-desktop.png">
-            <link rel="preload" as="image" href="logos/petshopplus-logo-tablet.png">
-            <picture>
-              <source media="(min-width:1024px)" srcset="logos/petshopplus-logo-desktop.png" type="image/png" />
-              <img
-                src="logos/petshopplus-logo-tablet.png"
-                alt="PetShop+ — seu pet em primeiro lugar"
-                class="h-10 sm:h-12 md:h-14 w-auto select-none"
-                loading="eager"
-                onerror="this.onerror=null;this.src='logos/petshopplus-logo-desktop.png';"
-              />
-            </picture>
-          </a>
-          <span class="hidden sm:inline text-[12px] text-[var(--marrom)]/70 font-semibold">
-            — Tudo para Cães e Gatos
-          </span>
-        </div>
+    <!-- Pitch compacto e inteligente (1 linha, sem logo) -->
+    <p class="hdr-pitch smartPitch" aria-label="ShihTzu Shop — comparador multilojas com filtros.">
+      <span class="brandMark">ShihTzu&nbsp;Shop</span>
+      <span class="dash">—</span>
+      <span class="claim">
+        Compare preços
+        <span class="muted">do mesmo produto</span>
+        <span class="highlight">em várias lojas</span>,
+        <span class="muted">filtre por</span> categoria/preço
+        <span class="muted">e</span> encontre a <span class="highlight">melhor oferta</span>
+        <span class="hidden md:inline">em segundos</span>.
+      </span>
 
-        <!-- Espaço à direita reservado -->
-        <div class="h-0 sm:h-auto"></div>
-      </div>
+      <!-- Pílulas explicativas (mini-métricas / legendas) -->
+      <span class="pills hidden sm:inline">
+        <span class="pill">Multilojas</span>
+        <span class="sep">•</span>
+        <span class="pill">Filtros rápidos</span>
+        <span class="sep">•</span>
+        <span class="pill">
+          Lojas: <i class="dot ml"></i>ML <i class="dot amz"></i>Amazon <i class="dot mag"></i>Magalu <i class="dot shp"></i>Shopee
+        </span>
+      </span>
+    </p>
 
-      <!-- Faixa dos botões de filtro (centralizados) -->
-      <div class="w-full flex items-center justify-center gap-3 py-2 flex-wrap">
-        <button id="btnBuscaFlutuante" aria-expanded="false">
-          🔎 Filtrar / Comparar / Procurar
-        </button>
-
-        <!-- Aparece somente quando o filtro está ativo -->
-        <button id="btnFecharFiltro" class="btn-close" aria-label="Fechar filtros" title="Fechar filtros">
-          ✖ Fechar filtros
-        </button>
-      </div>
-    </div>
-  </header>
+    <!-- Botão de filtros/comparador -->
+    <button id="btnBuscaFlutuante"
+            class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[12px] font-black text-white shadow-sm border border-black/10"
+            style="background:linear-gradient(120deg,#2b1b12,#3a2518,#1d140f)">
+      🔎 Filtrar / Comparar
+    </button>
+  </div>
+</header>
 
   <!-- =========================================================
        SELO MULTIMARCAS — CARROSSEL INFINITO (logos locais)
