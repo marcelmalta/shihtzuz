@@ -1,6 +1,6 @@
 /* =========================================================
-   ShihTzuShop — Padrão único de cards e modal (todas lojas)
-   (ATUALIZADO: filtros LOGO-only em mobile/tablet, fix erros)
+   ShihTzuShop — Cards + Modal + Comparador Multilojas
+   (Atual) — mantém todas as suas funções + adiciona comparador
    ========================================================= */
 
 /* ========= CSS: +30% nos botões/logo (desktop/tablet/mobile) ========= */
@@ -50,104 +50,28 @@
     #filtroOrigem label.ativo{
       border-width:2px;
       transform: translateY(-1px);
-      /* usa a variável --ring definida por marca (fallback suave) */
-      box-shadow:
-        0 0 0 3px var(--ring, rgba(0,0,0,.08)),
-        0 6px 14px rgba(0,0,0,.12);
+      box-shadow: 0 0 0 3px var(--ring, rgba(0,0,0,.08)), 0 6px 14px rgba(0,0,0,.12);
     }
 
     /* ===== Ativos por marca ===== */
-
-    /* Shopee (fundo claro p/ logo aparecer) */
-    #filtroOrigem label.ativo[data-src="shopee"]{
-      --ring: rgba(238,77,45,.18);
-      background: linear-gradient(145deg,#FFF0E6,#FFE5DA);
-      color:#7A1A0F; border-color:#EE4D2D;
-    }
-
-    /* Petlove */
-    #filtroOrigem label.ativo[data-src="petlove"]{
-      --ring: rgba(0,174,239,.16);
-      background: linear-gradient(145deg,#E6F7FF,#BDEBFF);
-      color:#005C87; border-color:#00AEEF;
-    }
-
-    /* Amazon (cinza) */
-    #filtroOrigem label.ativo[data-src="amazon"]{
-      --ring: rgba(58,69,83,.18);
-      background: linear-gradient(145deg,#ECEFF1,#CFD8DC);
-      color:#111; border-color:#3A4553;
-    }
-
-    /* Mercado Livre */
-    #filtroOrigem label.ativo[data-src="mercadolivre"]{
-      --ring: rgba(255,230,0,.22);
-      background: linear-gradient(145deg,#FFF9C8,#FFE600);
-      color:#0B4EA2; border-color:#FFE600;
-    }
-
-    /* Magalu */
-    #filtroOrigem label.ativo[data-src="magalu"]{
-      --ring: rgba(25,118,210,.18);
-      background: linear-gradient(145deg,#E5F2FF,#BFE0FF);
-      color:#0D47A1; border-color:#1976D2;
-    }
-
-    /* Petz */
-    #filtroOrigem label.ativo[data-src="petz"]{
-      --ring: rgba(0,178,255,.18);
-      background: linear-gradient(145deg,#E9F6FF,#CDECFF);
-      color:#004E92; border-color:#00B2FF;
-    }
-
-    /* Cobasi */
-    #filtroOrigem label.ativo[data-src="cobasi"]{
-      --ring: rgba(0,119,190,.18);
-      background: linear-gradient(145deg,#E6F2FF,#CFE6FF);
-      color:#005A8C; border-color:#0077BE;
-    }
-
-    /* Americanas */
-    #filtroOrigem label.ativo[data-src="americanas"]{
-      --ring: rgba(213,0,0,.18);
-      background: linear-gradient(145deg,#FFE1E1,#FFCACA);
-      color:#8F1010; border-color:#D50000;
-    }
-
-    /* AliExpress */
-    #filtroOrigem label.ativo[data-src="aliexpress"]{
-      --ring: rgba(255,90,0,.18);
-      background: linear-gradient(145deg,#FFEEE2,#FFE0CC);
-      color:#B33A12; border-color:#FF5A00;
-    }
-
-    /* Carrefour */
-    #filtroOrigem label.ativo[data-src="carrefour"]{
-      --ring: rgba(0,94,184,.18);
-      background: linear-gradient(145deg,#E7F1FF,#D7E9FF);
-      color:#003B73; border-color:#005EB8;
-    }
-
-    /* Casas Bahia */
-    #filtroOrigem label.ativo[data-src="casasbahia"]{
-      --ring: rgba(0,51,160,.18);
-      background: linear-gradient(145deg,#E7EDFF,#D8E4FF);
-      color:#001A66; border-color:#0033A0;
-    }
-
-    /* Ponto (laranja claro) */
-    #filtroOrigem label.ativo[data-src="ponto"]{
-      --ring: rgba(255,106,42,.18);
-      background: linear-gradient(145deg,#FFE8D9,#FFD8BF);
-      color:#6B2E00; border-color:#FF6A2A;
-    }
+    #filtroOrigem label.ativo[data-src="shopee"]{ --ring: rgba(238,77,45,.18); background: linear-gradient(145deg,#FFF0E6,#FFE5DA); color:#7A1A0F; border-color:#EE4D2D; }
+    #filtroOrigem label.ativo[data-src="petlove"]{ --ring: rgba(0,174,239,.16); background: linear-gradient(145deg,#E6F7FF,#BDEBFF); color:#005C87; border-color:#00AEEF; }
+    #filtroOrigem label.ativo[data-src="amazon"]{ --ring: rgba(58,69,83,.18); background: linear-gradient(145deg,#ECEFF1,#CFD8DC); color:#111; border-color:#3A4553; }
+    #filtroOrigem label.ativo[data-src="mercadolivre"]{ --ring: rgba(255,230,0,.22); background: linear-gradient(145deg,#FFF9C8,#FFE600); color:#0B4EA2; border-color:#FFE600; }
+    #filtroOrigem label.ativo[data-src="magalu"]{ --ring: rgba(25,118,210,.18); background: linear-gradient(145deg,#E5F2FF,#BFE0FF); color:#0D47A1; border-color:#1976D2; }
+    #filtroOrigem label.ativo[data-src="petz"]{ --ring: rgba(0,178,255,.18); background: linear-gradient(145deg,#E9F6FF,#CDECFF); color:#004E92; border-color:#00B2FF; }
+    #filtroOrigem label.ativo[data-src="cobasi"]{ --ring: rgba(0,119,190,.18); background: linear-gradient(145deg,#E6F2FF,#CFE6FF); color:#005A8C; border-color:#0077BE; }
+    #filtroOrigem label.ativo[data-src="americanas"]{ --ring: rgba(213,0,0,.18); background: linear-gradient(145deg,#FFE1E1,#FFCACA); color:#8F1010; border-color:#D50000; }
+    #filtroOrigem label.ativo[data-src="aliexpress"]{ --ring: rgba(255,90,0,.18); background: linear-gradient(145deg,#FFEEE2,#FFE0CC); color:#B33A12; border-color:#FF5A00; }
+    #filtroOrigem label.ativo[data-src="carrefour"]{ --ring: rgba(0,94,184,.18); background: linear-gradient(145deg,#E7F1FF,#D7E9FF); color:#003B73; border-color:#005EB8; }
+    #filtroOrigem label.ativo[data-src="casasbahia"]{ --ring: rgba(0,51,160,.18); background: linear-gradient(145deg,#E7EDFF,#D8E4FF); color:#001A66; border-color:#0033A0; }
+    #filtroOrigem label.ativo[data-src="ponto"]{ --ring: rgba(255,106,42,.18); background: linear-gradient(145deg,#FFE8D9,#FFD8BF); color:#6B2E00; border-color:#FF6A2A; }
   `;
   const style = document.createElement('style');
   style.setAttribute(`data-${id}`,'true');
   style.textContent = css;
   document.head.appendChild(style);
 })();
-
 
 /* ================== IDENTIDADE POR LOJA ================== */
 const STORE_META = {
@@ -173,7 +97,12 @@ const produtos = [
   { tipo:"petlove", nome:"Cama Donut Antiestresse (P) — Bege", precoAntigo:189.90, precoAtual:129.90, desconto:"32% OFF", parcelas:"6x sem juros", detalhes:["Tecido soft","Antiderrapante","Zíper para lavar"], imagem:"https://images.unsplash.com/photo-1548191265-cc70d3d45ba1?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"amazon", nome:"Escova Slicker + Pente 2 em 1 — Anti-embolo", precoAntigo:59.90, precoAtual:39.90, desconto:"33% OFF", parcelas:"Em até 10x", detalhes:["Cerdas macias","Cabo ergonômico"], imagem:"https://images.unsplash.com/photo-1567359781514-3b964e06a3ab?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"amazon", nome:"Hidratante de Almofadinhas (50g) — Natural", precoAntigo:49.90, precoAtual:31.90, desconto:"36% OFF", parcelas:"Em até 10x", detalhes:["Manteiga de karité","Sem álcool"], imagem:"https://images.unsplash.com/photo-1525253013412-55c1a69a5738?q=80&w=800&auto=format&fit=crop", link:"#"},
+  /* ====== Produto “igual” em várias lojas (para demo do comparador) ====== */
   { tipo:"magalu", nome:"Simparic Antipulgas 10,1 a 20kg (40mg) — 3 comprimidos", precoAntigo:298.90, precoAtual:251.01, desconto:"16% OFF", parcelas:"1x R$278,90 sem juros", detalhes:["Ação rápida por até 35 dias","Protege contra pulgas, carrapatos e sarna","Comprimido mastigável saborizado","Indicado para cães de 10,1 a 20kg","Fabricante: Zoetis"], imagem:"https://a-static.mlcdn.com.br/800x560/simparic-antipulgas-para-caes-de-101-a-20kg-40mg-cx-com-3-compr-zoetis/petcaoricica/230be688263311eebbb14201ac185049/b100a43bbc606eff93b937122c907436.jpeg", link:"https://divulgador.magalu.com/JSpImZ78"},
+  { tipo:"americanas", nome:"Simparic Antipulgas 10,1 a 20kg (40mg) — 3 comprimidos", precoAntigo:309.90, precoAtual:259.90, desconto:"", parcelas:"Em até 10x", detalhes:["1 caixa com 3 comprimidos","Zoetis"], imagem:"https://a-static.mlcdn.com.br/800x560/simparic-antipulgas-para-caes-de-101-a-20kg-40mg-cx-com-3-compr-zoetis/petcaoricica/230be688263311eebbb14201ac185049/b100a43bbc606eff93b937122c907436.jpeg", link:"#"},
+  { tipo:"amazon", nome:"Simparic Antipulgas 10,1 a 20kg (40mg) — 3 comprimidos", precoAntigo:299.90, precoAtual:247.50, desconto:"", parcelas:"Em até 10x", detalhes:["Zoetis • 3 comprimidos"], imagem:"https://a-static.mlcdn.com.br/800x560/simparic-antipulgas-para-caes-de-101-a-20kg-40mg-cx-com-3-compr-zoetis/petcaoricica/230be688263311eebbb14201ac185049/b100a43bbc606eff93b937122c907436.jpeg", link:"#"},
+  { tipo:"mercadolivre", nome:"Simparic Antipulgas 10,1 a 20kg (40mg) — 3 comprimidos", precoAntigo:310.00, precoAtual:268.90, desconto:"", parcelas:"10x sem juros", detalhes:["Original Zoetis"], imagem:"https://a-static.mlcdn.com.br/800x560/simparic-antipulgas-para-caes-de-101-a-20kg-40mg-cx-com-3-compr-zoetis/petcaoricica/230be688263311eebbb14201ac185049/b100a43bbc606eff93b937122c907436.jpeg", link:"#"},
+  /* ====== Fim do grupo de comparação ====== */
   { tipo:"mercadolivre", nome:"Conjunto Bandana + Gravata (3 peças) — Shih Tzu", precoAntigo:49.90, precoAtual:32.90, desconto:"34% OFF", parcelas:"10x sem juros", detalhes:["Tecido respirável","Lavável","Ajuste com velcro"], imagem:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"petz", nome:"Tapete Higiênico Premium p/ Cães (30 un.)", precoAntigo:119.90, precoAtual:89.90, parcelas:"3x sem juros", detalhes:["Gel superabsorvente","Adesivo antideslizante","Neutraliza odores"], imagem:"https://images.unsplash.com/photo-1543465077-db45d34b88a5?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"petz", nome:"Escova Dupla — Macia & Pinos (p/ pelos longos)", precoAntigo:69.90, precoAtual:44.90, parcelas:"4x sem juros", detalhes:["Remoção de nós","Evita quebra do pelo","Cabo ergonômico"], imagem:"https://images.unsplash.com/photo-1561736778-92e52a7769ef?q=80&w=800&auto=format&fit=crop", link:"#"},
@@ -254,8 +183,7 @@ function attachLogoFallback(imgEl){
             <circle r="18" cx="0" cy="8"/>
           </g>
         </svg>`);
-    imgEl.src = PAW;                // mostra placeholder
-    imgEl.classList.add('filtro-logo');
+    imgEl.src = PAW; imgEl.classList.add('filtro-logo');
     const label = imgEl.closest('label');
     if (label) label.style.visibility = 'visible';
   };
@@ -276,7 +204,6 @@ function renderBanner(containerId, tipos) {
 
     const imgWrap = buildImg(p.imagem, p.nome);
     imgWrap.style.background = meta.bgCard;
-
     card.appendChild(imgWrap);
     const ribbon = buildRibbon(p.desconto); if(ribbon) card.appendChild(ribbon);
 
@@ -296,6 +223,47 @@ function renderBanner(containerId, tipos) {
     card.addEventListener("click", () => openModal(p));
     faixa.appendChild(card);
   });
+}
+
+/* ===================== NORMALIZAÇÃO p/ COMPARAÇÃO ===================== */
+/* Prioridade: se existir p.sku ou p.key, usar; senão derivar do nome */
+function normalizeKey(obj){
+  if (obj.sku) return `sku:${String(obj.sku).trim().toLowerCase()}`;
+  if (obj.key) return `key:${String(obj.key).trim().toLowerCase()}`;
+
+  let name = (obj.nome || "").toLowerCase();
+
+  // remove conteúdos entre parênteses (ex.: (40mg), (300ml))
+  name = name.replace(/\([^)]*\)/g, " ");
+  // remove travessões/dashes e variantes
+  name = name.replace(/[—–\-]/g, " ");
+  // remove tamanhos/cor comuns
+  name = name.replace(/\b(pp|p|m|g|gg|xg|xl|xxl|preto|branco|bege|azul|rosa|vermelho)\b/g, " ");
+  // remove números isolados sem contexto (deixa 10,1 a 20kg, 40mg, 3 comprimidos)
+  // preserva padrões com kg, mg, ml e "comprimid" na mesma palavra
+  name = name.replace(/\b(\d+(?:,\d+)?)\b(?!\s*(kg|mg|ml|comprimid))/g, " ");
+
+  // colapsa espaços
+  name = name.replace(/\s+/g, " ").trim();
+
+  // pega até 6 tokens mais relevantes
+  const tokens = name.split(" ").filter(Boolean);
+  return "nm:" + tokens.slice(0, 6).join(" ");
+}
+
+function groupByKey(list){
+  const map = new Map();
+  list.forEach(p=>{
+    const k = normalizeKey(p);
+    if (!map.has(k)) map.set(k, []);
+    map.get(k).push(p);
+  });
+  return map;
+}
+
+function comparablesFor(product, list=produtos){
+  const key = normalizeKey(product);
+  return groupByKey(list).get(key) || [];
 }
 
 /* ===================== LISTA PRINCIPAL ===================== */
@@ -329,6 +297,24 @@ function renderLista(lista) {
       <div class="card-off" style="color:${meta.off}">${p.desconto || ""}</div>
     `);
 
+    // ===== Botões de ação (Comparar + Ver) =====
+    const actions = document.createElement("div");
+    actions.className = "mt-1.5 flex items-center justify-center gap-1";
+    const btnCmp = document.createElement("button");
+    btnCmp.className = "px-2 py-1 rounded-md text-[10px] font-bold border border-gray-300 bg-white hover:bg-gray-50";
+    btnCmp.textContent = "🔎 Comparar";
+    btnCmp.addEventListener("click", (e)=>{ e.stopPropagation(); abrirComparador(p); });
+
+    const btnVer = document.createElement("button");
+    btnVer.className = "px-2 py-1 rounded-md text-[10px] font-bold border border-gray-300 bg-white hover:bg-gray-50";
+    btnVer.textContent = "👁️ Ver";
+    btnVer.addEventListener("click", (e)=>{ e.stopPropagation(); openModal(p); });
+
+    actions.appendChild(btnCmp);
+    actions.appendChild(btnVer);
+    card.appendChild(actions);
+
+    // abrir modal ao clicar no card (fora dos botões)
     card.addEventListener("click", () => openModal(p));
     wrap.appendChild(card);
   });
@@ -396,9 +382,21 @@ function openModal(obj) {
     });
   }
 
+  // ---- Botão "Comparar preços" dentro do modal (criado dinamicamente)
+  let btnCmp = el("#btnModalComparar");
+  if (!btnCmp){
+    btnCmp = document.createElement("button");
+    btnCmp.id = "btnModalComparar";
+    btnCmp.className = "mt-2 bg-black text-white font-bold py-2.5 rounded-md shadow";
+    btnCmp.textContent = "🔎 Comparar preços deste item";
+    const linkRef = el("#modalLink");
+    if (linkRef) linkRef.insertAdjacentElement("afterend", btnCmp);
+  }
+  btnCmp.onclick = ()=> abrirComparador(p);
+
+  // exibe
   modal.classList.remove("hidden");
   modal.classList.add("flex");
-  // animação
   requestAnimationFrame(()=> {
     box.classList.remove("scale-95","opacity-0");
     box.classList.add("scale-100","opacity-100");
@@ -461,6 +459,8 @@ function aplicarFiltros(){
   });
 
   ativarFiltro(true);
+  // ao filtrar, garantimos que o usuário está na lista (não no comparador)
+  toggleComparador(false);
   renderLista(filtrados);
 
   const lista = el("#listaProdutos");
@@ -587,8 +587,10 @@ function ativarFiltro(ativo){
       barra.style.opacity="0"; barra.style.transform="translateY(-10px)";
       setTimeout(()=> barra.classList.add("hidden"), 280);
     }
+    // restaurar conteúdo padrão
     renderBanner("bannerA", ["shopee","amazon","magalu","americanas","aliexpress"]);
     renderBanner("bannerB", ["petlove","mercadolivre","petz","cobasi","carrefour","casasbahia","ponto"]);
+    toggleComparador(false);
     renderLista(produtos);
   }
 }
@@ -618,8 +620,144 @@ function autoScroll(containerId){
   loop();
 }
 
+/* ===================== COMPARADOR (UI) ===================== */
+function toggleComparador(show){
+  const secList = el("#secListaProdutos");
+  const secCmp  = el("#secComparador");
+  if (!secList || !secCmp) return;
+
+  if (show){
+    secList.classList.add("hidden");
+    secCmp.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    secCmp.classList.add("hidden");
+    secList.classList.remove("hidden");
+  }
+}
+
+function abrirComparador(baseProduct){
+  closeModal(); // se estiver aberto, fecha
+  const grupo = comparablesFor(baseProduct);
+  renderComparador(grupo, baseProduct);
+  toggleComparador(true);
+}
+
+function renderComparador(grupo, baseProduct){
+  const cont = el("#listaComparativos");
+  if (!cont) return;
+  cont.innerHTML = "";
+
+  if (!grupo || grupo.length <= 1){
+    cont.innerHTML = `
+      <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+        <div class="text-center text-gray-700 font-semibold">Só encontramos este item em <b>${grupo?.length || 0}</b> loja no momento.</div>
+        <div class="text-center mt-2">
+          <button id="btnVoltarLista" class="px-3 py-2 rounded-md bg-black text-white text-sm font-bold">← Voltar para a lista</button>
+        </div>
+      </div>`;
+    el("#btnVoltarLista")?.addEventListener("click", ()=> toggleComparador(false));
+    return;
+  }
+
+  // ordena por preço atual
+  const ordenados = [...grupo].sort((a,b)=> a.precoAtual - b.precoAtual);
+  const menor = ordenados[0];
+  const maior = ordenados[ordenados.length-1];
+  const media = ordenados.reduce((acc,p)=>acc+p.precoAtual,0)/ordenados.length;
+
+  // Header resumo (nome normalizado + métricas)
+  const head = document.createElement("div");
+  head.className = "col-span-full bg-white border border-gray-200 rounded-lg p-3 shadow-sm";
+  head.innerHTML = `
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <h3 class="text-sm sm:text-base font-extrabold text-gray-800">
+          🔎 Comparando: <span class="text-gray-900">${baseProduct?.nome || menor.nome}</span>
+        </h3>
+        <div class="flex gap-2">
+          <button id="btnVoltarLista" class="px-3 py-2 rounded-md bg-black text-white text-xs sm:text-sm font-bold">← Voltar para a lista</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm">
+        <div class="bg-green-50 border border-green-200 rounded-md p-2">
+          <div class="font-bold text-green-700">Menor preço</div>
+          <div class="text-green-800">${STORE_META[menor.tipo].nome} — <b>${fmt(menor.precoAtual)}</b></div>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-md p-2">
+          <div class="font-bold text-amber-700">Preço médio</div>
+          <div class="text-amber-800"><b>${fmt(media)}</b> (entre ${grupo.length} lojas)</div>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-md p-2">
+          <div class="font-bold text-red-700">Maior preço</div>
+          <div class="text-red-800">${STORE_META[maior.tipo].nome} — <b>${fmt(maior.precoAtual)}</b></div>
+        </div>
+      </div>
+    </div>
+  `;
+  cont.appendChild(head);
+  el("#btnVoltarLista")?.addEventListener("click", ()=> toggleComparador(false));
+
+  // Cards por loja
+  ordenados.forEach(p=>{
+    const meta = STORE_META[p.tipo];
+    const card = document.createElement("div");
+    card.className = "bg-white border border-gray-200 rounded-lg p-3 shadow-sm flex flex-col gap-2";
+    const isBest = (p === menor);
+
+    card.innerHTML = `
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <img src="${meta.logo}" alt="${meta.nome}" class="h-6 w-auto" />
+          <span class="text-xs font-bold text-gray-700">${meta.nome}</span>
+        </div>
+        ${isBest ? `<span class="text-[10px] font-black bg-green-600 text-white px-2 py-0.5 rounded">MENOR PREÇO</span>` : ""}
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div class="text-2xl sm:text-3xl font-extrabold" style="color:${meta.corTexto}">${fmt(p.precoAtual)}</div>
+        <div class="text-xs text-gray-500">${p.parcelas || ""}</div>
+      </div>
+
+      <div class="flex flex-wrap gap-2 text-[11px]">
+        ${p.precoAntigo ? `<span class="line-through text-gray-400">${fmt(p.precoAntigo)}</span>` : ""}
+        ${p.desconto ? `<span class="font-bold text-green-700">${p.desconto}</span>` : ""}
+        ${!isBest ? `<span class="ml-auto text-[11px] bg-gray-100 border border-gray-200 rounded px-1.5">+ ${fmt(p.precoAtual - menor.precoAtual)} vs melhor</span>` : ""}
+      </div>
+
+      <div class="mt-1 grid grid-cols-2 gap-2">
+        <a href="${p.link || "#"}" target="_blank"
+           class="text-center py-2 rounded-md font-extrabold text-white"
+           style="background:linear-gradient(90deg, ${meta.btn[0]}, ${meta.btn[1]}); border:1px solid ${meta.corBorda}88">
+          Abrir na loja
+        </a>
+        <button class="py-2 rounded-md font-bold border border-gray-300 hover:bg-gray-50 ver-btn">Detalhes</button>
+      </div>
+    `;
+
+    // preview imagem + nome compacto
+    const top = document.createElement("div");
+    top.className = "flex items-center gap-2";
+    const imgW = buildImg(p.imagem, p.nome, "h-14");
+    imgW.classList.remove("h-24","sm:h-28");
+    imgW.classList.add("h-16","sm:h-20");
+    top.appendChild(imgW);
+
+    const nm = document.createElement("div");
+    nm.className = "text-[11px] leading-snug font-semibold text-gray-800 line-clamp-2";
+    nm.textContent = p.nome;
+    top.appendChild(nm);
+
+    card.insertBefore(top, card.firstChild);
+    card.querySelector(".ver-btn")?.addEventListener("click", ()=> openModal(p));
+
+    cont.appendChild(card);
+  });
+}
+
 /* ===================== INIT ===================== */
 window.addEventListener("DOMContentLoaded", ()=>{
+  // conteúdo padrão
   renderBanner("bannerA", ["shopee","amazon","magalu","americanas","aliexpress"]);
   renderBanner("bannerB", ["petlove","mercadolivre","petz","cobasi","carrefour","casasbahia","ponto"]);
   renderLista(produtos);
@@ -627,4 +765,23 @@ window.addEventListener("DOMContentLoaded", ()=>{
   autoScroll("bannerA");
   autoScroll("bannerB");
   document.body.classList.remove("modo-filtro");
+
+  // toolbar (se quiser colocar botões fixos no topo)
+  const tb = document.querySelector(".ml-toolbar");
+  if (tb){
+    const btnBack = document.createElement("button");
+    btnBack.className = "hidden ml-auto px-3 py-1.5 rounded-md bg-black text-white text-xs font-bold";
+    btnBack.id = "toolbarVoltar";
+    btnBack.textContent = "← Voltar para a lista";
+    btnBack.onclick = ()=> toggleComparador(false);
+    tb.appendChild(btnBack);
+
+    // Observa alternância do comparador p/ mostrar/ocultar
+    const obs = new MutationObserver(()=>{
+      const secCmp = el("#secComparador");
+      if (secCmp && !secCmp.classList.contains("hidden")) btnBack.classList.remove("hidden");
+      else btnBack.classList.add("hidden");
+    });
+    obs.observe(el("#secComparador"), { attributes:true, attributeFilter:["class"] });
+  }
 });
