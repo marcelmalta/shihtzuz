@@ -10,27 +10,20 @@
 
   <!-- Favicon (PNG com fundo transparente) -->
   <link rel="icon" type="image/png" href="logos/petshopplus-favicon.png" sizes="64x64" />
-  <!-- Fallback SVG inline (caso o PNG não exista ainda) -->
+  <!-- Fallback SVG inline -->
   <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect width="100%" height="100%" rx="12" ry="12" fill="%23D6A75C"/><text x="50%" y="54%" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="%23fff">PS+</text></svg>' />
 
-  <!-- =========================================================
-       Tailwind (CDN)
-       ========================================================= -->
+  <!-- Tailwind (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- =========================================================
-       STYLES (CSS)
-       Observação: Mantido extenso para preservar estrutura e
-       evitar regressões. IDs/Classes compatíveis com script.js
+       STYLES (CSS) — IDs/Classes compatíveis com script.js
        ========================================================= -->
   <style>
-  /* =========================
-     Base e variáveis
-     ========================= */
+  /* Base e variáveis */
   html { scroll-behavior: smooth; }
   ::-webkit-scrollbar { height: 6px; width: 6px; }
   ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
-
   :root{
     --marrom:#8B5E3C;
     --bege:#F3E9DC;
@@ -38,9 +31,7 @@
     --creme:#FFF8ED;
   }
 
-  /* =========================
-     Skeleton (efeito shimmer)
-     ========================= */
+  /* Skeleton */
   .skel { position: relative; overflow: hidden; background: #f3f4f6; }
   .skel::after{
     content:""; position:absolute; inset:0;
@@ -49,15 +40,11 @@
   }
   @keyframes shimmer{ 100% { transform: translateX(100%); } }
 
-  /* =========================
-     Card — Imagem Produto
-     ========================= */
+  /* Card — imagem */
   .card-img-wrap{ position:relative; border-radius:.6rem; }
   .card-img{ width:100%; height:100%; object-fit:contain; }
 
-  /* =========================
-     Ribbon de desconto (se usar)
-     ========================= */
+  /* Ribbon desconto */
   .ribbon {
     position:absolute; top:6px; left:-6px; z-index:5;
     background:#16a34a; color:#fff; font-weight:800; font-size:10px;
@@ -65,32 +52,54 @@
     transform: rotate(-3deg);
   }
 
-  /* =========================
-     Botão filtro flutuante
-     ========================= */
+  /* =============== BOTÕES DE FILTRO (INLINE) =============== */
+  /* Botão principal maior, premium */
   #btnBuscaFlutuante{
-    position:fixed; left:18px; bottom:18px; z-index:60;
-    display:flex; align-items:center; gap:6px;
-    padding:10px 18px; font-size:14px; font-weight:800;
-    color:#fff; border-radius:9999px;
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    padding:12px 22px; font-size:15px; font-weight:900; letter-spacing:.2px;
+    color:#fff; border-radius:9999px; cursor:pointer; user-select:none;
     background:linear-gradient(120deg,#2b1b12,#3a2518,#1d140f);
     border:1.5px solid rgba(255,255,255,.18);
-    box-shadow:0 3px 10px rgba(0,0,0,.4);
-    transition:.3s;
+    box-shadow:
+      0 3px 10px rgba(0,0,0,.18),
+      inset 0 0 0 1px rgba(255,255,255,.06);
+    transition:transform .15s ease, box-shadow .15s ease, background .2s ease, filter .15s ease;
   }
-  #btnBuscaFlutuante.ativo{ background:linear-gradient(120deg,#7f1d1d,#b91c1c,#dc2626); }
-  @media (min-width:641px){
-    #btnBuscaFlutuante{ left:25px; bottom:25px; transform:scale(.92); }
+  #btnBuscaFlutuante:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0,0,0,.22), inset 0 0 0 1px rgba(255,255,255,.08);
+    filter: saturate(1.05);
   }
+  #btnBuscaFlutuante:active{ transform: translateY(0); }
+  #btnBuscaFlutuante.ativo{
+    background:linear-gradient(120deg,#7f1d1d,#b91c1c,#dc2626);
+  }
+  /* pequeno brilho em loop */
+  #btnBuscaFlutuante::after{
+    content:""; position:absolute; inset:auto 0 0 0; height:2px;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent);
+    transform: translateX(-100%); filter: blur(0.5px);
+    animation: shine 2.8s linear infinite;
+    opacity:.5;
+  }
+  @keyframes shine{ 100% { transform: translateX(100%); } }
 
-  /* =========================
-     Lista de Produtos — Grid fluido
-     ========================= */
+  /* Botão secundário: fechar filtros (apenas quando ativo) */
+  #btnFecharFiltro{
+    display:none; align-items:center; justify-content:center; gap:8px;
+    padding:10px 16px; font-size:14px; font-weight:800;
+    color:#7f1d1d; background:#fff; border-radius:9999px;
+    border:1.5px solid #fca5a5; box-shadow:0 3px 10px rgba(0,0,0,.08);
+    transition:transform .15s ease, box-shadow .15s ease, background .2s ease, color .2s ease;
+  }
+  #btnFecharFiltro:hover{ transform: translateY(-1px); box-shadow:0 6px 14px rgba(0,0,0,.12); background:#fff7f7; color:#991b1b; }
+  body.modo-filtro #btnFecharFiltro{ display:inline-flex; }
+
+  /* Lista de Produtos — Grid fluido (5 por linha no mobile) */
   #listaProdutos{
     display:flex; flex-wrap:wrap; justify-content:center;
     gap:6px; padding-bottom:8px; transition: all .35s ease;
   }
-
   .card-geral{
     position:relative; background:#fff; border-radius:.7rem;
     display:flex; flex-direction:column; align-items:center;
@@ -98,7 +107,6 @@
     width:23%;
   }
   .card-geral:hover{ transform:scale(1.035); box-shadow:0 6px 16px rgba(0,0,0,.12); }
-
   .card-img-wrap{
     width:100%; height:84px; display:flex; align-items:center; justify-content:center;
     overflow:hidden; border-radius:.55rem;
@@ -106,56 +114,37 @@
   .card-img{ max-height:84px; object-fit:contain; transition:transform .3s ease; }
   .card-geral:hover .card-img{ transform:scale(1.04); }
 
-  /* =========================
-     Selo com logo da loja
-     ========================= */
+  /* Selo com logo */
   .card-selo{
     width:100%; display:flex; align-items:center; justify-content:center; gap:6px;
     background:#fff; border:1px solid #e5e7eb; border-radius:.45rem;
-    margin-top:3px; height:auto; min-height:32px; padding:4px 8px;
+    margin-top:3px; min-height:32px; padding:4px 8px;
   }
 
-  /* =========================
-     Logos nos cards e modais
-     ========================= */
+  /* Logos */
   .card-logo{ height:24px; width:auto; max-width:90px; object-fit:contain; transition:transform .25s ease; }
   .card-selo:hover .card-logo{ transform:scale(1.1); }
   .card-logo.amz, .card-logo.pnt, .card-logo.mgl { height:26px; }
 
-  /* =========================
-     Textos do card
-     ========================= */
+  /* Textos do card */
   .card-nome{ font-size:10px; line-height:1.1rem; height:34px; overflow:hidden; text-align:center; margin-top:4px; font-weight:700; color:#1f2937; }
   .card-old{ font-size:10px; color:#6b7280; text-decoration:line-through; }
   .card-price{ font-size:13px; font-weight:900; }
   .card-off{ font-size:11px; font-weight:800; }
 
-  /* =========================
-     Responsivo: qtd por linha
-     ========================= */
-  /* ✅ 5 por linha no mobile */
-  @media (max-width:640px){
-    .card-geral{ width: calc(20% - 6px); }
-  }
-  @media (min-width:641px) and (max-width:1024px){
-    .card-geral{ width:18%; }
-  }
-  @media (min-width:1025px){
-    .card-geral{ width:11.5%; }
-  }
+  /* Responsivo (5 por linha no mobile) */
+  @media (max-width:640px){ .card-geral{ width: calc(20% - 6px); } }
+  @media (min-width:641px) and (max-width:1024px){ .card-geral{ width:18%; } }
+  @media (min-width:1025px){ .card-geral{ width:11.5%; } }
 
-  /* =========================
-     Modo filtro (banners escondem)
-     ========================= */
+  /* Modo filtro (esconde banners) */
   #bannerA, #bannerB{ transition: all .35s ease; }
   .modo-filtro #bannerA, .modo-filtro #bannerB{
     opacity:0; transform: translateY(-16px) scale(.96);
     height:0; margin:0; padding:0; overflow:hidden; pointer-events:none;
   }
 
-  /* =========================
-     Barra de filtros (inserida via JS)
-     ========================= */
+  /* Barra de filtros (inserida via JS) */
   #barraFiltros{
     display:none !important; opacity:0; transform: translateY(-10px);
     position:relative; width:100%;
@@ -171,9 +160,7 @@
     border:1.5px solid rgba(214,167,92,.45); border-radius:9999px; padding:9px 12px;
   }
 
-  /* =========================
-   Origem buttons (marcas) – via JS (ATUALIZADO)
-   ========================= */
+  /* Origem buttons (marcas) — estados ativos principais */
   #filtroOrigem{
     display:grid; grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
     gap:8px; width:100%;
@@ -194,29 +181,18 @@
     #filtroOrigem label .texto{ display:inline; }
     #filtroOrigem label img.filtro-logo{ width:26px; height:26px; }
   }
-  /* Estados ativos (realce já combinado com seu script) */
   #filtroOrigem label.ativo[data-src="shopee"]{ background:linear-gradient(145deg,#ee4d2d,#ff8a70); color:#fff; border-color:#ee4d2d; }
   #filtroOrigem label.ativo[data-src="petlove"]{ background:linear-gradient(145deg,#00AEEF,#b3ecff); color:#00324a; border-color:#00AEEF; }
   #filtroOrigem label.ativo[data-src="amazon"]{ background:linear-gradient(145deg,#ff9900,#232f3e); color:#fff; border-color:#232f3e; }
   #filtroOrigem label.ativo[data-src="mercadolivre"]{ background:linear-gradient(145deg,#fff6a6,#ffe600); color:#0b4ea2; border-color:#ffe600; }
 
-  /* =========================
-     Modal
-     ========================= */
+  /* Modal */
   .modal-bg{ background:rgba(0,0,0,.7); }
   .modal-box{ background:linear-gradient(135deg,#ffffff 0%, #FFF8ED 100%); border:1px solid rgba(214,167,92,.45); }
-
-  /* Logo do modal maior e centralizado */
   #modalStoreLogo{ height:40px; margin-left:auto; margin-right:auto; display:block; }
+  .sr-only{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-  /* Mantém compat c/ script.js se ele ler #modalStoreName */
-  .sr-only{
-    position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
-  }
-
-  /* =========================
-     CARROSSEL INFINITO — SELO MULTIMARCAS
-     ========================= */
+  /* Carrossel de logos (selo multimarcas) */
   .ml-selo { overflow:hidden; position:relative; }
   .logos-container {
     display:flex; gap:32px; align-items:center;
@@ -227,9 +203,7 @@
   .logos-container img:hover { transform:scale(1.1); }
   @keyframes slide { from { transform:translateX(0); } to { transform:translateX(-50%); } }
 
-  /* ================================
-   OVERRIDES — espaço e logo maior
-   ================================ */
+  /* Overrides — banners somem no modo filtro */
   body.modo-filtro section:has(#bannerA),
   body.modo-filtro section:has(#bannerB){
     padding: 0 !important; margin: 0 !important; height: 0 !important; border: 0 !important; overflow: hidden !important;
@@ -237,7 +211,7 @@
   body.modo-filtro main .text-center > .bg-gradient-to-r{ margin-top: 6px !important; }
   body.modo-filtro #barraFiltros{ padding-top: 6px !important; padding-bottom: 6px !important; margin-bottom: 6px !important; }
 
-  /* LOGO MAIS LARGO NO TOPO DO CARD */
+  /* Logo mais largo na faixa do card */
   .card-selo{ padding: 4px 6px !important; min-height: 34px; border-radius: .5rem; }
   @media (min-width:1024px){ .card-selo{ min-height: 42px; } }
   .card-logo{ width: 100% !important; height: 28px !important; max-width: none !important; object-fit: contain !important; }
@@ -246,7 +220,7 @@
   .card-selo:hover .card-logo{ transform: none !important; }
   </style>
 
-  <!-- OVERRIDE de layout dos botões (linhas/colunas fixas) -->
+  <!-- Override de layout dos botões (linhas/colunas fixas) e filtro compacto -->
   <style id="filtro-override-layout">
     #filtroOrigem{
       display:grid !important; grid-auto-flow: row dense; gap:12px;
@@ -255,35 +229,29 @@
     #filtroOrigem label{ width:100%; max-width:200px; padding:10px 12px; border-radius:16px; }
     #filtroOrigem label img.filtro-logo{ height:56px; width:auto; max-width:92%; object-fit:contain; }
 
-    /* 📱 Mobile (≤640px): 3x4 */
     @media (max-width:640px){
       #filtroOrigem{ grid-template-columns: repeat(4, minmax(0,1fr)); gap:10px; }
       #filtroOrigem label img.filtro-logo{ height:46px; }
     }
-    /* 📟 Tablet (641–1024px): 4 colunas */
     @media (min-width:641px) and (max-width:1024px){
       #filtroOrigem{ grid-template-columns: repeat(4, minmax(0,1fr)); gap:12px; }
       #filtroOrigem label img.filtro-logo{ height:52px; }
     }
-    /* 🖥️ Desktop (≥1025px): 6 colunas */
     @media (min-width:1025px){
       #filtroOrigem{ grid-template-columns: repeat(6, minmax(0,1fr)); gap:12px; }
       #filtroOrigem label img.filtro-logo{ height:56px; }
     }
 
-    /* Badges / rank / botões globais */
     .tag-badge{ background:#111; color:#fff; border-radius:9999px; font-size:10px; padding:2px 8px; border:1px solid #e5e7eb; }
     .rank-chip{ margin-top:4px; display:inline-block; background:linear-gradient(90deg,#fef3c7,#fde68a); color:#7c2d12; font-weight:800; font-size:10px; padding:3px 8px; border-radius:9999px; border:1px solid #f59e0b99; }
     .btn-compare{ font-size:11px; font-weight:800; padding:4px 8px; border-radius:8px; border:1px solid #e5e7eb; background:#fff; }
     .btn-compare:hover{ background:#f9fafb; }
     .btn-buy{ font-size:11px; font-weight:900; padding:5px 10px; border-radius:8px; color:#fff; background:#111; border:1px solid #111; }
 
-    /* Cola título no filtro quando ativo */
     body.modo-filtro main.space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; }
     body.modo-filtro main .text-center > .bg-gradient-to-r { margin-top: 0 !important; }
     body.modo-filtro #barraFiltros { margin-bottom: 0 !important; padding-bottom: 4px !important; }
 
-    /* Filtro compacto */
     #barraFiltros{ padding: 8px 10px !important; gap: 8px !important; border-radius: 14px; }
     #barraFiltros .f-controls{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap: 8px 10px; }
 
@@ -323,7 +291,6 @@
 
     .search-wrap .icon, .search-wrap svg { display: none !important; }
     #filtroCategoria { height: 40px; font-weight: 600; }
-
     #filtroOrigem label .texto{ display:none !important; }
   </style>
 </head>
@@ -341,31 +308,43 @@
     </div>
 
     <!-- branding -->
-    <div class="bg-white px-2 py-2 flex flex-col sm:flex-row items-center justify-between border-b border-[var(--dourado)]/40">
-      <div class="flex items-center gap-2">
-        <!-- LOGO RESPONSIVO (sem emoji) -->
-        <a href="/" class="block">
-          <!-- Preload ajuda no carregamento -->
-          <link rel="preload" as="image" href="logos/petshopplus-logo-desktop.png">
-          <link rel="preload" as="image" href="logos/petshopplus-logo-tablet.png">
+    <div class="bg-white px-2 pt-2 pb-0 flex flex-col border-b border-[var(--dourado)]/40">
+      <div class="flex flex-col sm:flex-row items-center justify-between">
+        <div class="flex items-center gap-2">
+          <!-- LOGO RESPONSIVO (sem emoji) -->
+          <a href="/" class="block">
+            <link rel="preload" as="image" href="logos/petshopplus-logo-desktop.png">
+            <link rel="preload" as="image" href="logos/petshopplus-logo-tablet.png">
+            <picture>
+              <source media="(min-width:1024px)" srcset="logos/petshopplus-logo-desktop.png" type="image/png" />
+              <img
+                src="logos/petshopplus-logo-tablet.png"
+                alt="PetShop+ — seu pet em primeiro lugar"
+                class="h-10 sm:h-12 md:h-14 w-auto select-none"
+                loading="eager"
+                onerror="this.onerror=null;this.src='logos/petshopplus-logo-desktop.png';"
+              />
+            </picture>
+          </a>
+          <span class="hidden sm:inline text-[12px] text-[var(--marrom)]/70 font-semibold">
+            — Tudo para Cães e Gatos
+          </span>
+        </div>
 
-          <picture>
-            <!-- desktop (>=1024px) -->
-            <source media="(min-width:1024px)" srcset="logos/petshopplus-logo-desktop.png" type="image/png" />
-            <!-- tablet/mobile (fallback) -->
-            <img
-              src="logos/petshopplus-logo-tablet.png"
-              alt="PetShop+ — seu pet em primeiro lugar"
-              class="h-10 sm:h-12 md:h-14 w-auto select-none"
-              loading="eager"
-              onerror="this.onerror=null;this.src='logos/petshopplus-logo-desktop.png';"
-            />
-          </picture>
-        </a>
+        <!-- Espaço à direita reservado -->
+        <div class="h-0 sm:h-auto"></div>
+      </div>
 
-        <span class="hidden sm:inline text-[12px] text-[var(--marrom)]/70 font-semibold">
-          — Tudo para Cães e Gatos
-        </span>
+      <!-- Faixa dos botões de filtro (centralizados) -->
+      <div class="w-full flex items-center justify-center gap-3 py-2 flex-wrap">
+        <button id="btnBuscaFlutuante" aria-expanded="false">
+          🔎 Filtrar / Comparar / Procurar
+        </button>
+
+        <!-- Aparece somente quando o filtro está ativo -->
+        <button id="btnFecharFiltro" class="btn-close" aria-label="Fechar filtros" title="Fechar filtros">
+          ✖ Fechar filtros
+        </button>
       </div>
     </div>
   </header>
@@ -422,16 +401,10 @@
   </section>
 
   <!-- =========================================================
-       BOTÃO FLUTUANTE (FILTRO)
-       ========================================================= -->
-  <button id="btnBuscaFlutuante">🔍 Buscar / Filtrar</button>
-
-  <!-- =========================================================
        LISTA DE PRODUTOS
        ========================================================= -->
   <main class="p-2 space-y-4 max-w-6xl mx-auto">
     <section id="secListaProdutos" class="text-center">
-      <!-- Título da listagem -->
       <div
         class="bg-gradient-to-r from-[var(--marrom)] via-[#3a2518] to-[var(--marrom)]
                text-[var(--bege)] font-bold text-[13px] sm:text-[14px] tracking-wide
@@ -441,7 +414,6 @@
         <span>Todos os Produtos para Cães e Gatos</span>
       </div>
 
-      <!-- Lista de Cards (JS popula) -->
       <div id="listaProdutos" class="faixa-geral"></div>
     </section>
   </main>
@@ -463,31 +435,24 @@
                 overflow-y-auto max-h-[85vh] p-5 sm:p-6 shadow-2xl
                 transform scale-95 opacity-0 transition-all duration-300">
 
-      <!-- Fechar -->
       <button id="closeModal"
               class="absolute top-2 right-3 text-gray-700 hover:text-black
                      text-2xl font-bold bg-white/80 rounded-full p-2 sm:p-2.5 shadow-md">✖</button>
 
       <div class="flex flex-col sm:flex-row gap-5">
-        <!-- Imagem principal -->
         <div class="flex-1 flex items-center justify-center bg-white rounded-xl p-3 border border-yellow-200 shadow-inner">
           <img id="modalImage" src="" alt="Produto"
                class="w-full rounded-lg shadow-md max-h-[300px] object-contain" />
         </div>
 
-        <!-- Detalhes -->
         <div class="flex-1 flex flex-col gap-3">
-          <!-- Logo da loja (somente logo, centralizado) -->
           <div class="flex items-center justify-center mb-1">
             <img id="modalStoreLogo" class="" alt="Loja" />
           </div>
-          <!-- Mantido para compatibilidade com script.js -->
           <span id="modalStoreName" class="sr-only"></span>
 
-          <!-- Título -->
           <h2 id="modalTitle" class="text-lg sm:text-xl font-bold text-gray-800 leading-tight text-center"></h2>
 
-          <!-- Preços / Desconto -->
           <div class="flex items-center justify-center gap-2 mt-1">
             <span id="modalOldPrice" class="line-through text-gray-500 text-sm"></span>
             <span id="modalDiscount" class="font-semibold"></span>
@@ -496,14 +461,11 @@
           <div id="modalPrice" class="text-3xl sm:text-4xl font-extrabold text-center"></div>
           <p id="modalParcelas" class="text-sm text-gray-700 text-center"></p>
 
-          <!-- Lista de detalhes -->
           <ul id="modalDetails" class="list-disc pl-5 text-sm text-gray-700 space-y-1 text-left"></ul>
 
-          <!-- CTA -->
           <a id="modalLink" href="#" target="_blank"
              class="mt-2 text-center py-3 rounded-md font-extrabold shadow-md transition-all">🔒 Comprar com segurança</a>
 
-          <!-- Compartilhar -->
           <button id="btnCompartilhar" class="mt-2 bg-gray-900 text-white font-semibold py-2.5 rounded-md shadow-md">
             🔗 Compartilhar Oferta
           </button>
@@ -511,6 +473,45 @@
       </div>
     </div>
   </div>
+
+  <!-- =========================================================
+       SCRIPTZINHO (opcional) para o botão “Fechar filtros”
+       ========================================================= -->
+  <script>
+    (function(){
+      const openBtn  = document.getElementById('btnBuscaFlutuante');
+      const closeBtn = document.getElementById('btnFecharFiltro');
+
+      // Atualiza aria-expanded conforme o estado atual
+      const syncAria = () => {
+        if(!openBtn) return;
+        openBtn.setAttribute('aria-expanded', document.body.classList.contains('modo-filtro') ? 'true' : 'false');
+        openBtn.classList.toggle('ativo', document.body.classList.contains('modo-filtro'));
+      };
+
+      // Se teu script.js já faz o toggle do filtro ao clicar no openBtn,
+      // aqui só garantimos que o botão de fechar também funcione
+      closeBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Se já está ativo, simulamos um clique no botão principal para fechar,
+        // sem duplicar lógica com teu script.js:
+        if (document.body.classList.contains('modo-filtro')) {
+          openBtn?.click();
+        }
+        // Se por algum motivo teu script não rodar, fazemos um fallback:
+        else {
+          document.body.classList.remove('modo-filtro');
+          syncAria();
+        }
+      });
+
+      // Depois de qualquer clique no botão principal, sincroniza aria/estilo
+      openBtn?.addEventListener('click', () => setTimeout(syncAria, 0));
+
+      // Sincroniza no load (caso a página já abra com modo-filtro por algum estado salvo)
+      document.addEventListener('DOMContentLoaded', syncAria);
+    })();
+  </script>
 
   <!-- =========================================================
        SCRIPTS
