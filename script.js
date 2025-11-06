@@ -89,20 +89,106 @@ const STORE_META = {
   ponto: { nome:"Ponto", corBorda:"#111111", corTexto:"#FF5500", bgCard:"linear-gradient(to bottom,#F0F0F0,#FFFFFF)", logo:"logos/ponto.svg", btn:["#111111","#444444"], off:"#FF5500" },
 };
 
-/* ===================== PRODUTOS (exemplos) ===================== */
+/* ===================== PRODUTOS (agora com GTIN) ===================== */
 const produtos = [
+  // ===== exemplos gerais (sem GTIN, continuam funcionando normalmente) =====
   { tipo:"shopee", nome:"Laços Premium — kit 20 un. (cores sortidas)", precoAntigo:69.90, precoAtual:39.90, desconto:"43% OFF", parcelas:"6x sem juros", detalhes:["Elástico macio","Não puxa o pelo","Cores vivas"], imagem:"https://images.unsplash.com/photo-1596495578065-8c1b2f6a3513?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"shopee", nome:"Peitoral Conforto X-Soft (PP/P) — Anti-puxão", precoAntigo:89.90, precoAtual:54.90, desconto:"39% OFF", parcelas:"6x sem juros", detalhes:["Ajuste rápido","Almofadado","Anel em metal"], imagem:"https://images.unsplash.com/photo-1560807707-8cc77767d783?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"petlove", nome:"Shampoo Hipoalergênico (300ml) — Pelos longos", precoAntigo:54.90, precoAtual:39.90, desconto:"27% OFF", parcelas:"3x sem juros", detalhes:["pH balanceado","Sem parabenos","Cheiro suave"], imagem:"https://images.unsplash.com/photo-1625314887424-9f189ffd40dc?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"petlove", nome:"Cama Donut Antiestresse (P) — Bege", precoAntigo:189.90, precoAtual:129.90, desconto:"32% OFF", parcelas:"6x sem juros", detalhes:["Tecido soft","Antiderrapante","Zíper para lavar"], imagem:"https://images.unsplash.com/photo-1548191265-cc70d3d45ba1?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"amazon", nome:"Escova Slicker + Pente 2 em 1 — Anti-embolo", precoAntigo:59.90, precoAtual:39.90, desconto:"33% OFF", parcelas:"Em até 10x", detalhes:["Cerdas macias","Cabo ergonômico"], imagem:"https://images.unsplash.com/photo-1567359781514-3b964e06a3ab?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"amazon", nome:"Hidratante de Almofadinhas (50g) — Natural", precoAntigo:49.90, precoAtual:31.90, desconto:"36% OFF", parcelas:"Em até 10x", detalhes:["Manteiga de karité","Sem álcool"], imagem:"https://images.unsplash.com/photo-1525253013412-55c1a69a5738?q=80&w=800&auto=format&fit=crop", link:"#"},
-  /* ====== Produto “igual” em várias lojas (para demo do comparador) ====== */
-  { tipo:"magalu", nome:"Simparic Antipulgas 10,1 a 20kg (40mg) — 3 comprimidos", precoAntigo:298.90, precoAtual:251.01, desconto:"16% OFF", parcelas:"1x R$278,90 sem juros", detalhes:["Ação rápida por até 35 dias","Protege contra pulgas, carrapatos e sarna","Comprimido mastigável saborizado","Indicado para cães de 10,1 a 20kg","Fabricante: Zoetis"], imagem:"https://a-static.mlcdn.com.br/800x560/simparic-antipulgas-para-caes-de-101-a-20kg-40mg-cx-com-3-compr-zoetis/petcaoricica/230be688263311eebbb14201ac185049/b100a43bbc606eff93b937122c907436.jpeg", link:"https://divulgador.magalu.com/JSpImZ78"},
-  { tipo:"americanas", nome:"Simparic Antipulgas 10,1 a 20kg (40mg) — 3 comprimidos", precoAntigo:309.90, precoAtual:259.90, desconto:"", parcelas:"Em até 10x", detalhes:["1 caixa com 3 comprimidos","Zoetis"], imagem:"https://a-static.mlcdn.com.br/800x560/simparic-antipulgas-para-caes-de-101-a-20kg-40mg-cx-com-3-compr-zoetis/petcaoricica/230be688263311eebbb14201ac185049/b100a43bbc606eff93b937122c907436.jpeg", link:"#"},
-  { tipo:"amazon", nome:"Simparic Antipulgas 10,1 a 20kg (40mg) — 3 comprimidos", precoAntigo:299.90, precoAtual:247.50, desconto:"", parcelas:"Em até 10x", detalhes:["Zoetis • 3 comprimidos"], imagem:"https://a-static.mlcdn.com.br/800x560/simparic-antipulgas-para-caes-de-101-a-20kg-40mg-cx-com-3-compr-zoetis/petcaoricica/230be688263311eebbb14201ac185049/b100a43bbc606eff93b937122c907436.jpeg", link:"#"},
-  { tipo:"mercadolivre", nome:"Simparic Antipulgas 10,1 a 20kg (40mg) — 3 comprimidos", precoAntigo:310.00, precoAtual:268.90, desconto:"", parcelas:"10x sem juros", detalhes:["Original Zoetis"], imagem:"https://a-static.mlcdn.com.br/800x560/simparic-antipulgas-para-caes-de-101-a-20kg-40mg-cx-com-3-compr-zoetis/petcaoricica/230be688263311eebbb14201ac185049/b100a43bbc606eff93b937122c907436.jpeg", link:"#"},
-  /* ====== Fim do grupo de comparação ====== */
+
+  /* ====== COMPARADOR (MESMO PRODUTO — MESMO GTIN) ======
+     Produto: Simparic Zoetis 40 mg (10,1–20 kg) — 1 unidade
+     GTIN/EAN: 7898049719488
+  */
+  {
+    tipo: "mercadolivre",
+    gtin: "7898049719488",
+    nome: "Simparic Zoetis 40 mg 10,1–20 kg — 1 unidade",
+    brand: "Zoetis",
+    doseMg: 40,
+    weightRange: "10,1–20 kg",
+    packQty: 1,
+    precoAntigo: 118.33,
+    precoAtual: 74.60,
+    desconto: "36% OFF",
+    parcelas: "12x R$ 7,35",
+    rating: 4.8,
+    reviews: 29113,
+    badges: ["Novo","Mais vendido"],
+    categoryRank: "1º em Tratamentos Anti-Pulgas",
+    cashback: "até R$ 2,24",
+    imagem: "https://http2.mlstatic.com/D_NQ_NP_2X_905561-MLA88406142177_072025-F.webp",
+    link: "https://mercadolivre.com/sec/1t7W5Sn",
+    detalhes: [
+      "Proteção contra parasitas por 5 semanas.",
+      "Indicado para cães de 10,1 a 20 kg.",
+      "Unidades por kit: 1."
+    ]
+  },
+  {
+    tipo: "cobasi",
+    gtin: "7898049719488",
+    nome: "Simparic Zoetis 40 mg 10,1–20 kg — 1 unidade",
+    brand: "Zoetis",
+    doseMg: 40,
+    weightRange: "10,1–20 kg",
+    packQty: 1,
+    precoAntigo: 133.90,
+    precoAtual: 79.90,
+    desconto: "40% OFF",
+    parcelas: "à vista",
+    rating: 4.8,
+    reviews: 1370,
+    badges: ["Produto original", "Compra Programada", "Amigo Cobasi"],
+    loyaltyPoints: 79,
+    shippingOptions: [
+      { nome: "Retire na loja", prazo: "até 11h", preco: 0, freteGratis: true },
+      { nome: "Econômica", prazo: "até 1 dia útil", preco: 15.90 },
+      { nome: "Cobasi Já", prazo: "até 1 hora*", preco: 17.90 }
+    ],
+    pickupAvailable: true,
+    imagem: "https://cobasi.vteximg.com.br/arquivos/ids/1089375-368-368/Antipulgas%20Simparic%2040mg%20para%20Caes%2010%20a%2020kg.webp?v=638974276600530000",
+    link: "#",
+    detalhes: [
+      "Elimina 100% de pulgas e carrapatos.",
+      "Comprimido mastigável e altamente palatável.",
+      "Combate também três tipos de sarnas.",
+      "Indicado para cães a partir de 8 semanas de idade.",
+      "Começa a fazer efeito em 3 horas e protege por até 35 dias."
+    ]
+  },
+  {
+    tipo: "magalu",
+    gtin: "7898049719488",
+    nome: "Simparic Zoetis 40 mg 10,1–20 kg — 1 unidade",
+    brand: "Zoetis",
+    doseMg: 40,
+    weightRange: "10,1–20 kg",
+    packQty: 1,
+    precoAntigo: 85.87,
+    precoAtual: 74.97,
+    precoPix: 59.98,
+    desconto: "≈30% OFF",
+    parcelas: "1x R$ 74,97 sem juros",
+    rating: 4.7,
+    reviews: 232,
+    badges: ["Magalu garante", "Olist Plus"],
+    cupom: "PET10",
+    cupomDescricao: "10% OFF (válido até 16/11)",
+    freteAPartir: 28.47,
+    imagem: "https://a-static.mlcdn.com.br/800x560/antipulgas-simparic-1-comp-10-a-20kg-zoetis/olistplus/opmjuho68xxtdv8l/43719ef3c6447d809db36e10d861f933.jpeg",
+    link: "https://divulgador.magalu.com/3BWYo8lG",
+    detalhes: [
+      "Proteção contra parasitas por 5 semanas.",
+      "Indicado para cães de 10,1 a 20 kg.",
+      "Unidades por kit: 1."
+    ]
+  },
+
+  // ===== resto dos exemplos que você já tinha =====
   { tipo:"mercadolivre", nome:"Conjunto Bandana + Gravata (3 peças) — Shih Tzu", precoAntigo:49.90, precoAtual:32.90, desconto:"34% OFF", parcelas:"10x sem juros", detalhes:["Tecido respirável","Lavável","Ajuste com velcro"], imagem:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"petz", nome:"Tapete Higiênico Premium p/ Cães (30 un.)", precoAntigo:119.90, precoAtual:89.90, parcelas:"3x sem juros", detalhes:["Gel superabsorvente","Adesivo antideslizante","Neutraliza odores"], imagem:"https://images.unsplash.com/photo-1543465077-db45d34b88a5?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"petz", nome:"Escova Dupla — Macia & Pinos (p/ pelos longos)", precoAntigo:69.90, precoAtual:44.90, parcelas:"4x sem juros", detalhes:["Remoção de nós","Evita quebra do pelo","Cabo ergonômico"], imagem:"https://images.unsplash.com/photo-1561736778-92e52a7769ef?q=80&w=800&auto=format&fit=crop", link:"#"},
@@ -189,6 +275,43 @@ function attachLogoFallback(imgEl){
   };
 }
 
+/* ===================== Helpers GTIN + índice por GTIN ===================== */
+const onlyDigits = (s="") => (s||"").replace(/\D+/g,"");
+
+function gtin14CheckDigit(body13){
+  let sum=0;
+  for(let i=0;i<body13.length;i++){
+    const n = body13.charCodeAt(i)-48;
+    sum += (i%2===0?3:1)*n;
+  }
+  const mod = sum%10; return mod===0?0:10-mod;
+}
+
+/* Normaliza EAN/UPC para GTIN-14 válido (ou "" se inválido) */
+function normalizeGTIN(raw){
+  let d = onlyDigits(raw);
+  if (!d) return "";
+  if (d.length===12) d = "00"+d;       // UPC-A -> GTIN-14
+  else if (d.length===13) d = "0"+d;   // EAN-13 -> GTIN-14
+  else if (![14,8].includes(d.length)) return "";
+  if (d.length===8) d = d.padStart(14,"0"); // EAN-8 -> GTIN-14 (padding)
+  const body = d.slice(0,13), dv = +d.slice(13);
+  const calc = gtin14CheckDigit(body);
+  return (dv===calc)?d:(body+String(calc));
+}
+
+/* Índice { GTIN-14: { loja: produto } } para lookup rápido */
+const indexByGTIN = new Map();
+function indexarPorGTIN(arr){
+  indexByGTIN.clear();
+  for(const p of arr){
+    const g = normalizeGTIN(p.gtin);
+    if(!g) continue;
+    if(!indexByGTIN.has(g)) indexByGTIN.set(g,{});
+    indexByGTIN.get(g)[p.tipo] = p;
+  }
+}
+
 /* ===================== BANNERS ===================== */
 function renderBanner(containerId, tipos) {
   const faixa = el(`#${containerId}`); if (!faixa) return;
@@ -240,7 +363,6 @@ function normalizeKey(obj){
   // remove tamanhos/cor comuns
   name = name.replace(/\b(pp|p|m|g|gg|xg|xl|xxl|preto|branco|bege|azul|rosa|vermelho)\b/g, " ");
   // remove números isolados sem contexto (deixa 10,1 a 20kg, 40mg, 3 comprimidos)
-  // preserva padrões com kg, mg, ml e "comprimid" na mesma palavra
   name = name.replace(/\b(\d+(?:,\d+)?)\b(?!\s*(kg|mg|ml|comprimid))/g, " ");
 
   // colapsa espaços
@@ -300,10 +422,16 @@ function renderLista(lista) {
     // ===== Botões de ação (Comparar + Ver) =====
     const actions = document.createElement("div");
     actions.className = "mt-1.5 flex items-center justify-center gap-1";
+
     const btnCmp = document.createElement("button");
     btnCmp.className = "px-2 py-1 rounded-md text-[10px] font-bold border border-gray-300 bg-white hover:bg-gray-50";
     btnCmp.textContent = "🔎 Comparar";
-    btnCmp.addEventListener("click", (e)=>{ e.stopPropagation(); abrirComparador(p); });
+    btnCmp.addEventListener("click", (e)=>{ 
+      e.stopPropagation(); 
+      const g = normalizeGTIN(p.gtin);
+      if (g) abrirComparadorPorGTIN(g);
+      else   abrirComparador(p);
+    });
 
     const btnVer = document.createElement("button");
     btnVer.className = "px-2 py-1 rounded-md text-[10px] font-bold border border-gray-300 bg-white hover:bg-gray-50";
@@ -382,17 +510,58 @@ function openModal(obj) {
     });
   }
 
-  // ---- Botão "Comparar preços" dentro do modal (criado dinamicamente)
-  let btnCmp = el("#btnModalComparar");
-  if (!btnCmp){
-    btnCmp = document.createElement("button");
-    btnCmp.id = "btnModalComparar";
-    btnCmp.className = "mt-2 bg-black text-white font-bold py-2.5 rounded-md shadow";
-    btnCmp.textContent = "🔎 Comparar preços deste item";
-    const linkRef = el("#modalLink");
-    if (linkRef) linkRef.insertAdjacentElement("afterend", btnCmp);
-  }
-  btnCmp.onclick = ()=> abrirComparador(p);
+  // ---- Extras no modal (rating / rank / cashback / Pix / cupom / GTIN) ----
+  (() => {
+    const holderId = "modalExtras";
+    let extras = el("#"+holderId);
+    if (!extras){
+      extras = document.createElement("div");
+      extras.id = holderId;
+      extras.className = "text-center text-sm text-gray-700 space-y-1";
+      el("#modalPrice")?.insertAdjacentElement("afterend", extras);
+    }
+    function renderStars(rating=0){
+      const full = Math.floor(rating);
+      const half = rating - full >= 0.25 && rating - full < 0.75 ? 1 : 0;
+      const empty = 5 - full - half;
+      return "★".repeat(full) + (half?"☆":"") + "✩".repeat(empty);
+    }
+    extras.innerHTML = `
+      ${p.rating ? `<div><b>${p.rating.toFixed(1)}</b> ${renderStars(p.rating)} <span class="text-gray-500">(${p.reviews?.toLocaleString?.("pt-BR")||p.reviews||""})</span></div>` : ``}
+      ${p.categoryRank ? `<div class="rank-chip inline-block !mt-0">${p.categoryRank}</div>` : ``}
+      ${p.cashback ? `<div class="text-emerald-700 font-semibold">💸 ${p.cashback}</div>` : ``}
+      ${p.gtin ? `<div class="text-[11px] text-gray-500">GTIN/EAN: ${normalizeGTIN(p.gtin)}</div>` : ``}
+    `;
+
+    if (p.precoPix){
+      const pixLine = document.createElement("div");
+      pixLine.className = "text-sm text-emerald-700 font-semibold text-center -mt-1";
+      pixLine.textContent = `Pix: ${fmt(p.precoPix)}`;
+      el("#modalPrice")?.insertAdjacentElement("afterend", pixLine);
+    }
+    if (p.cupom){
+      const cupLine = document.createElement("div");
+      cupLine.className = "text-xs text-amber-700 font-semibold text-center";
+      cupLine.textContent = `Cupom ${p.cupom} — ${p.cupomDescricao||""}`;
+      (el("#modalPrice")?.parentElement || el("#modalBox")).appendChild(cupLine);
+    }
+
+    // Botão comparar dentro do modal (recolocado aqui para evitar duplicatas)
+    let btnCmp = el("#btnModalComparar");
+    if (!btnCmp){
+      btnCmp = document.createElement("button");
+      btnCmp.id = "btnModalComparar";
+      btnCmp.className = "mt-2 bg-white font-semibold py-2.5 rounded-md shadow border";
+      btnCmp.textContent = "🔎 Comparar preços deste item";
+      const linkRef = el("#modalLink");
+      if (linkRef) linkRef.insertAdjacentElement("afterend", btnCmp);
+    }
+    btnCmp.onclick = ()=> {
+      const g = normalizeGTIN(p.gtin);
+      if (g) abrirComparadorPorGTIN(g);
+      else   abrirComparador(p);
+    };
+  })();
 
   // exibe
   modal.classList.remove("hidden");
@@ -622,9 +791,14 @@ function autoScroll(containerId){
 
 /* ===================== COMPARADOR (UI) ===================== */
 function toggleComparador(show){
-  const secList = el("#secListaProdutos");
   const secCmp  = el("#secComparador");
-  if (!secList || !secCmp) return;
+  // Se não houver uma seção “lista”, calculamos a área principal a partir do #listaProdutos
+  let secList = el("#secListaProdutos");
+  if (!secList){
+    const lista = el("#listaProdutos");
+    secList = lista ? lista.closest("section") || lista.parentElement : null;
+  }
+  if (!secCmp || !secList) return;
 
   if (show){
     secList.classList.add("hidden");
@@ -636,8 +810,24 @@ function toggleComparador(show){
   }
 }
 
+function abrirComparadorPorGTIN(gtin14){
+  closeModal();
+  const pack = indexByGTIN.get(gtin14);
+  if (!pack){
+    const fake = { nome:`GTIN ${gtin14}`, tipo:"mercadolivre", precoAtual:0 };
+    renderComparador([fake], fake);
+    toggleComparador(true);
+    return;
+  }
+  const grupo = Object.values(pack);
+  renderComparador(grupo, grupo[0]);
+  toggleComparador(true);
+}
+
 function abrirComparador(baseProduct){
-  closeModal(); // se estiver aberto, fecha
+  closeModal(); // fecha modal, se aberto
+  const g = normalizeGTIN(baseProduct.gtin);
+  if (g){ abrirComparadorPorGTIN(g); return; }
   const grupo = comparablesFor(baseProduct);
   renderComparador(grupo, baseProduct);
   toggleComparador(true);
@@ -766,6 +956,9 @@ window.addEventListener("DOMContentLoaded", ()=>{
   autoScroll("bannerB");
   document.body.classList.remove("modo-filtro");
 
+  // Índice de GTIN para comparador por código
+  indexarPorGTIN(produtos);
+
   // toolbar (se quiser colocar botões fixos no topo)
   const tb = document.querySelector(".ml-toolbar");
   if (tb){
@@ -782,6 +975,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
       if (secCmp && !secCmp.classList.contains("hidden")) btnBack.classList.remove("hidden");
       else btnBack.classList.add("hidden");
     });
-    obs.observe(el("#secComparador"), { attributes:true, attributeFilter:["class"] });
+    const secC = el("#secComparador");
+    if (secC) obs.observe(secC, { attributes:true, attributeFilter:["class"] });
   }
 });

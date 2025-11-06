@@ -9,7 +9,9 @@
   <title>PetShop+ — Tudo para Cães e Gatos</title>
 
   <!-- Favicon (PNG com fundo transparente) -->
-  <link rel="icon" type="image/png" href="logo/petshopplus-favicon.png" sizes="64x64" />
+  <link rel="icon" type="image/png" href="logos/petshopplus-favicon.png" sizes="64x64" />
+  <!-- Fallback SVG inline (caso o PNG não exista ainda) -->
+  <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect width="100%" height="100%" rx="12" ry="12" fill="%23D6A75C"/><text x="50%" y="54%" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="%23fff">PS+</text></svg>' />
 
   <!-- =========================================================
        Tailwind (CDN)
@@ -39,47 +41,27 @@
   /* =========================
      Skeleton (efeito shimmer)
      ========================= */
-  .skel {
-    position: relative;
-    overflow: hidden;
-    background: #f3f4f6;
-  }
+  .skel { position: relative; overflow: hidden; background: #f3f4f6; }
   .skel::after{
-    content:"";
-    position:absolute; inset:0;
+    content:""; position:absolute; inset:0;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
-    transform: translateX(-100%);
-    animation: shimmer 1.2s infinite;
+    transform: translateX(-100%); animation: shimmer 1.2s infinite;
   }
   @keyframes shimmer{ 100% { transform: translateX(100%); } }
 
   /* =========================
      Card — Imagem Produto
      ========================= */
-  .card-img-wrap{
-    position:relative;
-    border-radius:.6rem;
-  }
-  .card-img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-  }
+  .card-img-wrap{ position:relative; border-radius:.6rem; }
+  .card-img{ width:100%; height:100%; object-fit:contain; }
 
   /* =========================
      Ribbon de desconto (se usar)
      ========================= */
   .ribbon {
-    position:absolute;
-    top:6px; left:-6px;
-    z-index:5;
-    background:#16a34a;
-    color:#fff;
-    font-weight:800;
-    font-size:10px;
-    padding:4px 10px;
-    border-radius:.4rem;
-    box-shadow:0 2px 8px rgba(0,0,0,.12);
+    position:absolute; top:6px; left:-6px; z-index:5;
+    background:#16a34a; color:#fff; font-weight:800; font-size:10px;
+    padding:4px 10px; border-radius:.4rem; box-shadow:0 2px 8px rgba(0,0,0,.12);
     transform: rotate(-3deg);
   }
 
@@ -96,9 +78,7 @@
     box-shadow:0 3px 10px rgba(0,0,0,.4);
     transition:.3s;
   }
-  #btnBuscaFlutuante.ativo{
-    background:linear-gradient(120deg,#7f1d1d,#b91c1c,#dc2626);
-  }
+  #btnBuscaFlutuante.ativo{ background:linear-gradient(120deg,#7f1d1d,#b91c1c,#dc2626); }
   @media (min-width:641px){
     #btnBuscaFlutuante{ left:25px; bottom:25px; transform:scale(.92); }
   }
@@ -107,53 +87,30 @@
      Lista de Produtos — Grid fluido
      ========================= */
   #listaProdutos{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:6px;
-    padding-bottom:8px;
-    transition: all .35s ease;
+    display:flex; flex-wrap:wrap; justify-content:center;
+    gap:6px; padding-bottom:8px; transition: all .35s ease;
   }
 
   .card-geral{
-    position:relative;
-    background:#fff;
-    border-radius:.7rem;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    position:relative; background:#fff; border-radius:.7rem;
+    display:flex; flex-direction:column; align-items:center;
     transition:transform .25s ease, box-shadow .25s ease;
     width:23%;
   }
-  .card-geral:hover{
-    transform:scale(1.035);
-    box-shadow:0 6px 16px rgba(0,0,0,.12);
-  }
+  .card-geral:hover{ transform:scale(1.035); box-shadow:0 6px 16px rgba(0,0,0,.12); }
 
   .card-img-wrap{
-    width:100%;
-    height:84px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    border-radius:.55rem;
+    width:100%; height:84px; display:flex; align-items:center; justify-content:center;
+    overflow:hidden; border-radius:.55rem;
   }
-  .card-img{
-    max-height:84px;
-    object-fit:contain;
-    transition:transform .3s ease;
-  }
-  .card-geral:hover .card-img{
-    transform:scale(1.04);
-  }
+  .card-img{ max-height:84px; object-fit:contain; transition:transform .3s ease; }
+  .card-geral:hover .card-img{ transform:scale(1.04); }
 
   /* =========================
      Selo com logo da loja
      ========================= */
   .card-selo{
-    width:100%;
-    display:flex; align-items:center; justify-content:center; gap:6px;
+    width:100%; display:flex; align-items:center; justify-content:center; gap:6px;
     background:#fff; border:1px solid #e5e7eb; border-radius:.45rem;
     margin-top:3px; height:auto; min-height:32px; padding:4px 8px;
   }
@@ -161,21 +118,14 @@
   /* =========================
      Logos nos cards e modais
      ========================= */
-  .card-logo{
-    height:24px; width:auto; max-width:90px;
-    object-fit:contain; transition:transform .25s ease;
-  }
+  .card-logo{ height:24px; width:auto; max-width:90px; object-fit:contain; transition:transform .25s ease; }
   .card-selo:hover .card-logo{ transform:scale(1.1); }
   .card-logo.amz, .card-logo.pnt, .card-logo.mgl { height:26px; }
 
   /* =========================
      Textos do card
      ========================= */
-  .card-nome{
-    font-size:10px; line-height:1.1rem; height:34px;
-    overflow:hidden; text-align:center; margin-top:4px;
-    font-weight:700; color:#1f2937;
-  }
+  .card-nome{ font-size:10px; line-height:1.1rem; height:34px; overflow:hidden; text-align:center; margin-top:4px; font-weight:700; color:#1f2937; }
   .card-old{ font-size:10px; color:#6b7280; text-decoration:line-through; }
   .card-price{ font-size:13px; font-weight:900; }
   .card-off{ font-size:11px; font-weight:800; }
@@ -183,9 +133,16 @@
   /* =========================
      Responsivo: qtd por linha
      ========================= */
-  @media (max-width:640px){ .card-geral{ width:23%; } }
-  @media (min-width:641px) and (max-width:1024px){ .card-geral{ width:18%; } }
-  @media (min-width:1025px){ .card-geral{ width:11.5%; } }
+  /* ✅ 5 por linha no mobile */
+  @media (max-width:640px){
+    .card-geral{ width: calc(20% - 6px); }
+  }
+  @media (min-width:641px) and (max-width:1024px){
+    .card-geral{ width:18%; }
+  }
+  @media (min-width:1025px){
+    .card-geral{ width:11.5%; }
+  }
 
   /* =========================
      Modo filtro (banners escondem)
@@ -208,9 +165,7 @@
     box-shadow: inset 0 2px 8px rgba(255,255,255,.6), 0 2px 14px rgba(0,0,0,.08);
     color:#222; padding:8px 12px;
   }
-  body.modo-filtro #barraFiltros{
-    display:flex !important; opacity:1; transform: translateY(0);
-  }
+  body.modo-filtro #barraFiltros{ display:flex !important; opacity:1; transform: translateY(0); }
   #buscaInput{
     background:rgba(255,255,255,.92); color:#111;
     border:1.5px solid rgba(214,167,92,.45); border-radius:9999px; padding:9px 12px;
@@ -219,77 +174,44 @@
   /* =========================
    Origem buttons (marcas) – via JS (ATUALIZADO)
    ========================= */
-#filtroOrigem{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
-  gap:8px; width:100%;
-}
-
-#filtroOrigem label{
-  display:flex; align-items:center; justify-content:center; gap:6px;
-  padding:8px 10px;
-  height:48px;                         /* altura consistente */
-  border-radius:9999px;
-  font-weight:800; font-size:13px;
-  border:1.5px solid #e5e7eb; background:#fff;
-  transition: box-shadow .2s ease, transform .2s ease;
-}
-#filtroOrigem label:hover{ box-shadow:0 4px 10px rgba(0,0,0,.06); transform: translateY(-1px); }
-
-#filtroOrigem input{ position:absolute; opacity:0; width:0; height:0; }
-
-/* Logo dentro do botão */
-#filtroOrigem label img.filtro-logo{
-  display:block; object-fit:contain;
-  width:24px; height:24px;             /* mobile */
-  pointer-events:none;
-}
-
-/* Esconde o texto até >=1280px (desktop grande) */
-#filtroOrigem label .texto{ display:none; }
-@media (min-width: 768px){             /* tablet */
-  #filtroOrigem label img.filtro-logo{ width:28px; height:28px; }
-}
-@media (min-width: 1024px){            /* desktop padrão */
-  #filtroOrigem label img.filtro-logo{ width:30px; height:30px; }
-}
-@media (min-width: 1280px){            /* desktop grande: mostra texto */
-  #filtroOrigem{ grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
-  #filtroOrigem label .texto{ display:inline; }
-  #filtroOrigem label img.filtro-logo{ width:26px; height:26px; } /* fica mais discreto */
-}
-
-/* Estados ativos por loja (mantidos) */
-#filtroOrigem label.ativo[data-src="shopee"]{
-  background:linear-gradient(145deg,#ee4d2d,#ff8a70); color:#fff; border-color:#ee4d2d;
-}
-#filtroOrigem label.ativo[data-src="petlove"]{
-  background:linear-gradient(145deg,#00AEEF,#b3ecff); color:#00324a; border-color:#00AEEF;
-}
-#filtroOrigem label.ativo[data-src="amazon"]{
-  background:linear-gradient(145deg,#ff9900,#232f3e); color:#fff; border-color:#232f3e;
-}
-#filtroOrigem label.ativo[data-src="mercadolivre"]{
-  background:linear-gradient(145deg,#fff6a6,#ffe600); color:#0b4ea2; border-color:#ffe600;
-}
+  #filtroOrigem{
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+    gap:8px; width:100%;
+  }
+  #filtroOrigem label{
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    padding:8px 10px; height:48px; border-radius:9999px; font-weight:800; font-size:13px;
+    border:1.5px solid #e5e7eb; background:#fff; transition: box-shadow .2s ease, transform .2s ease;
+  }
+  #filtroOrigem label:hover{ box-shadow:0 4px 10px rgba(0,0,0,.06); transform: translateY(-1px); }
+  #filtroOrigem input{ position:absolute; opacity:0; width:0; height:0; }
+  #filtroOrigem label img.filtro-logo{ display:block; object-fit:contain; width:24px; height:24px; pointer-events:none; }
+  #filtroOrigem label .texto{ display:none; }
+  @media (min-width: 768px){ #filtroOrigem label img.filtro-logo{ width:28px; height:28px; } }
+  @media (min-width: 1024px){ #filtroOrigem label img.filtro-logo{ width:30px; height:30px; } }
+  @media (min-width: 1280px){
+    #filtroOrigem{ grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+    #filtroOrigem label .texto{ display:inline; }
+    #filtroOrigem label img.filtro-logo{ width:26px; height:26px; }
+  }
+  /* Estados ativos (realce já combinado com seu script) */
+  #filtroOrigem label.ativo[data-src="shopee"]{ background:linear-gradient(145deg,#ee4d2d,#ff8a70); color:#fff; border-color:#ee4d2d; }
+  #filtroOrigem label.ativo[data-src="petlove"]{ background:linear-gradient(145deg,#00AEEF,#b3ecff); color:#00324a; border-color:#00AEEF; }
+  #filtroOrigem label.ativo[data-src="amazon"]{ background:linear-gradient(145deg,#ff9900,#232f3e); color:#fff; border-color:#232f3e; }
+  #filtroOrigem label.ativo[data-src="mercadolivre"]{ background:linear-gradient(145deg,#fff6a6,#ffe600); color:#0b4ea2; border-color:#ffe600; }
 
   /* =========================
      Modal
      ========================= */
   .modal-bg{ background:rgba(0,0,0,.7); }
-  .modal-box{
-    background:linear-gradient(135deg,#ffffff 0%, #FFF8ED 100%);
-    border:1px solid rgba(214,167,92,.45);
-  }
+  .modal-box{ background:linear-gradient(135deg,#ffffff 0%, #FFF8ED 100%); border:1px solid rgba(214,167,92,.45); }
 
   /* Logo do modal maior e centralizado */
   #modalStoreLogo{ height:40px; margin-left:auto; margin-right:auto; display:block; }
 
   /* Mantém compat c/ script.js se ele ler #modalStoreName */
   .sr-only{
-    position:absolute !important;
-    width:1px; height:1px;
-    padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
   }
 
   /* =========================
@@ -303,230 +225,107 @@
   .logos-container:hover { animation-play-state: paused; }
   .logos-container img { height:26px; object-fit:contain; transition:transform .3s; }
   .logos-container img:hover { transform:scale(1.1); }
-  @keyframes slide {
-    from { transform:translateX(0); }
-    to   { transform:translateX(-50%); }
-  }
+  @keyframes slide { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
   /* ================================
    OVERRIDES — espaço e logo maior
    ================================ */
+  body.modo-filtro section:has(#bannerA),
+  body.modo-filtro section:has(#bannerB){
+    padding: 0 !important; margin: 0 !important; height: 0 !important; border: 0 !important; overflow: hidden !important;
+  }
+  body.modo-filtro main .text-center > .bg-gradient-to-r{ margin-top: 6px !important; }
+  body.modo-filtro #barraFiltros{ padding-top: 6px !important; padding-bottom: 6px !important; margin-bottom: 6px !important; }
 
-/* 1) Ao ativar o filtro, esconda COMPLETAMENTE
-      as seções dos banners (não só o conteúdo)  */
-body.modo-filtro section:has(#bannerA),
-body.modo-filtro section:has(#bannerB){
-  padding: 0 !important;
-  margin: 0 !important;
-  height: 0 !important;
-  border: 0 !important;
-  overflow: hidden !important;
-}
-
-/* 2) Diminui a “folga” entre o filtro e o título da listagem */
-body.modo-filtro main .text-center > .bg-gradient-to-r{
-  margin-top: 6px !important;   /* estava mt-3 no HTML */
-}
-
-/* 3) Compacta levemente a própria barra quando ativa
-      para ganhar mais viewport, principalmente no mobile */
-body.modo-filtro #barraFiltros{
-  padding-top: 6px !important;
-  padding-bottom: 6px !important;
-  margin-bottom: 6px !important;
-}
-
-/* ================================
-   LOGO MAIS LARGO NO TOPO DO CARD
-   ================================ */
-
-/* Faixa do selo ocupa melhor a largura */
-.card-selo{
-  padding: 4px 6px !important;
-  min-height: 34px;
-  border-radius: .5rem;
-}
-
-/* Desktop deixa a faixa um pouco mais alta */
-@media (min-width:1024px){
-  .card-selo{ min-height: 42px; }
-}
-
-/* O logo passa a usar praticamente toda a faixa
-   (mantendo proporção por object-fit: contain) */
-.card-logo{
-  width: 100% !important;      /* ocupa toda a faixa */
-  height: 28px !important;     /* mobile */
-  max-width: none !important;
-  object-fit: contain !important;
-}
-
-/* Tablet / Desktop: aumenta a altura do logo para preencher melhor */
-@media (min-width:640px){
-  .card-logo{ height: 32px !important; }
-}
-@media (min-width:1024px){
-  .card-logo{ height: 36px !important; }
-}
-
-/* Ajuste fino: remove “pulos” na expansão do card ao passar o mouse */
-.card-selo:hover .card-logo{ transform: none !important; }
-
+  /* LOGO MAIS LARGO NO TOPO DO CARD */
+  .card-selo{ padding: 4px 6px !important; min-height: 34px; border-radius: .5rem; }
+  @media (min-width:1024px){ .card-selo{ min-height: 42px; } }
+  .card-logo{ width: 100% !important; height: 28px !important; max-width: none !important; object-fit: contain !important; }
+  @media (min-width:640px){ .card-logo{ height: 32px !important; } }
+  @media (min-width:1024px){ .card-logo{ height: 36px !important; } }
+  .card-selo:hover .card-logo{ transform: none !important; }
   </style>
 
   <!-- OVERRIDE de layout dos botões (linhas/colunas fixas) -->
-<style id="filtro-override-layout">
-  /* Base: grid com preenchimento denso */
-  #filtroOrigem{
-    display:grid !important;
-    grid-auto-flow: row dense;
-    gap:12px;
-    align-items:center;
-    justify-items:center; /* centraliza cada botão */
-    width:100%;
-  }
-
-  /* Botão “cápsula” se adapta ao grid sem quebrar */
-  #filtroOrigem label{
-    width:100%;
-    max-width:200px;         /* evita ultra largo */
-    padding:10px 12px;
-    border-radius:16px;
-  }
-
-  /* Logos dimensionadas para encher bem a cápsula */
-  #filtroOrigem label img.filtro-logo{
-    height:56px;             /* desktop padrão */
-    width:auto;
-    max-width:92%;
-    object-fit:contain;
-  }
-
-  /* ===== Breakpoints ===== */
-
-  /* 📱 Mobile (≤640px): 3 linhas × 4 colunas = 12 lojas */
-  @media (max-width:640px){
+  <style id="filtro-override-layout">
     #filtroOrigem{
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap:10px;
+      display:grid !important; grid-auto-flow: row dense; gap:12px;
+      align-items:center; justify-items:center; width:100%;
     }
-    #filtroOrigem label img.filtro-logo{ height:46px; }
-  }
+    #filtroOrigem label{ width:100%; max-width:200px; padding:10px 12px; border-radius:16px; }
+    #filtroOrigem label img.filtro-logo{ height:56px; width:auto; max-width:92%; object-fit:contain; }
 
-  /* 📟 Tablet (641–1024px): 4 colunas (fica 3 linhas × 4 = 12) */
-  @media (min-width:641px) and (max-width:1024px){
-    #filtroOrigem{
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap:12px;
+    /* 📱 Mobile (≤640px): 3x4 */
+    @media (max-width:640px){
+      #filtroOrigem{ grid-template-columns: repeat(4, minmax(0,1fr)); gap:10px; }
+      #filtroOrigem label img.filtro-logo{ height:46px; }
     }
-    #filtroOrigem label img.filtro-logo{ height:52px; }
-  }
-
-  /* 🖥️ Desktop (≥1025px): 2 linhas × 6 colunas = 12 lojas */
-  @media (min-width:1025px){
-    #filtroOrigem{
-      grid-template-columns: repeat(6, minmax(0,1fr));
-      gap:12px;
+    /* 📟 Tablet (641–1024px): 4 colunas */
+    @media (min-width:641px) and (max-width:1024px){
+      #filtroOrigem{ grid-template-columns: repeat(4, minmax(0,1fr)); gap:12px; }
+      #filtroOrigem label img.filtro-logo{ height:52px; }
     }
-    #filtroOrigem label img.filtro-logo{ height:56px; }
-  }
-  /* ======= COLAR o título na barra de filtros quando o filtro está ativo ======= */
+    /* 🖥️ Desktop (≥1025px): 6 colunas */
+    @media (min-width:1025px){
+      #filtroOrigem{ grid-template-columns: repeat(6, minmax(0,1fr)); gap:12px; }
+      #filtroOrigem label img.filtro-logo{ height:56px; }
+    }
 
-/* zera o "space-y-4" do Tailwind dentro do <main> */
-body.modo-filtro main.space-y-4 > :not([hidden]) ~ :not([hidden]) {
-  margin-top: 0 !important;
-}
+    /* Badges / rank / botões globais */
+    .tag-badge{ background:#111; color:#fff; border-radius:9999px; font-size:10px; padding:2px 8px; border:1px solid #e5e7eb; }
+    .rank-chip{ margin-top:4px; display:inline-block; background:linear-gradient(90deg,#fef3c7,#fde68a); color:#7c2d12; font-weight:800; font-size:10px; padding:3px 8px; border-radius:9999px; border:1px solid #f59e0b99; }
+    .btn-compare{ font-size:11px; font-weight:800; padding:4px 8px; border-radius:8px; border:1px solid #e5e7eb; background:#fff; }
+    .btn-compare:hover{ background:#f9fafb; }
+    .btn-buy{ font-size:11px; font-weight:900; padding:5px 10px; border-radius:8px; color:#fff; background:#111; border:1px solid #111; }
 
-/* remove totalmente a margem de cima do título "Todos os Produtos..." */
-body.modo-filtro main .text-center > .bg-gradient-to-r {
-  margin-top: 0 !important;
-}
+    /* Cola título no filtro quando ativo */
+    body.modo-filtro main.space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; }
+    body.modo-filtro main .text-center > .bg-gradient-to-r { margin-top: 0 !important; }
+    body.modo-filtro #barraFiltros { margin-bottom: 0 !important; padding-bottom: 4px !important; }
 
-/* encosta o fim do filtro no título (sem folga inferior) */
-body.modo-filtro #barraFiltros {
-  margin-bottom: 0 !important;
-  padding-bottom: 0px !important;   /* pode reduzir para 0 se quiser ainda mais colado */
-}
-/* ===== Filtro compacto + estética premium ===== */
-#barraFiltros{
-  padding: 8px 10px !important;      /* menos altura */
-  gap: 8px !important;
-  border-radius: 14px;
-}
+    /* Filtro compacto */
+    #barraFiltros{ padding: 8px 10px !important; gap: 8px !important; border-radius: 14px; }
+    #barraFiltros .f-controls{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap: 8px 10px; }
 
-/* linha de controles (busca + selects) */
-#barraFiltros .f-controls{
-  display:flex; flex-wrap:wrap;
-  align-items:center; justify-content:center;
-  gap: 8px 10px;                      /* bem juntinho */
-}
+    .search-wrap{ position:relative; min-width: 240px; max-width: 680px; width:100%; }
+    .search-wrap .icon{ position:absolute; left:12px; top:50%; transform:translateY(-50%); width:18px; height:18px; opacity:.65; pointer-events:none; }
+    .search-wrap input{
+      width:100%; height:40px; padding:0 40px 0 36px;
+      border-radius:9999px; border:1.5px solid rgba(214,167,92,.45);
+      background:rgba(255,255,255,.95); font-weight:600; letter-spacing:.1px;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,.05); transition:.2s;
+    }
+    .search-wrap input::placeholder{ color:#9ca3af; font-weight:500; }
+    .search-wrap input:focus{ outline:0; border-color:#d6a75c; box-shadow:0 0 0 3px rgba(214,167,92,.25); }
+    .search-wrap .clear{
+      position:absolute; right:8px; top:50%; transform:translateY(-50%);
+      width:28px; height:28px; border-radius:9999px; border:1px solid #e5e7eb;
+      background:#fff; display:none; place-items:center; font-weight:900;
+    }
+    .search-wrap .clear.show{ display:grid; }
 
-/* === Busca em pílula com ícone e botão limpar === */
-.search-wrap{
-  position:relative; min-width: 240px; max-width: 680px; width:100%;
-}
-.search-wrap .icon{
-  position:absolute; left:12px; top:50%; transform:translateY(-50%);
-  width:18px; height:18px; opacity:.65; pointer-events:none;
-}
-.search-wrap input{
-  width:100%; height:40px; padding:0 40px 0 36px;
-  border-radius:9999px; border:1.5px solid rgba(214,167,92,.45);
-  background:rgba(255,255,255,.95);
-  font-weight:600; letter-spacing:.1px;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
-  transition:.2s;
-}
-.search-wrap input::placeholder{ color:#9ca3af; font-weight:500; }
-.search-wrap input:focus{
-  outline:0; border-color:#d6a75c; box-shadow:0 0 0 3px rgba(214,167,92,.25);
-}
-.search-wrap .clear{
-  position:absolute; right:8px; top:50%; transform:translateY(-50%);
-  width:28px; height:28px; border-radius:9999px; border:1px solid #e5e7eb;
-  background:#fff; display:none; place-items:center; font-weight:900;
-}
-.search-wrap .clear.show{ display:grid; }
+    .select-pill{
+      appearance:none; height:40px; padding:0 36px 0 14px; border-radius:9999px;
+      border:1.5px solid #e5e7eb; background:#fff; font-weight:700;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="%236b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+      background-repeat:no-repeat; background-position:right 10px center;
+    }
+    .select-pill:focus{ outline:0; border-color:#d6a75c; box-shadow:0 0 0 3px rgba(214,167,92,.2); }
 
-/* === Selects em pílula (Preço/Categoria) === */
-.select-pill{
-  appearance:none; -webkit-appearance:none; -moz-appearance:none;
-  height:40px; padding:0 36px 0 14px; border-radius:9999px;
-  border:1.5px solid #e5e7eb; background:#fff; font-weight:700;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="%236b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
-  background-repeat:no-repeat; background-position:right 10px center;
-}
-.select-pill:focus{ outline:0; border-color:#d6a75c; box-shadow:0 0 0 3px rgba(214,167,92,.2); }
+    #filtroOrigem{ gap:8px !important; margin-top:6px !important; }
+    #filtroOrigem label{ margin:0 !important; }
 
-/* === Espaçamentos do grupo de marcas (não altera tamanho dos botões) === */
-#filtroOrigem{ gap:8px !important; margin-top:6px !important; }
-#filtroOrigem label{ margin:0 !important; }
+    @media (max-width:1024px){
+      #barraFiltros{ padding:8px !important; gap:6px !important; }
+      .search-wrap input, .select-pill{ height:38px; }
+    }
+    @media (max-width:640px){ .search-wrap{ min-width: 100%; } }
 
-/* ===== Colar título nos botões do filtro (sem “respiro”) ===== */
-body.modo-filtro main.space-y-4 > :not([hidden]) ~ :not([hidden]){ margin-top:0 !important; }
-body.modo-filtro main .text-center > .bg-gradient-to-r{ margin-top:0 !important; }
-body.modo-filtro #barraFiltros{ margin-bottom:0 !important; padding-bottom:4px !important; }
+    .search-wrap .icon, .search-wrap svg { display: none !important; }
+    #filtroCategoria { height: 40px; font-weight: 600; }
 
-/* responsivo – deixa tudo compacto também em telas menores */
-@media (max-width:1024px){
-  #barraFiltros{ padding:8px !important; gap:6px !important; }
-  .search-wrap input, .select-pill{ height:38px; }
-}
-@media (max-width:640px){
-  .search-wrap{ min-width: 100%; }
-}
-/* Esconde a lupa do campo de busca (cobre SVG inline e ícones com classe .icon) */
-.search-wrap .icon,
-.search-wrap svg {
-  display: none !important;
-}
-#filtroCategoria {
-  height: 40px;
-  font-weight: 600;
-}
-
-  /* Garante que qualquer texto dentro do botão permaneça oculto */
-  #filtroOrigem label .texto{ display:none !important; }
-</style>
+    #filtroOrigem label .texto{ display:none !important; }
+  </style>
 </head>
 
 <body class="bg-[var(--bege)] text-gray-900 font-sans">
@@ -545,24 +344,24 @@ body.modo-filtro #barraFiltros{ margin-bottom:0 !important; padding-bottom:4px !
     <div class="bg-white px-2 py-2 flex flex-col sm:flex-row items-center justify-between border-b border-[var(--dourado)]/40">
       <div class="flex items-center gap-2">
         <!-- LOGO RESPONSIVO (sem emoji) -->
-<a href="/" class="block">
-  <!-- Preload ajuda no carregamento -->
-  <link rel="preload" as="image" href="logos/petshopplus-logo-desktop.png">
-  <link rel="preload" as="image" href="logos/petshopplus-logo-tablet.png">
+        <a href="/" class="block">
+          <!-- Preload ajuda no carregamento -->
+          <link rel="preload" as="image" href="logos/petshopplus-logo-desktop.png">
+          <link rel="preload" as="image" href="logos/petshopplus-logo-tablet.png">
 
-  <picture>
-    <!-- desktop (>=1024px) -->
-    <source media="(min-width:1024px)" srcset="logos/petshopplus-logo-desktop.png" type="image/png" />
-    <!-- tablet/mobile (fallback) -->
-    <img
-      src="logos/petshopplus-logo-tablet.png"
-      alt="PetShop+ — seu pet em primeiro lugar"
-      class="h-10 sm:h-12 md:h-14 w-auto select-none"
-      loading="eager"
-      onerror="this.onerror=null;this.src='logos/petshopplus-logo-desktop.png';"
-    />
-  </picture>
-</a>
+          <picture>
+            <!-- desktop (>=1024px) -->
+            <source media="(min-width:1024px)" srcset="logos/petshopplus-logo-desktop.png" type="image/png" />
+            <!-- tablet/mobile (fallback) -->
+            <img
+              src="logos/petshopplus-logo-tablet.png"
+              alt="PetShop+ — seu pet em primeiro lugar"
+              class="h-10 sm:h-12 md:h-14 w-auto select-none"
+              loading="eager"
+              onerror="this.onerror=null;this.src='logos/petshopplus-logo-desktop.png';"
+            />
+          </picture>
+        </a>
 
         <span class="hidden sm:inline text-[12px] text-[var(--marrom)]/70 font-semibold">
           — Tudo para Cães e Gatos
@@ -625,16 +424,13 @@ body.modo-filtro #barraFiltros{ margin-bottom:0 !important; padding-bottom:4px !
   <!-- =========================================================
        BOTÃO FLUTUANTE (FILTRO)
        ========================================================= -->
-  <button id="btnBuscaFlutuante">
-    🔍 Buscar / Filtrar
-  </button>
+  <button id="btnBuscaFlutuante">🔍 Buscar / Filtrar</button>
 
   <!-- =========================================================
        LISTA DE PRODUTOS
        ========================================================= -->
   <main class="p-2 space-y-4 max-w-6xl mx-auto">
-    <section class="text-center">
-
+    <section id="secListaProdutos" class="text-center">
       <!-- Título da listagem -->
       <div
         class="bg-gradient-to-r from-[var(--marrom)] via-[#3a2518] to-[var(--marrom)]
@@ -647,9 +443,16 @@ body.modo-filtro #barraFiltros{ margin-bottom:0 !important; padding-bottom:4px !
 
       <!-- Lista de Cards (JS popula) -->
       <div id="listaProdutos" class="faixa-geral"></div>
-
     </section>
   </main>
+
+  <!-- ======================= COMPARADOR (mesmo GTIN em várias lojas) ======================= -->
+  <section id="secComparador" class="hidden mt-3 max-w-6xl mx-auto px-2">
+    <h2 class="text-sm sm:text-base font-bold text-white bg-black py-1.5 px-3 rounded-md text-center shadow-md">
+      🔎 Comparador — mesmo produto em várias lojas
+    </h2>
+    <div id="listaComparativos" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 mt-3"></div>
+  </section>
 
   <!-- =========================================================
        MODAL ÚNICO PADRONIZADO
@@ -663,9 +466,7 @@ body.modo-filtro #barraFiltros{ margin-bottom:0 !important; padding-bottom:4px !
       <!-- Fechar -->
       <button id="closeModal"
               class="absolute top-2 right-3 text-gray-700 hover:text-black
-                     text-2xl font-bold bg-white/80 rounded-full p-2 sm:p-2.5 shadow-md">
-        ✖
-      </button>
+                     text-2xl font-bold bg-white/80 rounded-full p-2 sm:p-2.5 shadow-md">✖</button>
 
       <div class="flex flex-col sm:flex-row gap-5">
         <!-- Imagem principal -->
@@ -676,18 +477,15 @@ body.modo-filtro #barraFiltros{ margin-bottom:0 !important; padding-bottom:4px !
 
         <!-- Detalhes -->
         <div class="flex-1 flex flex-col gap-3">
-
           <!-- Logo da loja (somente logo, centralizado) -->
           <div class="flex items-center justify-center mb-1">
             <img id="modalStoreLogo" class="" alt="Loja" />
           </div>
-          <!-- Mantido para compatibilidade com script.js (fica invisível) -->
+          <!-- Mantido para compatibilidade com script.js -->
           <span id="modalStoreName" class="sr-only"></span>
 
           <!-- Título -->
-          <h2 id="modalTitle"
-              class="text-lg sm:text-xl font-bold text-gray-800 leading-tight text-center">
-          </h2>
+          <h2 id="modalTitle" class="text-lg sm:text-xl font-bold text-gray-800 leading-tight text-center"></h2>
 
           <!-- Preços / Desconto -->
           <div class="flex items-center justify-center gap-2 mt-1">
@@ -695,10 +493,7 @@ body.modo-filtro #barraFiltros{ margin-bottom:0 !important; padding-bottom:4px !
             <span id="modalDiscount" class="font-semibold"></span>
           </div>
 
-          <div id="modalPrice"
-               class="text-3xl sm:text-4xl font-extrabold text-center">
-          </div>
-
+          <div id="modalPrice" class="text-3xl sm:text-4xl font-extrabold text-center"></div>
           <p id="modalParcelas" class="text-sm text-gray-700 text-center"></p>
 
           <!-- Lista de detalhes -->
@@ -706,16 +501,12 @@ body.modo-filtro #barraFiltros{ margin-bottom:0 !important; padding-bottom:4px !
 
           <!-- CTA -->
           <a id="modalLink" href="#" target="_blank"
-             class="mt-2 text-center py-3 rounded-md font-extrabold shadow-md transition-all">
-            🔒 Comprar com segurança
-          </a>
+             class="mt-2 text-center py-3 rounded-md font-extrabold shadow-md transition-all">🔒 Comprar com segurança</a>
 
           <!-- Compartilhar -->
-          <button id="btnCompartilhar"
-                  class="mt-2 bg-gray-900 text-white font-semibold py-2.5 rounded-md shadow-md">
+          <button id="btnCompartilhar" class="mt-2 bg-gray-900 text-white font-semibold py-2.5 rounded-md shadow-md">
             🔗 Compartilhar Oferta
           </button>
-
         </div>
       </div>
     </div>
