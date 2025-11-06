@@ -9,73 +9,138 @@
   document.querySelector(`style[data-${id}]`)?.remove();
 
   const css = `
-    /* Container dos filtros */
+    /* Container */
     #filtroOrigem{
       display:flex; flex-wrap:wrap; gap:12px; width:100%; align-items:center;
     }
 
-    /* Cápsula responsiva (ajusta ao conteúdo), agora ~30% maior */
+    /* Cápsula responsiva */
     #filtroOrigem label{
       display:inline-flex; align-items:center; justify-content:center;
       padding:12px 14px;
       border-radius:16px; border:1.5px solid #e5e7eb; background:#fff;
       cursor:pointer; user-select:none; overflow:hidden;
-      max-width:182px;   /* +30% (era ~140px) */
-      min-width:83px;    /* +30% (era ~64px)  */
+      max-width:182px; min-width:83px;
       transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
     @media (min-width:1025px){
-      #filtroOrigem label:hover{
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 10px 18px rgba(0,0,0,.10);
-      }
+      #filtroOrigem label:hover{ transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 18px rgba(0,0,0,.10); }
     }
 
-    /* Logo cresce ~30% e nunca ultrapassa a cápsula */
+    /* Logo */
     #filtroOrigem label img.filtro-logo{
       display:block; object-fit:contain; pointer-events:none;
-      max-width:100%; height:auto;
-      max-height:57px;   /* +30% (era ~44px) */
+      max-width:100%; height:auto; max-height:57px;
     }
-
-    /* Tablet */
     @media (max-width:1024px){
       #filtroOrigem{ gap:11px; }
-      #filtroOrigem label{
-        padding:11px 12px; border-radius:14px;
-        max-width:156px;   /* +30% (era ~120px) */
-        min-width:78px;    /* +30% (era ~60px)  */
-      }
-      #filtroOrigem label img.filtro-logo{ max-height:52px; } /* +30% (era ~40px) */
+      #filtroOrigem label{ padding:11px 12px; border-radius:14px; max-width:156px; min-width:78px; }
+      #filtroOrigem label img.filtro-logo{ max-height:52px; }
     }
-
-    /* Mobile */
     @media (max-width:640px){
       #filtroOrigem{ gap:9px; }
-      #filtroOrigem label{
-        padding:10px 11px; border-radius:12px;
-        max-width:135px;   /* +30% (era ~104px) */
-        min-width:73px;    /* +30% (era ~56px)  */
-      }
-      #filtroOrigem label img.filtro-logo{ max-height:47px; } /* +30% (era ~36px) */
+      #filtroOrigem label{ padding:10px 11px; border-radius:12px; max-width:135px; min-width:73px; }
+      #filtroOrigem label img.filtro-logo{ max-height:47px; }
     }
 
-    /* Nunca mostrar texto nas cápsulas dos filtros */
+    /* Sem texto no botão */
     #filtroOrigem label .texto{ display:none !important; }
 
-    /* Borda por marca quando ativa */
-    #filtroOrigem label.ativo[data-src="shopee"]       { border-color:#EE4D2D; }
-    #filtroOrigem label.ativo[data-src="petlove"]      { border-color:#00AEEF; }
-    #filtroOrigem label.ativo[data-src="amazon"]       { border-color:#232F3E; }
-    #filtroOrigem label.ativo[data-src="mercadolivre"] { border-color:#FFE600; }
-    #filtroOrigem label.ativo[data-src="magalu"]       { border-color:#1976D2; }
-    #filtroOrigem label.ativo[data-src="petz"]         { border-color:#00B2FF; }
-    #filtroOrigem label.ativo[data-src="cobasi"]       { border-color:#0077BE; }
-    #filtroOrigem label.ativo[data-src="americanas"]   { border-color:#D50000; }
-    #filtroOrigem label.ativo[data-src="aliexpress"]   { border-color:#FF5A00; }
-    #filtroOrigem label.ativo[data-src="carrefour"]    { border-color:#005EB8; }
-    #filtroOrigem label.ativo[data-src="casasbahia"]   { border-color:#0033A0; }
-    #filtroOrigem label.ativo[data-src="ponto"]        { border-color:#111111; }
+    /* Realce comum quando ATIVO (vale para todas as marcas) */
+    #filtroOrigem label.ativo{
+      border-width:2px;
+      transform: translateY(-1px);
+      /* usa a variável --ring definida por marca (fallback suave) */
+      box-shadow:
+        0 0 0 3px var(--ring, rgba(0,0,0,.08)),
+        0 6px 14px rgba(0,0,0,.12);
+    }
+
+    /* ===== Ativos por marca ===== */
+
+    /* Shopee (fundo claro p/ logo aparecer) */
+    #filtroOrigem label.ativo[data-src="shopee"]{
+      --ring: rgba(238,77,45,.18);
+      background: linear-gradient(145deg,#FFF0E6,#FFE5DA);
+      color:#7A1A0F; border-color:#EE4D2D;
+    }
+
+    /* Petlove */
+    #filtroOrigem label.ativo[data-src="petlove"]{
+      --ring: rgba(0,174,239,.16);
+      background: linear-gradient(145deg,#E6F7FF,#BDEBFF);
+      color:#005C87; border-color:#00AEEF;
+    }
+
+    /* Amazon (cinza) */
+    #filtroOrigem label.ativo[data-src="amazon"]{
+      --ring: rgba(58,69,83,.18);
+      background: linear-gradient(145deg,#ECEFF1,#CFD8DC);
+      color:#111; border-color:#3A4553;
+    }
+
+    /* Mercado Livre */
+    #filtroOrigem label.ativo[data-src="mercadolivre"]{
+      --ring: rgba(255,230,0,.22);
+      background: linear-gradient(145deg,#FFF9C8,#FFE600);
+      color:#0B4EA2; border-color:#FFE600;
+    }
+
+    /* Magalu */
+    #filtroOrigem label.ativo[data-src="magalu"]{
+      --ring: rgba(25,118,210,.18);
+      background: linear-gradient(145deg,#E5F2FF,#BFE0FF);
+      color:#0D47A1; border-color:#1976D2;
+    }
+
+    /* Petz */
+    #filtroOrigem label.ativo[data-src="petz"]{
+      --ring: rgba(0,178,255,.18);
+      background: linear-gradient(145deg,#E9F6FF,#CDECFF);
+      color:#004E92; border-color:#00B2FF;
+    }
+
+    /* Cobasi */
+    #filtroOrigem label.ativo[data-src="cobasi"]{
+      --ring: rgba(0,119,190,.18);
+      background: linear-gradient(145deg,#E6F2FF,#CFE6FF);
+      color:#005A8C; border-color:#0077BE;
+    }
+
+    /* Americanas */
+    #filtroOrigem label.ativo[data-src="americanas"]{
+      --ring: rgba(213,0,0,.18);
+      background: linear-gradient(145deg,#FFE1E1,#FFCACA);
+      color:#8F1010; border-color:#D50000;
+    }
+
+    /* AliExpress */
+    #filtroOrigem label.ativo[data-src="aliexpress"]{
+      --ring: rgba(255,90,0,.18);
+      background: linear-gradient(145deg,#FFEEE2,#FFE0CC);
+      color:#B33A12; border-color:#FF5A00;
+    }
+
+    /* Carrefour */
+    #filtroOrigem label.ativo[data-src="carrefour"]{
+      --ring: rgba(0,94,184,.18);
+      background: linear-gradient(145deg,#E7F1FF,#D7E9FF);
+      color:#003B73; border-color:#005EB8;
+    }
+
+    /* Casas Bahia */
+    #filtroOrigem label.ativo[data-src="casasbahia"]{
+      --ring: rgba(0,51,160,.18);
+      background: linear-gradient(145deg,#E7EDFF,#D8E4FF);
+      color:#001A66; border-color:#0033A0;
+    }
+
+    /* Ponto (laranja claro) */
+    #filtroOrigem label.ativo[data-src="ponto"]{
+      --ring: rgba(255,106,42,.18);
+      background: linear-gradient(145deg,#FFE8D9,#FFD8BF);
+      color:#6B2E00; border-color:#FF6A2A;
+    }
   `;
   const style = document.createElement('style');
   style.setAttribute(`data-${id}`,'true');
