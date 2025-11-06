@@ -1,7 +1,7 @@
 /* =========================================================
+   script.js
    ShihTzuShop — Cards + Modal + Comparador Multilojas
-   (Atual) — mantém todas as suas funções + botão flutuante
-   de “Fechar filtro” no corpo (sem cobrir os cards)
+   (Atual) — mantém tudo + GTIN fix + botão flutuante fechar filtro
    ========================================================= */
 
 /* ========= CSS inject: +30% nos botões/logo + botão flutuante ========= */
@@ -49,8 +49,7 @@
 
     /* Realce quando ATIVO */
     #filtroOrigem label.ativo{
-      border-width:2px;
-      transform: translateY(-1px);
+      border-width:2px; transform: translateY(-1px);
       box-shadow: 0 0 0 3px var(--ring, rgba(0,0,0,.08)), 0 6px 14px rgba(0,0,0,.12);
     }
 
@@ -122,7 +121,7 @@ const STORE_META = {
   ponto: { nome:"Ponto", corBorda:"#111111", corTexto:"#FF5500", bgCard:"linear-gradient(to bottom,#F0F0F0,#FFFFFF)", logo:"logos/ponto.svg", btn:["#111111","#444444"], off:"#FF5500" },
 };
 
-/* ===================== PRODUTOS (com GTIN onde aplicável) ===================== */
+/* ===================== PRODUTOS (exemplos) ===================== */
 const produtos = [
   { tipo:"shopee", nome:"Laços Premium — kit 20 un. (cores sortidas)", precoAntigo:69.90, precoAtual:39.90, desconto:"43% OFF", parcelas:"6x sem juros", detalhes:["Elástico macio","Não puxa o pelo","Cores vivas"], imagem:"https://images.unsplash.com/photo-1596495578065-8c1b2f6a3513?q=80&w=800&auto=format&fit=crop", link:"#"},
   { tipo:"shopee", nome:"Peitoral Conforto X-Soft (PP/P) — Anti-puxão", precoAntigo:89.90, precoAtual:54.90, desconto:"39% OFF", parcelas:"6x sem juros", detalhes:["Ajuste rápido","Almofadado","Anel em metal"], imagem:"https://images.unsplash.com/photo-1560807707-8cc77767d783?q=80&w=800&auto=format&fit=crop", link:"#"},
@@ -132,48 +131,48 @@ const produtos = [
   { tipo:"amazon", nome:"Hidratante de Almofadinhas (50g) — Natural", precoAntigo:49.90, precoAtual:31.90, desconto:"36% OFF", parcelas:"Em até 10x", detalhes:["Manteiga de karité","Sem álcool"], imagem:"https://images.unsplash.com/photo-1525253013412-55c1a69a5738?q=80&w=800&auto=format&fit=crop", link:"#"},
   /* COMPARADOR — Simparic 40 mg (GTIN 7898049719488) */
   {
-    tipo: "mercadolivre", gtin: "7898049719488",
-    nome: "Simparic Zoetis 40 mg 10,1–20 kg — 1 unidade",
-    brand: "Zoetis", doseMg: 40, weightRange: "10,1–20 kg", packQty: 1,
-    precoAntigo: 118.33, precoAtual: 74.60, desconto: "36% OFF", parcelas: "12x R$ 7,35",
-    rating: 4.8, reviews: 29113, badges: ["Novo","Mais vendido"],
-    categoryRank: "1º em Tratamentos Anti-Pulgas", cashback: "até R$ 2,24",
-    imagem: "https://http2.mlstatic.com/D_NQ_NP_2X_905561-MLA88406142177_072025-F.webp",
-    link: "https://mercadolivre.com/sec/1t7W5Sn",
-    detalhes: ["Proteção contra parasitas por 5 semanas.","Indicado para cães de 10,1 a 20 kg.","Unidades por kit: 1."]
+    tipo:"mercadolivre", gtin:"7898049719488",
+    nome:"Simparic Zoetis 40 mg 10,1–20 kg — 1 unidade",
+    brand:"Zoetis", doseMg:40, weightRange:"10,1–20 kg", packQty:1,
+    precoAntigo:118.33, precoAtual:74.60, desconto:"36% OFF", parcelas:"12x R$ 7,35",
+    rating:4.8, reviews:29113, badges:["Novo","Mais vendido"],
+    categoryRank:"1º em Tratamentos Anti-Pulgas", cashback:"até R$ 2,24",
+    imagem:"https://http2.mlstatic.com/D_NQ_NP_2X_905561-MLA88406142177_072025-F.webp",
+    link:"https://mercadolivre.com/sec/1t7W5Sn",
+    detalhes:["Proteção contra parasitas por 5 semanas.","Indicado para cães de 10,1 a 20 kg.","Unidades por kit: 1."]
   },
   {
-    tipo: "cobasi", gtin: "7898049719488",
-    nome: "Simparic Zoetis 40 mg 10,1–20 kg — 1 unidade",
-    brand: "Zoetis", doseMg: 40, weightRange: "10,1–20 kg", packQty: 1,
-    precoAntigo: 133.90, precoAtual: 79.90, desconto: "40% OFF", parcelas: "à vista",
-    rating: 4.8, reviews: 1370, badges: ["Produto original","Compra Programada","Amigo Cobasi"],
-    loyaltyPoints: 79,
-    shippingOptions: [
-      { nome: "Retire na loja", prazo: "até 11h", preco: 0, freteGratis: true },
-      { nome: "Econômica", prazo: "até 1 dia útil", preco: 15.90 },
-      { nome: "Cobasi Já", prazo: "até 1 hora*", preco: 17.90 }
+    tipo:"cobasi", gtin:"7898049719488",
+    nome:"Simparic Zoetis 40 mg 10,1–20 kg — 1 unidade",
+    brand:"Zoetis", doseMg:40, weightRange:"10,1–20 kg", packQty:1,
+    precoAntigo:133.90, precoAtual:79.90, desconto:"40% OFF", parcelas:"à vista",
+    rating:4.8, reviews:1370, badges:["Produto original","Compra Programada","Amigo Cobasi"],
+    loyaltyPoints:79,
+    shippingOptions:[
+      { nome:"Retire na loja", prazo:"até 11h", preco:0, freteGratis:true },
+      { nome:"Econômica", prazo:"até 1 dia útil", preco:15.90 },
+      { nome:"Cobasi Já", prazo:"até 1 hora*", preco:17.90 }
     ],
-    pickupAvailable: true,
-    imagem: "https://cobasi.vteximg.com.br/arquivos/ids/1089375-368-368/Antipulgas%20Simparic%2040mg%20para%20Caes%2010%20a%2020kg.webp?v=638974276600530000",
-    link: "#",
-    detalhes: [
+    pickupAvailable:true,
+    imagem:"https://cobasi.vteximg.com.br/arquivos/ids/1089375-368-368/Antipulgas%20Simparic%2040mg%20para%20Caes%2010%20a%2020kg.webp?v=638974276600530000",
+    link:"#",
+    detalhes:[
       "Elimina 100% de pulgas e carrapatos.","Comprimido mastigável e altamente palatável.",
       "Combate também três tipos de sarnas.","Indicado para cães a partir de 8 semanas de idade.",
       "Começa a fazer efeito em 3 horas e protege por até 35 dias."
     ]
   },
   {
-    tipo: "magalu", gtin: "7898049719488",
-    nome: "Simparic Zoetis 40 mg 10,1–20 kg — 1 unidade",
-    brand: "Zoetis", doseMg: 40, weightRange: "10,1–20 kg", packQty: 1,
-    precoAntigo: 85.87, precoAtual: 74.97, precoPix: 59.98, desconto: "≈30% OFF",
-    parcelas: "1x R$ 74,97 sem juros", rating: 4.7, reviews: 232,
-    badges: ["Magalu garante","Olist Plus"], cupom: "PET10", cupomDescricao: "10% OFF (válido até 16/11)",
-    freteAPartir: 28.47,
-    imagem: "https://a-static.mlcdn.com.br/800x560/antipulgas-simparic-1-comp-10-a-20kg-zoetis/olistplus/opmjuho68xxtdv8l/43719ef3c6447d809db36e10d861f933.jpeg",
-    link: "https://divulgador.magalu.com/3BWYo8lG",
-    detalhes: ["Proteção contra parasitas por 5 semanas.","Indicado para cães de 10,1 a 20 kg.","Unidades por kit: 1."]
+    tipo:"magalu", gtin:"7898049719488",
+    nome:"Simparic Zoetis 40 mg 10,1–20 kg — 1 unidade",
+    brand:"Zoetis", doseMg:40, weightRange:"10,1–20 kg", packQty:1,
+    precoAntigo:85.87, precoAtual:74.97, precoPix:59.98, desconto:"≈30% OFF",
+    parcelas:"1x R$ 74,97 sem juros", rating:4.7, reviews:232,
+    badges:["Magalu garante","Olist Plus"], cupom:"PET10", cupomDescricao:"10% OFF (válido até 16/11)",
+    freteAPartir:28.47,
+    imagem:"https://a-static.mlcdn.com.br/800x560/antipulgas-simparic-1-comp-10-a-20kg-zoetis/olistplus/opmjuho68xxtdv8l/43719ef3c6447d809db36e10d861f933.jpeg",
+    link:"https://divulgador.magalu.com/3BWYo8lG",
+    detalhes:["Proteção contra parasitas por 5 semanas.","Indicado para cães de 10,1 a 20 kg.","Unidades por kit: 1."]
   },
 
   /* Outros exemplos */
@@ -265,14 +264,20 @@ function attachLogoFallback(imgEl){
 
 /* ===================== Helpers GTIN + índice por GTIN ===================== */
 const onlyDigits = (s="") => (s||"").replace(/\D+/g,"");
+
+/* ✔️ GTIN-14 dígito verificador corrigido (peso 3 começa da direita) */
 function gtin14CheckDigit(body13){
-  let sum=0;
-  for(let i=0;i<body13.length;i++){
-    const n = body13.charCodeAt(i)-48;
-    sum += (i%2===0?3:1)*n;
+  let sum = 0;
+  for (let i = 0; i < 13; i++){
+    const n = body13.charCodeAt(i) - 48;          // dígito
+    const posFromRight = 13 - i;                   // 1..13
+    const weight = (posFromRight % 2 === 1) ? 3 : 1; // ímpar (da direita) = 3
+    sum += n * weight;
   }
-  const mod = sum%10; return mod===0?0:10-mod;
+  const mod = sum % 10;
+  return mod === 0 ? 0 : 10 - mod;
 }
+
 function normalizeGTIN(raw){
   let d = onlyDigits(raw);
   if (!d) return "";
@@ -284,6 +289,7 @@ function normalizeGTIN(raw){
   const calc = gtin14CheckDigit(body);
   return (dv===calc)?d:(body+String(calc));
 }
+
 /* Índice { GTIN-14: { loja: produto } } */
 const indexByGTIN = new Map();
 function indexarPorGTIN(arr){
@@ -364,6 +370,7 @@ function renderLista(lista) {
 
     const card = document.createElement("div");
     card.className = "relative card-geral p-1";
+    card.dataset.tipo = p.tipo;                      // <— para CSS por [data-tipo]
     card.style.border = `2px solid ${meta.corBorda}80`;
 
     const imgWrap = buildImg(p.imagem, p.nome);
@@ -474,6 +481,7 @@ function openModal(obj) {
     });
   }
 
+  // extras (rating, rank, cashback, GTIN, Pix, cupom) + botão comparar
   (() => {
     const holderId = "modalExtras";
     let extras = el("#"+holderId);
@@ -708,11 +716,9 @@ function ativarFiltro(ativo){
 
   if (ativo){
     body.classList.add("modo-filtro");
-    // Fecha/oculta o header (como você pediu manter)
     if (header) header.classList.add("hidden");
     if (selo)   selo.classList.add("hidden");
 
-    // exibe barra filtros
     if (barra){
       barra.classList.remove("hidden");
       barra.style.opacity = "0"; barra.style.transform = "translateY(-10px)";
@@ -721,7 +727,6 @@ function ativarFiltro(ativo){
       });
     }
 
-    // garante botão flutuante visível no corpo
     ensureCloseFloat();
     window.scrollTo({ top: 0, behavior: "smooth" });
   } else {
@@ -927,6 +932,6 @@ window.addEventListener("DOMContentLoaded", ()=>{
   document.body.classList.remove("modo-filtro");
 
   indexarPorGTIN(produtos);
-  syncOpenButton();      // ajusta texto do botão abrir, se existir
-  ensureCloseFloat();    // injeta o botão flutuante (fica oculto até entrar no modo-filtro)
+  syncOpenButton();      // ajusta texto do botão abrir
+  ensureCloseFloat();    // injeta botão flutuante (oculto até entrar em modo-filtro)
 });
