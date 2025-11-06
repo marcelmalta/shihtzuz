@@ -20,7 +20,7 @@
        STYLES (CSS) — IDs/Classes compatíveis com script.js
        ========================================================= -->
   <style>
-  /* Base e variáveis */
+  /* ===================== Base e variáveis ===================== */
   html { scroll-behavior: smooth; }
   ::-webkit-scrollbar { height: 6px; width: 6px; }
   ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
@@ -31,95 +31,84 @@
     --creme:#FFF8ED;
   }
 
-  /* ===== HEADER COMPACTO (1 linha) ===== */
-.hdr-inner { min-height: 48px; }
-@media (min-width: 640px){ .hdr-inner { min-height: 56px; } }
+  /* =========================================================
+     HEADER COMPACTO — CONSOLIDADO (1 linha, sem logos no header)
+     ========================================================= */
+  .hdr-inner{ min-height:48px; }
+  @media (min-width:640px){ .hdr-inner{ min-height:56px; } }
 
-.hdr-pitch{
-  max-width: clamp(40%, 72vw, 78%);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  /* Pitch em 1 linha que corta antes do botão */
+  .hdr-pitch.smartPitch{
+    min-width:0; /* permite ellipsis no grid */
+    display:flex; align-items:center; gap:.5ch;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    font-weight:600; color:#111827; line-height:1;
+    max-width: clamp(40%, 72vw, 78%);
+  }
+  .smartPitch .brandMark{
+    font-weight:900; letter-spacing:.2px;
+    background:linear-gradient(90deg,#111827,#0f766e 55%,#065f46);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .smartPitch .dash{ opacity:.55; }
+  .smartPitch .claim{ color:#1f2937; }
+  .smartPitch .claim .muted{ opacity:.75; }
+  .smartPitch .claim .highlight{ font-weight:800; position:relative; }
+  .smartPitch .claim .highlight::after{
+    content:""; position:absolute; left:0; right:0; bottom:-2px; height:8px;
+    background:linear-gradient(90deg,rgba(250,204,21,.28),rgba(16,185,129,.25));
+    border-radius:6px; z-index:-1;
+  }
 
-/* Quando o modo filtro está ativo, ocultar o header (já integrado ao script.js) */
-body.modo-filtro #hdr{ display:none; }
+  /* Botão — rótulo dinâmico, não achata (sem JS) */
+  .btn-filter{
+    display:inline-flex; align-items:center; gap:.45rem;
+    white-space:nowrap;
+    padding:.44rem .8rem; border-radius:999px;
+    font-size:12px; font-weight:900; color:#fff;
+    border:1px solid rgba(0,0,0,.08); box-shadow:0 1px 0 rgba(0,0,0,.06);
+    background:linear-gradient(120deg,#2b1b12,#3a2518,#1d140f);
+  }
+  .btn-filter .ico{ font-size:14px; line-height:1; }
+  .btn-filter .lbl-lg{ display:none; }   /* mobile: curto */
+  .btn-filter .lbl-sm{ display:inline; }
+  @media (min-width:640px){              /* ≥ tablet: rótulo longo */
+    .btn-filter{ font-size:12.5px; padding:.5rem 1rem; }
+    .btn-filter .lbl-lg{ display:inline; }
+    .btn-filter .lbl-sm{ display:none; }
+  }
+  /* Telas ultra estreitas: só ícone para preservar o pitch */
+  @media (max-width:340px){
+    .btn-filter{ padding:.44rem .6rem; }
+    .btn-filter .lbl{ display:none; }
+  }
 
-/* ===== Header compacto segue igual ===== */
-.hdr-inner { min-height: 48px; }
-@media (min-width: 640px){ .hdr-inner { min-height: 56px; } }
+  /* Responsividade do pitch */
+  @media (max-width:360px){ .hdr-pitch.smartPitch{ max-width:64vw; font-size:11px; } }
+  @media (min-width:361px) and (max-width:639px){ .hdr-pitch.smartPitch{ font-size:12px; } }
+  @media (min-width:640px){ .hdr-pitch.smartPitch{ font-size:12.5px; } }
+  @media (min-width:1024px){ .hdr-pitch.smartPitch{ font-size:13px; } }
 
-/* ===== Pitch em 1 linha com ênfase sem “pular” ===== */
-.hdr-pitch.smartPitch{
-  display:flex; align-items:center; gap:.5ch;
-  max-width: clamp(40%, 72vw, 78%);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  font-weight: 600; color:#111827; /* gray-900 */
-  line-height: 1;
-}
+  /* ===== Pitch 2 linhas compactas no desktop, sem aumentar a faixa ===== */
+  .smartPitch--2lines{ /* mobile/tablet continua 1 linha */ }
+  @media (min-width:1024px){
+    .hdr-pitch.smartPitch.smartPitch--2lines{
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 1.05;
+      max-height: calc(2 * 1em * 1.05);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 86%;
+    }
+  }
 
-.smartPitch .brandMark{
-  font-weight: 900;
-  letter-spacing: .2px;
-  background: linear-gradient(90deg,#111827,#0f766e 55%,#065f46);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-.smartPitch .dash{ opacity:.55; }
-.smartPitch .claim{ color:#1f2937; }         /* gray-800 */
-.smartPitch .claim .muted{ opacity:.75; }
-.smartPitch .claim .highlight{
-  font-weight: 800;
-  position: relative;
-}
-.smartPitch .claim .highlight::after{
-  content:"";
-  position:absolute; left:0; right:0; bottom:-2px; height:8px;
-  background: linear-gradient(90deg, rgba(250,204,21,.28), rgba(16,185,129,.25));
-  border-radius:6px; z-index:-1;
-}
+  /* Ocultar header no modo filtro (uma única vez) */
+  body.modo-filtro #hdr{ display:none; }
 
-/* ===== Pílulas explicativas curtas (somem no mobile) ===== */
-.smartPitch .pills{ display:inline-flex; align-items:center; gap:.5ch; margin-left:.5ch; }
-.smartPitch .pills .sep{ opacity:.5; }
-.smartPitch .pill{
-  font-size: 11.5px; font-weight: 800; letter-spacing:.2px;
-  padding: 2px 8px; border-radius: 999px;
-  border: 1px solid rgba(0,0,0,.08);
-  background: #f9fafb; /* gray-50 */
-  color: #0f172a;      /* slate-900 */
-}
-
-/* ===== Pontos de legenda por loja ===== */
-.smartPitch .dot{
-  display:inline-block; width:.6em; height:.6em; border-radius:50%;
-  margin: 0 .25ch 0 .5ch; transform: translateY(1px);
-  box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset;
-}
-.smartPitch .dot.ml  { background:#facc15; }  /* Mercado Livre amarelo */
-.smartPitch .dot.amz { background:#111827; }  /* Amazon preto */
-.smartPitch .dot.mag { background:#2563eb; }  /* Magalu azul */
-.smartPitch .dot.shp { background:#ef4444; }  /* Shopee vermelho/laranja */
-
-/* ===== Responsividade fina ===== */
-@media (max-width: 360px){
-  .hdr-pitch.smartPitch{ max-width: 64vw; font-size: 11px; }
-}
-@media (min-width: 361px) and (max-width: 639px){
-  .hdr-pitch.smartPitch{ font-size: 12px; }
-}
-@media (min-width: 640px){
-  .hdr-pitch.smartPitch{ font-size: 12.5px; }
-}
-@media (min-width: 1024px){
-  .hdr-pitch.smartPitch{ font-size: 13px; }
-}
-
-/* Ocultar header quando filtros estiverem abertos (coerente com seu fluxo) */
-body.modo-filtro #hdr{ display:none; }
-
-
-
-  /* Skeleton */
+  /* ===================== Skeleton ===================== */
   .skel { position: relative; overflow: hidden; background: #f3f4f6; }
   .skel::after{
     content:""; position:absolute; inset:0;
@@ -140,50 +129,7 @@ body.modo-filtro #hdr{ display:none; }
     transform: rotate(-3deg);
   }
 
-  /* =============== BOTÕES DE FILTRO (INLINE) =============== */
-  /* Botão principal maior, premium */
-  #btnBuscaFlutuante{
-    display:inline-flex; align-items:center; justify-content:center; gap:10px;
-    padding:12px 22px; font-size:15px; font-weight:900; letter-spacing:.2px;
-    color:#fff; border-radius:9999px; cursor:pointer; user-select:none;
-    background:linear-gradient(120deg,#2b1b12,#3a2518,#1d140f);
-    border:1.5px solid rgba(255,255,255,.18);
-    box-shadow:
-      0 3px 10px rgba(0,0,0,.18),
-      inset 0 0 0 1px rgba(255,255,255,.06);
-    transition:transform .15s ease, box-shadow .15s ease, background .2s ease, filter .15s ease;
-  }
-  #btnBuscaFlutuante:hover{
-    transform: translateY(-1px);
-    box-shadow: 0 8px 18px rgba(0,0,0,.22), inset 0 0 0 1px rgba(255,255,255,.08);
-    filter: saturate(1.05);
-  }
-  #btnBuscaFlutuante:active{ transform: translateY(0); }
-  #btnBuscaFlutuante.ativo{
-    background:linear-gradient(120deg,#7f1d1d,#b91c1c,#dc2626);
-  }
-  /* pequeno brilho em loop */
-  #btnBuscaFlutuante::after{
-    content:""; position:absolute; inset:auto 0 0 0; height:2px;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent);
-    transform: translateX(-100%); filter: blur(0.5px);
-    animation: shine 2.8s linear infinite;
-    opacity:.5;
-  }
-  @keyframes shine{ 100% { transform: translateX(100%); } }
-
-  /* Botão secundário: fechar filtros (apenas quando ativo) */
-  #btnFecharFiltro{
-    display:none; align-items:center; justify-content:center; gap:8px;
-    padding:10px 16px; font-size:14px; font-weight:800;
-    color:#7f1d1d; background:#fff; border-radius:9999px;
-    border:1.5px solid #fca5a5; box-shadow:0 3px 10px rgba(0,0,0,.08);
-    transition:transform .15s ease, box-shadow .15s ease, background .2s ease, color .2s ease;
-  }
-  #btnFecharFiltro:hover{ transform: translateY(-1px); box-shadow:0 6px 14px rgba(0,0,0,.12); background:#fff7f7; color:#991b1b; }
-  body.modo-filtro #btnFecharFiltro{ display:inline-flex; }
-
-  /* Lista de Produtos — Grid fluido (5 por linha no mobile) */
+  /* ===================== Lista de Produtos — Grid fluido ===================== */
   #listaProdutos{
     display:flex; flex-wrap:wrap; justify-content:center;
     gap:6px; padding-bottom:8px; transition: all .35s ease;
@@ -231,8 +177,6 @@ body.modo-filtro #hdr{ display:none; }
     opacity:0; transform: translateY(-16px) scale(.96);
     height:0; margin:0; padding:0; overflow:hidden; pointer-events:none;
   }
-  /* Mostra o botão de fechar só quando o filtro estiver ativo */
-body.modo-filtro #btnFecharFiltro { display: inline-flex; }
 
   /* Barra de filtros (inserida via JS) */
   #barraFiltros{
@@ -250,7 +194,7 @@ body.modo-filtro #btnFecharFiltro { display: inline-flex; }
     border:1.5px solid rgba(214,167,92,.45); border-radius:9999px; padding:9px 12px;
   }
 
-  /* Origem buttons (marcas) — estados ativos principais */
+  /* Origem (marcas) — estados ativos principais */
   #filtroOrigem{
     display:grid; grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
     gap:8px; width:100%;
@@ -310,7 +254,9 @@ body.modo-filtro #btnFecharFiltro { display: inline-flex; }
   .card-selo:hover .card-logo{ transform: none !important; }
   </style>
 
-  <!-- Override de layout dos botões (linhas/colunas fixas) e filtro compacto -->
+  <!-- =========================================================
+       Override layout filtros (mantido do seu arquivo)
+       ========================================================= -->
   <style id="filtro-override-layout">
     #filtroOrigem{
       display:grid !important; grid-auto-flow: row dense; gap:12px;
@@ -388,44 +334,30 @@ body.modo-filtro #btnFecharFiltro { display: inline-flex; }
 <body class="bg-[var(--bege)] text-gray-900 font-sans">
 
   <!-- =========================================================
-     HEADER (compacto, 1 linha, sem logos)
-     ========================================================= -->
-<header id="hdr" class="sticky top-0 z-50 bg-white border-b border-[var(--dourado)]/40">
-  <div class="hdr-inner h-12 sm:h-14 max-w-6xl mx-auto px-2 flex items-center justify-between gap-2">
-
-    <!-- Pitch compacto e inteligente (1 linha, sem logo) -->
-    <p class="hdr-pitch smartPitch" aria-label="ShihTzu Shop — comparador multilojas com filtros.">
-      <span class="brandMark">ShihTzu&nbsp;Shop</span>
-      <span class="dash">—</span>
-      <span class="claim">
-        Compare preços
-        <span class="muted">do mesmo produto</span>
-        <span class="highlight">em várias lojas</span>,
-        <span class="muted">filtre por</span> categoria/preço
-        <span class="muted">e</span> encontre a <span class="highlight">melhor oferta</span>
-        <span class="hidden md:inline">em segundos</span>.
-      </span>
-
-      <!-- Pílulas explicativas (mini-métricas / legendas) -->
-      <span class="pills hidden sm:inline">
-        <span class="pill">Multilojas</span>
-        <span class="sep">•</span>
-        <span class="pill">Filtros rápidos</span>
-        <span class="sep">•</span>
-        <span class="pill">
-          Lojas: <i class="dot ml"></i>ML <i class="dot amz"></i>Amazon <i class="dot mag"></i>Magalu <i class="dot shp"></i>Shopee
+       HEADER (compacto, 1 linha, sem pílulas; texto 2-linhas no desktop)
+       ========================================================= -->
+  <header id="hdr" class="sticky top-0 z-50 bg-white border-b border-black/10">
+    <div class="hdr-inner max-w-6xl mx-auto pl-1 pr-2 lg:pl-1 h-12 sm:h-14 grid items-center"
+         style="grid-template-columns: minmax(0,1fr) max-content; gap:.5rem">
+      <!-- Pitch -->
+      <p class="hdr-pitch smartPitch smartPitch--2lines" aria-label="Comparador multilojas com filtros.">
+        <span class="brandMark">ShihTzu&nbsp;Shop</span>
+        <span class="dash">—</span>
+        <span class="claim claim--lg">Compare preços <span class="muted">do mesmo produto</span>
+          <span class="highlight">em várias lojas</span>, <span class="muted">filtre por</span> categoria/preço
+          <span class="muted">e</span> encontre a <span class="highlight">melhor oferta</span>.
         </span>
-      </span>
-    </p>
+        <span class="claim claim--sm">Compare preços, filtre e ache a melhor oferta.</span>
+      </p>
 
-    <!-- Botão de filtros/comparador -->
-    <button id="btnBuscaFlutuante"
-            class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[12px] font-black text-white shadow-sm border border-black/10"
-            style="background:linear-gradient(120deg,#2b1b12,#3a2518,#1d140f)">
-      🔎 Filtrar / Comparar
-    </button>
-  </div>
-</header>
+      <!-- Botão responsivo: ícone + rótulo dinâmico (sem JS) -->
+      <button id="btnBuscaFlutuante" class="btn-filter" aria-label="Abrir filtros e comparador">
+        <span class="ico" aria-hidden="true">🔎</span>
+        <span class="lbl lbl-sm">Filtrar</span>
+        <span class="lbl lbl-lg">Filtrar / Comparar</span>
+      </button>
+    </div>
+  </header>
 
   <!-- =========================================================
        SELO MULTIMARCAS — CARROSSEL INFINITO (logos locais)
@@ -551,42 +483,6 @@ body.modo-filtro #btnFecharFiltro { display: inline-flex; }
       </div>
     </div>
   </div>
-
-  <!-- =========================================================
-       SCRIPTZINHO (opcional) para o botão “Fechar filtros”
-       ========================================================= -->
-  <script>
-    (function(){
-            // Atualiza aria-expanded conforme o estado atual
-      const syncAria = () => {
-        if(!openBtn) return;
-        openBtn.setAttribute('aria-expanded', document.body.classList.contains('modo-filtro') ? 'true' : 'false');
-        openBtn.classList.toggle('ativo', document.body.classList.contains('modo-filtro'));
-      };
-
-      // Se teu script.js já faz o toggle do filtro ao clicar no openBtn,
-      // aqui só garantimos que o botão de fechar também funcione
-      closeBtn?.addEventListener('click', (e) => {
-        e.preventDefault();
-        // Se já está ativo, simulamos um clique no botão principal para fechar,
-        // sem duplicar lógica com teu script.js:
-        if (document.body.classList.contains('modo-filtro')) {
-          openBtn?.click();
-        }
-        // Se por algum motivo teu script não rodar, fazemos um fallback:
-        else {
-          document.body.classList.remove('modo-filtro');
-          syncAria();
-        }
-      });
-
-      // Depois de qualquer clique no botão principal, sincroniza aria/estilo
-      openBtn?.addEventListener('click', () => setTimeout(syncAria, 0));
-
-      // Sincroniza no load (caso a página já abra com modo-filtro por algum estado salvo)
-      document.addEventListener('DOMContentLoaded', syncAria);
-    })();
-  </script>
 
   <!-- =========================================================
        SCRIPTS
