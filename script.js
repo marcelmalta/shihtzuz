@@ -4,9 +4,10 @@
    (Atual) — mantém tudo + GTIN fix + botão flutuante fechar filtro
    + HOVERCARD/TOOLTIP grande (desktop/TOUCH)
    + Cards compactos (50% da altura)
+   + Logos menores (cards, carrossel, pílulas de filtro)
    ========================================================= */
 
-/* ========= CSS inject: +30% nos botões/logo + botão flutuante ========= */
+/* ========= CSS inject: logos menores nas pílulas e botão flutuante ========= */
 (function injectFiltroCSS(){
   const id = 'filtros-logo-only';
   document.querySelector(`style[data-${id}]`)?.remove();
@@ -17,13 +18,13 @@
       display:flex; flex-wrap:wrap; gap:12px; width:100%; align-items:center;
     }
 
-    /* Cápsula responsiva */
+    /* Cápsula responsiva (um pouco mais baixa) */
     #filtroOrigem label{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:12px 14px;
+      padding:10px 12px;
       border-radius:16px; border:1.5px solid #e5e7eb; background:#fff;
       cursor:pointer; user-select:none; overflow:hidden;
-      max-width:182px; min-width:83px;
+      max-width:182px; min-width:78px; height:44px;
       transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
       visibility: visible;
     }
@@ -31,23 +32,23 @@
       #filtroOrigem label:hover{ transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 18px rgba(0,0,0,.10); }
     }
 
-    /* Logo */
+    /* Logo menor nas pílulas */
     #filtroOrigem label img.filtro-logo{
       display:block; object-fit:contain; pointer-events:none;
-      max-width:100%; height:auto; max-height:57px;
+      width:auto; height:22px; max-width:100%;
     }
     @media (max-width:1024px){
-      #filtroOrigem{ gap:11px; }
-      #filtroOrigem label{ padding:11px 12px; border-radius:14px; max-width:156px; min-width:78px; }
-      #filtroOrigem label img.filtro-logo{ max-height:52px; }
+      #filtroOrigem{ gap:10px; }
+      #filtroOrigem label{ padding:10px 11px; border-radius:14px; max-width:156px; min-width:74px; height:42px; }
+      #filtroOrigem label img.filtro-logo{ height:22px; }
     }
     @media (max-width:640px){
       #filtroOrigem{ gap:9px; }
-      #filtroOrigem label{ padding:10px 11px; border-radius:12px; max-width:135px; min-width:73px; }
-      #filtroOrigem label img.filtro-logo{ max-height:47px; }
+      #filtroOrigem label{ padding:9px 10px; border-radius:12px; max-width:135px; min-width:70px; height:40px; }
+      #filtroOrigem label img.filtro-logo{ height:22px; }
     }
 
-    /* Sem texto no botão */
+    /* Sem texto no botão (mantém o comportamento) */
     #filtroOrigem label .texto{ display:none !important; }
 
     /* Realce quando ATIVO */
