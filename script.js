@@ -125,11 +125,6 @@
       display:inline-block; margin-top:1px;
     }
 
-    .banner-card .ribbon{
-      font-size: 9px; padding: 2px 6px;
-      top: 6px; left: 6px; border-radius: 6px;
-    }
-
     /* Botão flutuante para fechar filtro — lateral, sem cobrir cards */
     #btnFecharFiltroFloat{
       position: fixed;
@@ -437,15 +432,6 @@ function buildImg(src, alt, opts = "") {
   return wrap;
 }
 
-/* badge de desconto (opcional) */
-function buildRibbon(desconto){
-  if(!desconto) return null;
-  const r = document.createElement("div");
-  r.className = "ribbon";
-  r.textContent = desconto;
-  return r;
-}
-
 /* calcula % OFF se vier vazio mas houver preço antigo */
 function autoFillDiscount(p){
   if ((!p.desconto || p.desconto.trim()==="") && p.precoAntigo && p.precoAntigo>p.precoAtual){
@@ -528,8 +514,6 @@ function renderBanner(containerId, tipos) {
     const imgWrap = buildImg(p.imagem, p.nome);
     imgWrap.style.background = meta.bgCard;
     card.appendChild(imgWrap);
-
-    const ribbon = buildRibbon(p.desconto); if(ribbon) card.appendChild(ribbon);
 
     const seloWrap = document.createElement("div");
     seloWrap.className = "mt-1 card-selo";
