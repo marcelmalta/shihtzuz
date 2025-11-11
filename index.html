@@ -287,29 +287,70 @@
   }
   #listaProdutos .card-compare-btn{
     position:absolute;
-    top:3px;
-    right:3px;
-    width:22px;
-    height:22px;
-    border-radius:999px;
-    border:1px solid rgba(0,0,0,.1);
-    background:rgba(255,255,255,.92);
+    top:4px;
+    right:4px;
+    width:26px;
+    height:26px;
+    border-radius:10px;
+    border:1px solid rgba(120,53,15,.25);
+    background:linear-gradient(135deg,#ffffff,#fde68a);
     color:#78350f;
-    font-size:12px;
+    font-size:13px;
     font-weight:900;
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    box-shadow:0 1px 3px rgba(0,0,0,.15);
+    box-shadow:0 3px 8px rgba(120,53,15,.18);
     transition:transform .15s ease, box-shadow .15s ease;
   }
   #listaProdutos .card-compare-btn:hover{
-    transform:scale(1.05);
-    box-shadow:0 2px 6px rgba(0,0,0,.2);
+    transform:scale(1.08);
+    box-shadow:0 4px 12px rgba(120,53,15,.25);
   }
   #listaProdutos .card-compare-btn:focus-visible{
     outline:2px solid #f97316;
     outline-offset:1px;
+  }
+  .ml-selo{ transition: all .3s ease; }
+  body.comparador-focus .ml-selo{
+    opacity:0;
+    max-height:0;
+    padding-top:0;
+    padding-bottom:0;
+    border:none;
+    box-shadow:none;
+    overflow:hidden;
+  }
+  #listaProdutos .card-compare-cta{
+    margin-top:4px;
+    width:100%;
+    border-radius:10px;
+    border:1px dashed rgba(120,53,15,.35);
+    background:rgba(255,255,255,.92);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.3px;
+    text-transform:uppercase;
+    color:#78350f;
+    padding:4px 2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  #listaProdutos .card-compare-cta::before{
+    content:"⇄";
+    font-size:11px;
+  }
+  #listaProdutos .card-compare-cta:hover{
+    background:#fef3c7;
+    border-color:#fbbf24;
+    color:#7c2d12;
+  }
+  #listaProdutos .card-compare-cta:focus-visible{
+    outline:2px solid #f97316;
+    outline-offset:2px;
   }
   #listaProdutos .card-old,
   #listaProdutos .card-off{
@@ -346,6 +387,16 @@
   .catalogo-focus #bannerA, .catalogo-focus #bannerB{
     opacity:0; transform: translateY(-16px) scale(.96);
     height:0; margin:0; padding:0; overflow:hidden; pointer-events:none;
+  }
+  .banner-shelf{ transition: all .35s ease; }
+  body.comparador-focus .banner-shelf{
+    opacity:0; transform: translateY(-16px) scale(.94);
+    max-height:0; margin:0; padding-top:0; padding-bottom:0;
+    overflow:hidden; pointer-events:none;
+  }
+  body.comparador-focus #bannerA,
+  body.comparador-focus #bannerB{
+    opacity:0;
   }
 
   /* Barra de filtros (inserida via JS) */
@@ -761,6 +812,37 @@
     background:#fff;
     color:#0f172a;
   }
+  #btnModalComparar{
+    width:100%;
+    margin-top:.4rem;
+    border-radius:16px;
+    border:2px solid #fcd34d;
+    background:#fffbeb;
+    color:#92400e;
+    font-weight:900;
+    font-size:.9rem;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    padding:.65rem .9rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:.4rem;
+    box-shadow:0 8px 18px rgba(245,158,11,.25);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  #btnModalComparar::before{
+    content:"\21C4";
+    font-size:1.1rem;
+  }
+  #btnModalComparar:hover{
+    transform:translateY(-1px);
+    box-shadow:0 10px 24px rgba(245,158,11,.35);
+  }
+  #btnModalComparar:focus-visible{
+    outline:3px solid rgba(245,158,11,.4);
+    outline-offset:2px;
+  }
   @media (max-width:640px){
     #listaComparativos{ gap:.75rem; }
     #secComparador .cmp-card{
@@ -936,11 +1018,11 @@
   <!-- =========================================================
        BANNERS (A e B) — preenchidos pelo script.js
        ========================================================= -->
-  <section class="bg-white py-2 px-2 overflow-x-auto flex gap-3 scrollbar-thin scrollbar-thumb-gray-300">
+  <section class="banner-shelf bg-white py-2 px-2 overflow-x-auto flex gap-3 scrollbar-thin scrollbar-thumb-gray-300">
     <div id="bannerA" class="flex gap-2 w-full"></div>
   </section>
 
-  <section class="bg-white py-2 px-2 overflow-x-auto flex gap-3 border-t border-blue-100">
+  <section class="banner-shelf bg-white py-2 px-2 overflow-x-auto flex gap-3 border-t border-blue-100">
     <div id="bannerB" class="flex gap-2 w-full"></div>
   </section>
 
@@ -1018,9 +1100,8 @@
 
           <a id="modalLink" href="#" target="_blank"
              class="mt-2 text-center py-3 rounded-md font-extrabold shadow-md transition-all">🔒 Comprar com segurança</a>
-
-          <button id="btnCompartilhar" class="mt-2 bg-gray-900 text-white font-semibold py-2.5 rounded-md shadow-md">
-            🔗 Compartilhar Oferta
+          <button id="btnModalComparar" type="button" class="cmp-modal-btn">
+            Comparar preços em outras lojas
           </button>
         </div>
       </div>
@@ -1052,3 +1133,4 @@
   <script src="script.js" defer></script>
 </body>
 </html>
+

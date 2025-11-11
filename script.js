@@ -742,23 +742,32 @@ function renderLista(lista) {
     card.appendChild(seloWrap);
     attachLogoFallback(seloWrap.querySelector("img"));
 
+    const launchCompare = (evt)=>{
+      evt?.stopPropagation?.();
+      const g = normalizeGTIN(p.gtin);
+      if (g) abrirComparadorPorGTIN(g);
+      else abrirComparador(p);
+    };
+
     const compareBtn = document.createElement("button");
     compareBtn.type = "button";
     compareBtn.className = "card-compare-btn";
     compareBtn.title = "Comparar este item";
     compareBtn.innerHTML = "⇄";
-    compareBtn.addEventListener("click", (evt)=>{
-      evt.stopPropagation();
-      const g = normalizeGTIN(p.gtin);
-      if (g) abrirComparadorPorGTIN(g);
-      else abrirComparador(p);
-    });
+    compareBtn.addEventListener("click", launchCompare);
     card.appendChild(compareBtn);
 
     card.insertAdjacentHTML("beforeend", `
       <div class="card-nome">${p.nome}</div>
       <div class="card-price card-price--solo" style="color:${meta.corTexto}">${fmt(p.precoAtual)}</div>
     `);
+
+    const compareCta = document.createElement("button");
+    compareCta.type = "button";
+    compareCta.className = "card-compare-cta";
+    compareCta.textContent = "Comparar em outras lojas";
+    compareCta.addEventListener("click", launchCompare);
+    card.appendChild(compareCta);
 
     card.addEventListener("click", ()=> openModal(p));
 
@@ -874,12 +883,18 @@ function openModal(obj) {
   if (!btnCmp){
     btnCmp = document.createElement("button");
     btnCmp.id = "btnModalComparar";
-    btnCmp.className = "mt-2 bg-white font-semibold py-2.5 rounded-md shadow border";
-    btnCmp.textContent = "Comparar precos deste item";
+    btnCmp.type = "button";
+    btnCmp.className = "cmp-modal-btn";
+    btnCmp.textContent = "Comparar preços em outras lojas";
     const linkRef = el("#modalLink");
     if (linkRef) linkRef.insertAdjacentElement("afterend", btnCmp);
+  } else {
+    btnCmp.type = "button";
+    btnCmp.classList.add("cmp-modal-btn");
+    btnCmp.textContent = "Comparar preços em outras lojas";
   }
-  btnCmp.onclick = ()=> {
+  btnCmp.onclick = (evt)=> {
+    evt?.preventDefault?.();
     const g = normalizeGTIN(p.gtin);
     if (g) abrirComparadorPorGTIN(g);
     else   abrirComparador(p);
@@ -917,19 +932,6 @@ function closeModal(){
   const modalBg = el("#productModal");
   if (modalBg) modalBg.addEventListener("click", (e)=>{ if(e.target.id==="productModal") closeModal(); });
 })();
-
-/* ===================== COMPARTILHAR ===================== */
-document.addEventListener("click", (e) => {
-  if (e.target && e.target.id === "btnCompartilhar") {
-    const link = el("#modalLink")?.href || location.href;
-    const titulo = el("#modalTitle")?.textContent || "Oferta";
-    if (navigator.share) {
-      navigator.share({ title: "Oferta ShihTzuShop", text: `Olha este item para Shih Tzu: ${titulo}`, url: link }).catch(()=>{});
-    } else {
-      navigator.clipboard.writeText(link).then(()=>alert("🔗 Link copiado!")).catch(()=>{});
-    }
-  }
-});
 
 /* ===================== FILTROS ===================== */
 function aplicarFiltros(arg){
@@ -1247,6 +1249,8 @@ function toggleComparador(show){
     secList = lista ? lista.closest("section") || lista.parentElement : null;
   }
   if (!secCmp || !secList) return;
+
+  document.body.classList.toggle("comparador-focus", !!show);
 
   if (show){
     secList.classList.add("hidden");
