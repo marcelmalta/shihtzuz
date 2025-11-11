@@ -733,7 +733,6 @@ function renderLista(lista) {
     card.setAttribute("data-simkey", p.simKey);
 
     if (meta?.bgCard){
-      card.style.setProperty("--card-bg", meta.bgCard);
       card.style.background = meta.bgCard;
     }
     card.style.borderColor = `${meta?.corBorda || "#e5e7eb"}80`;
@@ -1465,8 +1464,6 @@ function renderComparador(grupo, baseProduct){
   const tipOff   = tip.querySelector('.tip-off');
   const tipPrice = tip.querySelector('.tip-price');
   const tipDesc  = tip.querySelector('.tip-desc');
-  const tipBuyBtn = tip.querySelector('.tip-btn-buy');
-  const tipCompareBtn = tip.querySelector('.tip-btn-compare');
 
   let rafMove = null;
   function moveHoverTip(px, py){
@@ -1507,35 +1504,6 @@ function renderComparador(grupo, baseProduct){
     tipOld.textContent   = (prod.precoAntigo ? fmt(prod.precoAntigo) : '');
     tipOff.textContent   = (prod.desconto || '');
     tipPrice.textContent = fmt(prod.precoAtual||0);
-
-    if (tipBuyBtn){
-      const loja = meta?.nome || 'loja';
-      tipBuyBtn.textContent = `Abrir ${loja}`;
-      if (prod.link){
-        tipBuyBtn.href = prod.link;
-        tipBuyBtn.classList.remove('disabled');
-        tipBuyBtn.setAttribute('aria-disabled','false');
-        tipBuyBtn.onclick = null;
-      } else {
-        tipBuyBtn.href = '#';
-        tipBuyBtn.classList.add('disabled');
-        tipBuyBtn.setAttribute('aria-disabled','true');
-        tipBuyBtn.onclick = (evt)=>{
-          evt.preventDefault();
-          evt.stopPropagation();
-        };
-      }
-    }
-
-    if (tipCompareBtn){
-      tipCompareBtn.onclick = (evt)=>{
-        evt.preventDefault();
-        evt.stopPropagation();
-        const g = normalizeGTIN(prod.gtin);
-        if (g) abrirComparadorPorGTIN(g);
-        else abrirComparador(prod);
-      };
-    }
 
     if (Array.isArray(prod.detalhes) && prod.detalhes.length){
       tipDesc.textContent = '• ' + prod.detalhes.slice(0,2).join('  • ');

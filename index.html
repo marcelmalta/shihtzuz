@@ -166,16 +166,16 @@
     display:flex; flex-direction:column; align-items:center;
     width:calc(20% - 4px);
     flex:0 0 calc(20% - 4px);
-    min-height:140px;
+    min-height:138px;
     padding:8px 6px 6px;
     border-radius:.65rem;
-    border:2px solid rgba(229,231,235,.9);
-    background:var(--card-bg,#fff);
-    box-shadow:0 4px 10px rgba(15,23,42,.08);
+    border:2px solid rgba(214,167,92,.25);
+    background:linear-gradient(180deg,#fffdf6,#f7efe0);
+    box-shadow:0 4px 8px rgba(15,23,42,.08);
     color:#0f172a;
     transition:transform .15s ease, box-shadow .15s ease;
   }
-  #listaProdutos .card-geral:hover{ transform:translateY(-2px); box-shadow:0 10px 18px rgba(15,23,42,.12); }
+  #listaProdutos .card-geral:hover{ transform:translateY(-2px); box-shadow:0 12px 20px rgba(15,23,42,.12); }
   #listaProdutos .card-img-wrap{ display:none !important; }
   #listaProdutos .card-selo{
     width:100%;
@@ -183,7 +183,7 @@
     gap:6px; padding:2px 6px;
     border-radius:.45rem;
     border:1px solid rgba(0,0,0,.08);
-    background:rgba(255,255,255,.92);
+    background:#fff;
   }
   #listaProdutos .card-logo{ height:18px; max-width:100%; object-fit:contain; }
 
@@ -198,13 +198,13 @@
     text-align:left;
     margin-top:8px;
     font-weight:800;
-    color:#f8fafc;
+    color:#0f172a;
     letter-spacing:.01em;
     overflow:hidden;
   }
   #listaProdutos .card-old{
     font-size:10px;
-    color:rgba(248,250,252,.75);
+    color:#6b7280;
     text-decoration:line-through;
     line-height:1.1;
     margin-top:2px;
@@ -218,11 +218,10 @@
     margin-top:4px;
     width:100%;
     text-align:left;
-    padding:3px 6px;
-    border-radius:.65rem;
-    background:rgba(0,0,0,.35);
-    border:1px solid rgba(255,255,255,.2);
-    color:#fef9c3;
+    padding:2px 4px;
+    border-radius:.55rem;
+    background:linear-gradient(120deg,rgba(214,167,92,.18),rgba(255,255,255,.95));
+    box-shadow:inset 0 0 0 1px rgba(214,167,92,.28);
   }
   #listaProdutos .card-off{
     font-size:11px;
@@ -231,8 +230,8 @@
     align-self:flex-start;
     padding:2px 8px;
     border-radius:999px;
-    background:rgba(255,255,255,.2);
-    color:#fef9c3;
+    background:rgba(16,185,129,.1);
+    color:#047857;
   }
 
   /* Ações (botões mini) */
@@ -306,10 +305,6 @@
   #listaProdutos .card-compare-cta:focus-visible{
     outline:2px solid #f97316;
     outline-offset:2px;
-  }
-  #listaProdutos .card-old,
-  #listaProdutos .card-off{
-    display:none !important;
   }
   @media (max-width:640px){
     #listaProdutos{
@@ -585,18 +580,6 @@
   #hoverTip .tip-old{ font-size:11px; color:#6b7280; text-decoration:line-through; }
   #hoverTip .tip-off{ font-size:11px; font-weight:900; color:#047857; }
   #hoverTip .tip-desc{ margin-top:8px; font-size:12px; color:#374151; }
-  #hoverTip .tip-actions{ margin-top:10px; display:grid; gap:6px; }
-  #hoverTip .tip-btn{
-    display:flex; align-items:center; justify-content:center;
-    border-radius:10px; padding:8px; font-size:12px; font-weight:800;
-    border:1px solid #e2e8f0; cursor:pointer; pointer-events:auto;
-  }
-  #hoverTip .tip-btn.disabled{
-    opacity:.5;
-    cursor:not-allowed;
-  }
-  #hoverTip .tip-btn-buy{ background:linear-gradient(90deg,#0f172a,#1e293b); color:#fff; border:none; }
-  #hoverTip .tip-btn-compare{ background:#fff; color:#0f172a; }
 
   /* ===== Carrossel: imagem menor (mantido 58/66px) ===== */
   .banner-card .card-img-wrap{ height:58px !important; }
@@ -1089,10 +1072,6 @@
       </div>
     </div>
     <div class="tip-desc"></div>
-    <div class="tip-actions">
-      <a class="tip-btn tip-btn-buy" href="#" target="_blank" rel="noopener">Abrir na loja</a>
-      <button class="tip-btn tip-btn-compare" type="button">Comparar preço</button>
-    </div>
   </div>
 
   <!-- =========================================================
