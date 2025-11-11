@@ -666,7 +666,7 @@ function renderBanner(containerId, tipos) {
     attachLogoFallback(seloWrap.querySelector("img"));
 
     card.insertAdjacentHTML("beforeend", `
-      <h2 class="font-semibold text-center line-clamp-2 text-gray-800">${p.nome}</h2>
+      <h2 class="font-semibold text-center banner-title text-gray-800">${p.nome}</h2>
       <p class="card-old">${p.precoAntigo ? fmt(p.precoAntigo) : ""}</p>
       <p class="card-price" style="color:${meta.corTexto}">${fmt(p.precoAtual)}</p>
       <span class="card-off" style="color:${meta.off}">${p.desconto || ""}</span>

@@ -606,15 +606,15 @@
   .banner-card .card-img-wrap{ height:58px !important; }
   @media (min-width:640px){ .banner-card .card-img-wrap{ height:66px !important; } }
   .banner-card .card-logo{ height:14px; }
-  .banner-card h2{
+  .banner-card .banner-title{
     font-size:11px !important;
     line-height:1.2 !important;
     height:auto !important;
     margin-top:3px !important;
-    display:-webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
+    display:block;
+    white-space:nowrap;
     overflow:hidden;
+    text-overflow:ellipsis;
     text-align:left;
   }
   .banner-card .card-old{
