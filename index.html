@@ -329,12 +329,20 @@
     justify-content:center;
     transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
   }
-  .claim--sm{ display:none; font-weight:700; color:#111; }
-  @media (max-width:639px){
-    .claim--lg{ display:none; }
-    .claim--sm{ display:inline-flex; align-items:center; }
+  .claim--sm{
+    display:none;
+    font-weight:700;
+    color:#111;
   }
-  @media (min-width:640px){
+  @media (max-width:767px){
+    .claim--lg{ display:none !important; }
+    .claim--sm{
+      display:inline-flex !important;
+      align-items:center;
+      gap:.15rem;
+    }
+  }
+  @media (min-width:768px){
     .claim--sm{ display:none !important; }
   }
   #listaProdutos .card-compare-cta:hover{
