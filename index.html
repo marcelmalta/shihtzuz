@@ -110,6 +110,22 @@
   }
   @media (max-width:340px){ .btn-filter{ padding:.44rem .6rem; } .btn-filter .lbl{ display:none; } }
 
+  .smartPitch .arrow-mobile{ display:none; }
+  @media (max-width:640px){
+    .smartPitch .arrow-mobile{
+      display:inline-flex;
+      margin-left:.35rem;
+      font-size:1rem;
+      color:#b45309;
+      font-weight:900;
+      animation:arrowPulse 1.1s ease-in-out infinite alternate;
+    }
+  }
+  @keyframes arrowPulse{
+    0%{ transform:translateX(0); opacity:.55; }
+    100%{ transform:translateX(6px); opacity:1; }
+  }
+
   /* Responsividade do pitch */
   @media (max-width:360px){ .hdr-pitch.smartPitch{ max-width:64vw; font-size:11px; } }
   @media (min-width:361px) and (max-width:639px){ .hdr-pitch.smartPitch{ font-size:12px; } }
@@ -931,14 +947,14 @@
           <span class="muted">e</span> encontre a <span class="highlight">melhor oferta</span>.
         </span>
         <!-- Mobile: mais curto e sem corte -->
-        <span class="claim claim--sm">Compare&nbsp;Preços!</span>
+        <span class="claim claim--sm">ShihTzu&nbsp;Shop — Compare<span class="arrow-mobile" aria-hidden="true">→</span></span>
       </p>
 
       <!-- Botão responsivo: ícone + rótulo dinâmico (sem JS) -->
       <button id="btnBuscaFlutuante" class="btn-filter" aria-label="Abrir filtros e comparador">
         <span class="ico" aria-hidden="true">🔎</span>
-        <span class="lbl lbl-sm">Filtrar</span>
-        <span class="lbl lbl-lg">Filtrar / Comparar</span>
+        <span class="lbl lbl-sm">Compare</span>
+        <span class="lbl lbl-lg">Comparar Preços</span>
       </button>
     </div>
   </header>
