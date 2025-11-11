@@ -212,7 +212,7 @@
   }
   .card-old{
     font-size:10px;
-    color:#94a3b8;
+    color:rgba(248,250,252,.85);
     text-decoration:line-through;
     line-height:1.1;
     margin-top:2px;
@@ -234,7 +234,8 @@
     align-self:flex-start;
     padding:2px 8px;
     border-radius:999px;
-    background:rgba(16,185,129,.12);
+    background:rgba(255,255,255,.2);
+    color:#fef9c3;
   }
 
   /* Ações (botões mini) */
@@ -251,21 +252,61 @@
   #listaProdutos .card-geral{
     width: calc(20% - 3px);
     flex: 0 0 calc(20% - 3px);
-    max-width:120px;
-    padding:3px 3px 3px;
-    border-radius:.4rem;
-    min-height:118px;
+    max-width:132px;
+    padding:8px 6px;
+    border-radius:.85rem;
+    min-height:150px;
     cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    background:#000;
+  }
+  #listaProdutos .card-geral::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:.75rem;
+    background:linear-gradient(185deg,rgba(15,23,42,.25),rgba(2,6,23,.8));
+    z-index:1;
+    pointer-events:none;
+  }
+  #listaProdutos .card-geral::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:.75rem;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+    z-index:1;
+    pointer-events:none;
+  }
+  #listaProdutos .card-geral > *:not(.card-img-wrap){
+    position:relative;
+    z-index:2;
   }
   #listaProdutos .card-img-wrap{
-    border-radius:.4rem;
-    border:1px solid rgba(0,0,0,.02);
+    position:absolute;
+    inset:0;
+    height:100% !important;
+    width:100%;
+    padding:0 !important;
+    margin:0 !important;
+    border-radius:.75rem;
+    overflow:hidden;
+  }
+  #listaProdutos .card-img-wrap img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:saturate(1.05);
   }
   #listaProdutos .card-selo{
     min-height:18px;
     padding:2px 3px;
     gap:3px;
     border-width:1px;
+    background:rgba(15,23,42,.35);
+    backdrop-filter:blur(4px);
+    border-color:rgba(255,255,255,.25);
   }
   #listaProdutos .card-logo{ height:15px; }
   @media (max-width:640px){
@@ -279,24 +320,27 @@
   #listaProdutos .card-nome{
     font-size:9.5px;
     line-height:1.15;
-    min-height:2.1em;
-    margin-top:2px;
+    min-height:2.3em;
+    margin-top:6px;
+    color:#f8fafc;
+    font-weight:700;
   }
   #listaProdutos .card-price{
-    font-size:12px;
+    font-size:13px;
     line-height:1;
-    margin-top:1px;
+    margin-top:4px;
     display:inline-flex;
     align-items:center;
     justify-content:flex-start;
     width:100%;
-    padding:2px 4px;
-    border-radius:.5rem;
-    background:linear-gradient(120deg,rgba(214,167,92,.18),rgba(255,255,255,.95));
-    box-shadow:inset 0 0 0 1px rgba(214,167,92,.28);
+    padding:2px 6px;
+    border-radius:.65rem;
+    background:rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.15);
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+    color:#fef9c3;
   }
   #listaProdutos .card-price--solo{
     width:100%;
