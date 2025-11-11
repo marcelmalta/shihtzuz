@@ -285,32 +285,6 @@
   #listaProdutos .card-price--solo{
     width:100%;
   }
-  #listaProdutos .card-compare-btn{
-    position:absolute;
-    top:4px;
-    right:4px;
-    width:26px;
-    height:26px;
-    border-radius:10px;
-    border:1px solid rgba(120,53,15,.25);
-    background:linear-gradient(135deg,#ffffff,#fde68a);
-    color:#78350f;
-    font-size:13px;
-    font-weight:900;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 3px 8px rgba(120,53,15,.18);
-    transition:transform .15s ease, box-shadow .15s ease;
-  }
-  #listaProdutos .card-compare-btn:hover{
-    transform:scale(1.08);
-    box-shadow:0 4px 12px rgba(120,53,15,.25);
-  }
-  #listaProdutos .card-compare-btn:focus-visible{
-    outline:2px solid #f97316;
-    outline-offset:1px;
-  }
   .ml-selo{ transition: all .3s ease; }
   body.comparador-focus .ml-selo{
     opacity:0;
@@ -324,29 +298,23 @@
   #listaProdutos .card-compare-cta{
     margin-top:4px;
     width:100%;
-    border-radius:10px;
-    border:1px dashed rgba(120,53,15,.35);
-    background:rgba(255,255,255,.92);
+    border-radius:12px;
+    border:1px solid rgba(120,53,15,.35);
+    background:linear-gradient(120deg,#fff8e1,#fde68a);
     font-size:9px;
-    font-weight:800;
-    letter-spacing:.3px;
+    font-weight:900;
+    letter-spacing:.2px;
     text-transform:uppercase;
-    color:#78350f;
-    padding:4px 2px;
+    color:#7c2d12;
+    padding:3px 2px;
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:4px;
-    transition:background .15s ease, color .15s ease, border-color .15s ease;
-  }
-  #listaProdutos .card-compare-cta::before{
-    content:"⇄";
-    font-size:11px;
+    transition:transform .15s ease, box-shadow .15s ease;
   }
   #listaProdutos .card-compare-cta:hover{
-    background:#fef3c7;
-    border-color:#fbbf24;
-    color:#7c2d12;
+    transform:translateY(-1px);
+    box-shadow:0 4px 10px rgba(120,53,15,.2);
   }
   #listaProdutos .card-compare-cta:focus-visible{
     outline:2px solid #f97316;

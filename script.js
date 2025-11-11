@@ -749,14 +749,6 @@ function renderLista(lista) {
       else abrirComparador(p);
     };
 
-    const compareBtn = document.createElement("button");
-    compareBtn.type = "button";
-    compareBtn.className = "card-compare-btn";
-    compareBtn.title = "Comparar este item";
-    compareBtn.innerHTML = "⇄";
-    compareBtn.addEventListener("click", launchCompare);
-    card.appendChild(compareBtn);
-
     card.insertAdjacentHTML("beforeend", `
       <div class="card-nome">${p.nome}</div>
       <div class="card-price card-price--solo" style="color:${meta.corTexto}">${fmt(p.precoAtual)}</div>
