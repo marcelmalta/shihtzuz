@@ -159,70 +159,73 @@
      ========================================================= */
   #listaProdutos{
     display:flex; flex-wrap:wrap; justify-content:flex-start;
-    gap:4px; padding-bottom:4px; transition: all .35s ease;
+    gap:8px; padding-bottom:6px; transition: all .35s ease;
   }
-  #listaProdutos .card-geral{
+  .card-compact{
     position:relative;
     display:flex; flex-direction:column; align-items:center;
-    width:calc(20% - 4px);
-    flex:0 0 calc(20% - 4px);
-    min-height:135px;
-    padding:6px;
-    border-radius:.6rem;
+    width:5.75rem; min-width:5.75rem;
+    min-height:150px;
+    padding:4px;
+    border-radius:10px;
     border:2px solid rgba(0,0,0,.06);
     background:#fffdf6;
     box-shadow:0 4px 10px rgba(15,23,42,.08);
     color:#0f172a;
     transition:transform .15s ease, box-shadow .15s ease;
   }
-  #listaProdutos .card-geral:hover{ transform:translateY(-2px); box-shadow:0 10px 18px rgba(15,23,42,.15); }
-  #listaProdutos .card-img-wrap{
-    width:100%; height:58px; display:flex; align-items:center; justify-content:center;
+  .card-compact:hover{ transform:translateY(-2px); box-shadow:0 10px 18px rgba(15,23,42,.15); }
+  @media (min-width:640px){
+    .card-compact{ width:6.75rem; min-width:6.75rem; }
+  }
+  @media (min-width:1024px){
+    .card-compact{ width:7.25rem; min-width:7.25rem; }
+  }
+  .card-compact .card-img-wrap{
+    width:100%; height:72px; display:flex; align-items:center; justify-content:center;
     overflow:hidden; border-radius:.55rem;
     border:1px solid rgba(255,255,255,.4);
     margin-bottom:3px;
   }
-  @media (min-width:640px){ #listaProdutos .card-img-wrap{ height:66px; } }
-  #listaProdutos .card-img-wrap img{
+  @media (min-width:640px){ .card-compact .card-img-wrap{ height:84px; } }
+  .card-compact .card-img-wrap img{
     width:100%; height:100%;
     object-fit:cover !important; object-position:center;
   }
-  #listaProdutos .card-selo{
+  .card-compact .card-selo{
     width:100%; display:flex; align-items:center; justify-content:center; gap:6px;
     background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:.45rem;
     margin-bottom:2px; padding:2px 6px;
   }
-  #listaProdutos .card-logo{ height:18px; max-width:100%; object-fit:contain; }
+  .card-compact .card-logo{ height:14px; max-width:100%; object-fit:contain; }
 
-  /* Tipografia COMPACTA */
-  #listaProdutos .card-nome{
-    display:-webkit-box;
-    -webkit-line-clamp:3;
-    -webkit-box-orient:vertical;
-    font-size:11px;
-    line-height:1.25;
-    min-height:2.7em;
+  .card-compact .banner-title{
+    font-size:9px;
+    line-height:1.15;
+    height:28px;
+    margin-top:2px;
+    display:block;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
     text-align:left;
-    margin-top:8px;
     font-weight:800;
     color:#0f172a;
-    letter-spacing:.01em;
-    overflow:hidden;
   }
-  #listaProdutos .card-old{
-    font-size:10px;
-    color:#6b7280;
+  .card-compact .card-old{
+    font-size:9px;
+    color:#9CA3AF;
     text-decoration:line-through;
     line-height:1.1;
     margin-top:2px;
     width:100%;
     text-align:left;
   }
-  #listaProdutos .card-price{
-    font-size:14px;
-    font-weight:900;
+  .card-compact .card-price{
+    font-size:11px;
+    font-weight:800;
     line-height:1.15;
-    margin-top:4px;
+    margin-top:1px;
     width:100%;
     text-align:left;
     padding:2px 4px;
@@ -230,14 +233,15 @@
     background:linear-gradient(120deg,rgba(214,167,92,.18),rgba(255,255,255,.95));
     box-shadow:inset 0 0 0 1px rgba(214,167,92,.28);
   }
-  #listaProdutos .card-off{
-    font-size:11px;
+  .card-compact .card-off{
+    font-size:10px;
     font-weight:900;
-    margin-top:3px;
+    margin-top:1px;
+    display:inline-flex;
     align-self:flex-start;
-    padding:2px 8px;
+    padding:2px 6px;
     border-radius:999px;
-    background:rgba(16,185,129,.1);
+    background:rgba(16,185,129,.15);
     color:#047857;
   }
 
@@ -246,10 +250,10 @@
   .btn-mini{ padding:3px 6px; border-radius:6px; border:1px solid #e5e7eb; background:#fff; font-size:9.5px; font-weight:800; }
   .btn-mini:hover{ background:#f9fafb; }
 
-  /* Responsivo (5 por linha no mobile, mas mais BAIXOS) */
-  @media (max-width:640px){ .card-geral{ width: calc(20% - 6px); } }
-  @media (min-width:641px) and (max-width:1024px){ .card-geral{ width:18%; } }
-  @media (min-width:1025px){ .card-geral{ width:11.5%; } }
+  /* Responsivo */
+  @media (max-width:640px){
+    #listaProdutos{ gap:4px; justify-content:center; }
+  }
 
   .ml-selo{ transition: all .3s ease; }
   body.comparador-focus .ml-selo{
@@ -287,31 +291,6 @@
   @media (min-width:768px){
     .pitch-line-mobile{ display:none !important; }
   }
-  @media (max-width:640px){
-    #listaProdutos{
-      gap:2px;
-    }
-    #listaProdutos .card-geral{
-      width: calc(20% - 2px);
-      flex: 0 0 calc(20% - 2px);
-      max-width: calc(20% - 2px);
-      min-width:64px;
-      min-height:115px;
-    }
-  }
-  @media (min-width:641px) and (max-width:1024px){
-    #listaProdutos .card-geral{
-      width:12.5%;
-      min-width:92px;
-    }
-  }
-  @media (min-width:1025px){
-    #listaProdutos .card-geral{
-      width:8.5%;
-      min-width:105px;
-    }
-  }
-
   /* Modo filtro (esconde banners) */
   #bannerA{ transition: all .35s ease; }
   .modo-filtro #bannerA,
@@ -528,18 +507,18 @@
   .card-selo:hover .card-logo{ transform: none !important; }
 
   /* ===================== Identidade por loja (borda/sombra) ===================== */
-  .card-geral[data-tipo="mercadolivre"]{ border-color:#ffe100; box-shadow:0 2px 10px rgba(255,225,0,.08); }
-  .card-geral[data-tipo="amazon"]{ border-color:#232f3e; box-shadow:0 2px 10px rgba(35,47,62,.08); }
-  .card-geral[data-tipo="magalu"]{ border-color:#2563eb; box-shadow:0 2px 10px rgba(37,99,235,.08); }
-  .card-geral[data-tipo="shopee"]{ border-color:#ee4d2d; box-shadow:0 2px 10px rgba(238,77,45,.08); }
-  .card-geral[data-tipo="petz"]{ border-color:#00a3ff; box-shadow:0 2px 10px rgba(0,163,255,.08); }
-  .card-geral[data-tipo="cobasi"]{ border-color:#0ea5a4; box-shadow:0 2px 10px rgba(14,165,164,.08); }
-  .card-geral[data-tipo="petlove"]{ border-color:#00AEEF; box-shadow:0 2px 10px rgba(0,174,239,.08); }
-  .card-geral[data-tipo="americanas"]{ border-color:#D50000; box-shadow:0 2px 10px rgba(213,0,0,.08); }
-  .card-geral[data-tipo="aliexpress"]{ border-color:#FF5A00; box-shadow:0 2px 10px rgba(255,90,0,.08); }
-  .card-geral[data-tipo="carrefour"]{ border-color:#005EB8; box-shadow:0 2px 10px rgba(0,94,184,.08); }
-  .card-geral[data-tipo="casasbahia"]{ border-color:#0033A0; box-shadow:0 2px 10px rgba(0,51,160,.08); }
-  .card-geral[data-tipo="ponto"]{ border-color:#111; box-shadow:0 2px 10px rgba(0,0,0,.08); }
+  .card-compact[data-tipo="mercadolivre"]{ border-color:#ffe100; box-shadow:0 2px 10px rgba(255,225,0,.08); }
+  .card-compact[data-tipo="amazon"]{ border-color:#232f3e; box-shadow:0 2px 10px rgba(35,47,62,.08); }
+  .card-compact[data-tipo="magalu"]{ border-color:#2563eb; box-shadow:0 2px 10px rgba(37,99,235,.08); }
+  .card-compact[data-tipo="shopee"]{ border-color:#ee4d2d; box-shadow:0 2px 10px rgba(238,77,45,.08); }
+  .card-compact[data-tipo="petz"]{ border-color:#00a3ff; box-shadow:0 2px 10px rgba(0,163,255,.08); }
+  .card-compact[data-tipo="cobasi"]{ border-color:#0ea5a4; box-shadow:0 2px 10px rgba(14,165,164,.08); }
+  .card-compact[data-tipo="petlove"]{ border-color:#00AEEF; box-shadow:0 2px 10px rgba(0,174,239,.08); }
+  .card-compact[data-tipo="americanas"]{ border-color:#D50000; box-shadow:0 2px 10px rgba(213,0,0,.08); }
+  .card-compact[data-tipo="aliexpress"]{ border-color:#FF5A00; box-shadow:0 2px 10px rgba(255,90,0,.08); }
+  .card-compact[data-tipo="carrefour"]{ border-color:#005EB8; box-shadow:0 2px 10px rgba(0,94,184,.08); }
+  .card-compact[data-tipo="casasbahia"]{ border-color:#0033A0; box-shadow:0 2px 10px rgba(0,51,160,.08); }
+  .card-compact[data-tipo="ponto"]{ border-color:#111; box-shadow:0 2px 10px rgba(0,0,0,.08); }
 
   /* ===================== HOVERCARD / TOOLTIP GRANDE ===================== */
   #hoverTip{
@@ -563,45 +542,6 @@
   #hoverTip .tip-desc{ margin-top:8px; font-size:12px; color:#374151; }
   @media (max-width:640px){
     #hoverTip{ display:none !important; }
-  }
-
-  /* ===== Carrossel: imagem menor (mantido 58/66px) ===== */
-  .banner-card .card-img-wrap{ height:58px !important; }
-  @media (min-width:640px){ .banner-card .card-img-wrap{ height:66px !important; } }
-  .banner-card .card-logo{ height:14px; }
-  .banner-card .banner-title{
-    font-size:11px !important;
-    line-height:1.2 !important;
-    height:auto !important;
-    margin-top:3px !important;
-    display:block;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    text-align:left;
-  }
-  .banner-card .card-old{
-    font-size:9.5px;
-    color:#94A3B8;
-    margin-top:2px;
-    text-align:left;
-    width:100%;
-  }
-  .banner-card .card-price{
-    font-size:13px;
-    font-weight:900;
-    margin-top:2px;
-    text-align:left;
-    width:100%;
-  }
-  .banner-card .card-off{
-    font-size:10.5px;
-    font-weight:900;
-    display:inline-flex;
-    margin-top:3px;
-    padding:2px 6px;
-    border-radius:999px;
-    background:rgba(16,185,129,.15);
   }
 
   /* ===================== Comparador compacto ===================== */

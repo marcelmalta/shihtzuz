@@ -79,48 +79,58 @@
   const id = 'carousel-tight-v2';
   document.querySelector(`style[data-${id}]`)?.remove();
   const css = `
-    /* Cards do carrossel apenas */
-    .banner-card{
+    /* Cards compactos compartilhados (carrossel + lista) */
+    .banner-card,
+    .card-compact{
       width: 5.75rem;           /* ~92px */
       padding: 4px !important;
       border-radius: 10px;
     }
     @media (min-width: 640px){  /* sm */
-      .banner-card{ width: 6.75rem; }   /* ~108px */
+      .banner-card,
+      .card-compact{ width: 6.75rem; }   /* ~108px */
     }
     @media (min-width: 1024px){ /* lg */
-      .banner-card{ width: 7.25rem; }   /* ~116px */
+      .banner-card,
+      .card-compact{ width: 7.25rem; }   /* ~116px */
     }
 
-    /* Imagem menor só no carrossel */
-    .banner-card .card-img-wrap{
+    /* Imagem reduzida */
+    .banner-card .card-img-wrap,
+    .card-compact .card-img-wrap{
       height: 72px !important;
     }
     @media (min-width: 640px){
-      .banner-card .card-img-wrap{ height: 84px !important; }
+      .banner-card .card-img-wrap,
+      .card-compact .card-img-wrap{ height: 84px !important; }
     }
 
-    /* Logo menor só no carrossel */
-    .banner-card .card-logo{
+    /* Logo menor */
+    .banner-card .card-logo,
+    .card-compact .card-logo{
       height: 14px;
       width: auto;
       opacity: .95;
     }
 
-    /* Tipografia mais compacta no carrossel */
-    .banner-card h2{
+    /* Tipografia compacta */
+    .banner-card .banner-title,
+    .card-compact .banner-title{
       font-size: 9px !important;
       line-height: 1.15;
       height: 28px;
       margin-top: 2px !important;
     }
-    .banner-card .card-old{
+    .banner-card .card-old,
+    .card-compact .card-old{
       font-size: 9px; color:#9CA3AF; margin-top:2px;
     }
-    .banner-card .card-price{
+    .banner-card .card-price,
+    .card-compact .card-price{
       font-size: 11px; font-weight: 800; margin-top:1px;
     }
-    .banner-card .card-off{
+    .banner-card .card-off,
+    .card-compact .card-off{
       font-size: 10px; font-weight: 800;
       display:inline-block; margin-top:1px;
     }
@@ -651,9 +661,10 @@ function renderBanner(containerId, tipos) {
     const meta = STORE_META[p.tipo];
 
     const card = document.createElement("div");
-    card.className = "relative banner-card rounded-lg flex-shrink-0 cursor-pointer hover:scale-[1.03] transition";
+    card.className = "relative banner-card card-compact rounded-lg flex-shrink-0 cursor-pointer hover:scale-[1.03] transition";
     card.style.border = `2px solid ${meta.corBorda}80`;
     card.style.boxShadow = `0 1px 4px rgba(0,0,0,.06)`;
+    card.dataset.tipo = p.tipo || "default";
 
     const imgWrap = buildImg(p.imagem, p.nome);
     imgWrap.style.background = meta.bgCard;
@@ -724,7 +735,7 @@ function renderLista(lista) {
     const meta = STORE_META[p.tipo];
 
     const card = document.createElement("div");
-    card.className = "relative card-geral";
+    card.className = "relative card-geral card-compact";
     card.style.border = `2px solid ${meta.corBorda}80`;
 
     // === atributos p/ highlight ===
