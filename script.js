@@ -79,60 +79,24 @@
   const id = 'carousel-tight-v2';
   document.querySelector(`style[data-${id}]`)?.remove();
   const css = `
-    /* Cards compactos compartilhados (carrossel + lista) */
-    .banner-card,
-    .card-compact{
+    /* Cards do carrossel (mantêm largura fixa para deslizar) */
+    .banner-card{
       width: 5.75rem;           /* ~92px */
       padding: 4px !important;
       border-radius: 10px;
     }
     @media (min-width: 640px){  /* sm */
-      .banner-card,
-      .card-compact{ width: 6.75rem; }   /* ~108px */
+      .banner-card{ width: 6.75rem; }   /* ~108px */
     }
     @media (min-width: 1024px){ /* lg */
-      .banner-card,
-      .card-compact{ width: 7.25rem; }   /* ~116px */
+      .banner-card{ width: 7.25rem; }   /* ~116px */
     }
 
-    /* Imagem reduzida */
-    .banner-card .card-img-wrap,
-    .card-compact .card-img-wrap{
-      height: 72px !important;
-    }
-    @media (min-width: 640px){
-      .banner-card .card-img-wrap,
-      .card-compact .card-img-wrap{ height: 84px !important; }
-    }
-
-    /* Logo menor */
-    .banner-card .card-logo,
-    .card-compact .card-logo{
+    /* Cards do carrossel ganham mesma curvatura das listas */
+    .banner-card .card-logo{
       height: 14px;
       width: auto;
-      opacity: .95;
-    }
-
-    /* Tipografia compacta */
-    .banner-card .banner-title,
-    .card-compact .banner-title{
-      font-size: 9px !important;
-      line-height: 1.15;
-      height: 28px;
-      margin-top: 2px !important;
-    }
-    .banner-card .card-old,
-    .card-compact .card-old{
-      font-size: 9px; color:#9CA3AF; margin-top:2px;
-    }
-    .banner-card .card-price,
-    .card-compact .card-price{
-      font-size: 11px; font-weight: 800; margin-top:1px;
-    }
-    .banner-card .card-off,
-    .card-compact .card-off{
-      font-size: 10px; font-weight: 800;
-      display:inline-block; margin-top:1px;
+      opacity:.95;
     }
 
     /* Botão flutuante para fechar filtro — lateral, sem cobrir cards */
