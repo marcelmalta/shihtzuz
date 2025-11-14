@@ -476,7 +476,7 @@ function destacarSelecao(){
 
 /* chip de estado dentro da barra de filtros */
 function ensureChipSelecionado(){
-  const barra = document.getElementById("barraFiltros");
+  const barra = document.getElementById("filtroLinhaProdutos");
   if (!barra) return;
   let chip = barra.querySelector(".chip-similares");
   const ativo = !!(filtrosAlvo.gtin || filtrosAlvo.simKey);
@@ -487,7 +487,7 @@ function ensureChipSelecionado(){
     chip = document.createElement("button");
     chip.type = "button";
     chip.className = "chip-similares flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-extrabold border border-amber-300 bg-amber-50 hover:bg-amber-100";
-    chip.innerHTML = `<span>Selecionado: ${filtrosAlvo.rotulo||"Produto"} <em class="opacity-70">(similares)</em></span>
+    chip.innerHTML = `<span class="chip-label">Selecionado: ${filtrosAlvo.rotulo||"Produto"} <em class="opacity-70">(similares)</em></span>
                       <span class="ml-1 inline-flex items-center justify-center w-5 h-5 rounded-full border border-amber-300 bg-white">✕</span>`;
     chip.addEventListener("click", ()=>{
       filtrosAlvo.gtin = null; filtrosAlvo.simKey = null; filtrosAlvo.rotulo = null;
@@ -495,7 +495,8 @@ function ensureChipSelecionado(){
     });
     (barra.querySelector(".f-controls")||barra).appendChild(chip);
   } else {
-    chip.querySelector("span").firstChild.textContent = `Selecionado: ${filtrosAlvo.rotulo||"Produto"} `;
+    const lbl = chip.querySelector(".chip-label");
+    if (lbl) lbl.innerHTML = `Selecionado: ${filtrosAlvo.rotulo||"Produto"} <em class="opacity-70">(similares)</em>`;
   }
 }
 
@@ -626,12 +627,9 @@ function renderBanner(containerId, tipos) {
 
     const card = document.createElement("div");
     card.className = "relative banner-card card-compact rounded-lg flex-shrink-0 cursor-pointer hover:scale-[1.03] transition";
-    card.style.border = `2px solid ${meta.corBorda}80`;
-    card.style.boxShadow = `0 1px 4px rgba(0,0,0,.06)`;
     card.dataset.tipo = p.tipo || "default";
 
     const imgWrap = buildImg(p.imagem, p.nome);
-    imgWrap.style.background = meta.bgCard;
     card.appendChild(imgWrap);
 
     const seloWrap = document.createElement("div");
@@ -643,8 +641,8 @@ function renderBanner(containerId, tipos) {
     card.insertAdjacentHTML("beforeend", `
       <h2 class="font-semibold text-center banner-title text-gray-800">${p.nome}</h2>
       <p class="card-old">${p.precoAntigo ? fmt(p.precoAntigo) : ""}</p>
-      <p class="card-price" style="color:${meta.corTexto}">${fmt(p.precoAtual)}</p>
-      <span class="card-off" style="color:${meta.off}">${p.desconto || ""}</span>
+      <p class="card-price">${fmt(p.precoAtual)}</p>
+      <span class="card-off">${p.desconto || ""}</span>
     `);
 
     card.addEventListener("click", () => openModal(p));
@@ -700,7 +698,6 @@ function renderLista(lista) {
 
     const card = document.createElement("div");
     card.className = "relative card-geral card-compact";
-    card.style.border = `2px solid ${meta.corBorda}80`;
 
     // === atributos p/ highlight ===
     if (p.gtin)   card.setAttribute("data-gtin", String(p.gtin));
@@ -708,13 +705,7 @@ function renderLista(lista) {
     card.setAttribute("data-simkey", p.simKey);
     card.dataset.tipo = p.tipo || "default";
 
-    if (meta?.bgCard){
-      card.style.background = meta.bgCard;
-    }
-    card.style.borderColor = `${meta?.corBorda || "#e5e7eb"}80`;
-
     const imgWrap = buildImg(p.imagem, p.nome);
-    imgWrap.style.background = meta.bgCard;
     card.appendChild(imgWrap);
 
     const seloWrap = document.createElement("div");
@@ -726,8 +717,8 @@ function renderLista(lista) {
     card.insertAdjacentHTML("beforeend", `
       <h2 class="font-semibold text-center banner-title text-gray-800">${p.nome}</h2>
       <p class="card-old">${p.precoAntigo ? fmt(p.precoAntigo) : ""}</p>
-      <p class="card-price" style="color:${meta.corTexto}">${fmt(p.precoAtual)}</p>
-      <span class="card-off" style="color:${meta.off}">${p.desconto || ""}</span>
+      <p class="card-price">${fmt(p.precoAtual)}</p>
+      <span class="card-off">${p.desconto || ""}</span>
     `);
 
     card.addEventListener("click", ()=> openModal(p));
@@ -946,7 +937,6 @@ function aplicarFiltros(arg){
     document.body.classList.remove("modo-filtro");
     document.querySelector("header.sticky")?.classList.remove("hidden");
     document.querySelector(".ml-selo")?.classList.remove("hidden");
-    document.getElementById("barraFiltros")?.classList.add("hidden");
     const secLista = document.getElementById("secListaProdutos");
     if (secLista){
       requestAnimationFrame(()=>{
@@ -975,10 +965,9 @@ function aplicarFiltros(arg){
 
 /* cria a barra de filtros logo abaixo do selo multimarcas */
 function criarBarraFiltros(){
-  const selo = document.querySelector(".ml-selo");
-  const barra = document.createElement("div");
-  barra.id = "barraFiltros";
-  barra.className = "hidden rounded-xl mt-1.5 p-2 shadow-md flex flex-col items-center justify-center gap-2 max-w-6xl mx-auto";
+  const lojasSlot = document.getElementById("filtroLojasTopo");
+  const linhaSlot = document.getElementById("filtroLinhaProdutos");
+  if (!lojasSlot || !linhaSlot) return;
 
   const origemHTML = Object.entries(STORE_META).map(([k,v])=>`
     <label data-src="${k}" class="ativo" aria-label="${v.nome}" title="${v.nome}">
@@ -987,40 +976,39 @@ function criarBarraFiltros(){
     </label>
   `).join("");
 
-  barra.innerHTML = `
-    <div class="f-controls w-full flex flex-wrap items-center justify-center gap-2">
-      <div class="search-wrap relative min-w-[240px] max-w-[680px] w-full">
-        <svg class="icon absolute left-3 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" width="18" height="18" fill="none">
-          <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <input id="buscaInput" type="text" placeholder="Buscar (ex: laço, cama, shampoo)..." class="w-full h-10 rounded-full border px-9 pr-9" />
-        <button id="clearBusca" type="button"
-                class="clear hidden absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full border grid place-items-center leading-none">×</button>
-      </div>
-
-      <select id="filtroPreco" class="select-pill px-3 py-1.5 rounded-full border h-10">
-        <option value="">Preço</option>
-        <option value="0">Até R$ 50</option>
-        <option value="1">R$ 50–R$ 150</option>
-        <option value="2">+ R$ 150</option>
-      </select>
-
-      <select id="filtroCategoria" class="px-3 py-1.5 rounded-full border min-w-[180px] md:min-w-[160px] sm:min-w-[140px] h-10 font-semibold">
-        <option value="">Categoria</option>
-        <option>Roupas</option><option>Acessórios</option><option>Higiene</option><option>Camas</option><option>Rações</option>
-      </select>
-    </div>
-
+  lojasSlot.innerHTML = `
     <div id="filtroOrigem" class="w-full">
       ${origemHTML}
     </div>
   `;
 
-  if (selo) selo.insertAdjacentElement("afterend", barra);
-  else document.body.insertBefore(barra, document.body.firstChild);
+  linhaSlot.innerHTML = `
+    <div class="f-controls w-full flex flex-wrap items-center justify-end gap-2">
+      <div class="search-wrap relative min-w-[240px] max-w-[680px] w-full">
+        <svg class="icon absolute left-3 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" width="18" height="18" fill="none">
+          <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input id="buscaInput" type="text" placeholder="Buscar (ex: la��o, cama, shampoo)..." class="w-full h-10 rounded-full border px-9 pr-9" />
+        <button id="clearBusca" type="button"
+                class="clear hidden absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full border grid place-items-center leading-none">�-</button>
+      </div>
 
-  const busca = barra.querySelector("#buscaInput");
-  const clear = barra.querySelector("#clearBusca");
+      <select id="filtroPreco" class="select-pill px-3 py-1.5 rounded-full border h-10">
+        <option value="">Pre��o</option>
+        <option value="0">AtǸ R$ 50</option>
+        <option value="1">R$ 50�?"R$ 150</option>
+        <option value="2">+ R$ 150</option>
+      </select>
+
+      <select id="filtroCategoria" class="px-3 py-1.5 rounded-full border min-w-[180px] md:min-w-[160px] sm:min-w-[140px] h-10 font-semibold">
+        <option value="">Categoria</option>
+        <option>Roupas</option><option>Acess��rios</option><option>Higiene</option><option>Camas</option><option>Ra����es</option>
+      </select>
+    </div>
+  `;
+
+  const busca = linhaSlot.querySelector("#buscaInput");
+  const clear = linhaSlot.querySelector("#clearBusca");
   const showClear = () => { if (clear) clear.classList.toggle("hidden", !busca.value); };
 
   ["input","change"].forEach(evt=>{
@@ -1029,11 +1017,11 @@ function criarBarraFiltros(){
   if (clear) clear.addEventListener("click", ()=>{ busca.value = ""; showClear(); aplicarFiltros(); });
 
   ["filtroPreco","filtroCategoria"].forEach(id=>{
-    const elx = barra.querySelector(`#${id}`);
+    const elx = linhaSlot.querySelector(`#${id}`);
     if (elx) elx.addEventListener("change", aplicarFiltros);
   });
 
-  barra.querySelectorAll(".origemCheck").forEach(chk=>{
+  lojasSlot.querySelectorAll(".origemCheck").forEach(chk=>{
     const label = chk.closest("label");
     chk.addEventListener("change", ()=>{
       label.classList.toggle("ativo", chk.checked);
@@ -1041,9 +1029,7 @@ function criarBarraFiltros(){
     });
   });
 
-  barra.querySelectorAll("#filtroOrigem img").forEach(attachLogoFallback);
-
-  barra.classList.add("hidden");
+  lojasSlot.querySelectorAll("#filtroOrigem img").forEach(attachLogoFallback);
 }
 /* ===================== BUSCA INTELIGENTE (AUTOCOMPLETE) ===================== */
 function setupAutocomplete(){
@@ -1105,7 +1091,6 @@ function setupAutocomplete(){
 function ativarFiltro(ativo){
   const body = document.body;
   const btn = document.getElementById("btnBuscaFlutuante");
-  const barra = document.getElementById("barraFiltros");
   const header = document.querySelector("header.sticky");
   const selo = document.querySelector(".ml-selo");
 
@@ -1114,13 +1099,6 @@ function ativarFiltro(ativo){
     if (btn){ btn.classList.add("ativo"); btn.innerHTML = '<span>??</span> Fechar Filtro'; }
     if (header) header.classList.add("hidden");
     if (selo) selo.classList.add("hidden");
-    if (barra){
-      barra.classList.remove("hidden");
-      barra.style.opacity = "0"; barra.style.transform = "translateY(-10px)";
-      requestAnimationFrame(()=>{
-        barra.style.transition = "all .35s ease"; barra.style.opacity="1"; barra.style.transform="translateY(0)";
-      });
-    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   } else {
     body.classList.remove("modo-filtro");
@@ -1133,11 +1111,6 @@ function ativarFiltro(ativo){
     if (btn){ btn.classList.remove("ativo"); btn.innerHTML = '?? Buscar / Filtrar'; }
     if (header) header.classList.remove("hidden");
     if (selo) selo.classList.remove("hidden");
-    if (barra){
-      barra.style.transition = "all .3s ease";
-      barra.style.opacity="0"; barra.style.transform="translateY(-10px)";
-      setTimeout(()=> barra.classList.add("hidden"), 280);
-    }
     renderBanner("bannerA", ["shopee","amazon","magalu","americanas","aliexpress","petlove","mercadolivre","petz","cobasi","carrefour","casasbahia","ponto"]);
     toggleComparador(false);
     listaAtual = produtos.slice();
@@ -1616,3 +1589,4 @@ window.addEventListener("DOMContentLoaded", ()=>{
     if (secC) obs.observe(secC, { attributes:true, attributeFilter:["class"] });
   }
 });
+

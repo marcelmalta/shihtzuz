@@ -314,17 +314,40 @@
     opacity:0;
   }
 
-  /* Barra de filtros (inserida via JS) */
-  #barraFiltros{
-    display:none !important; opacity:0; transform: translateY(-10px);
-    position:relative; width:100%;
+  /* Barra de filtros dividida (inserida via JS) */
+  #filtroLojasTopo{
+    display:none;
+    position:relative;
+    width:100%;
+    max-width:72rem;
+    margin:0 auto;
+    padding:10px 16px;
     backdrop-filter: blur(10px) brightness(1.05);
     background: linear-gradient(180deg,#fff3d6 0%, var(--creme) 40%, #ffffff 100%);
-    border-top:1px solid rgba(214,167,92,.35); border-bottom:1px solid rgba(200,200,200,.35);
+    border-top:1px solid rgba(214,167,92,.35);
+    border-bottom:1px solid rgba(200,200,200,.35);
     box-shadow: inset 0 2px 8px rgba(255,255,255,.6), 0 2px 14px rgba(0,0,0,.08);
-    color:#222; padding:8px 12px;
+    color:#222;
+    border-radius:0 0 18px 18px;
   }
-  body.modo-filtro #barraFiltros{ display:flex !important; opacity:1; transform: translateY(0); }
+  body.modo-filtro #filtroLojasTopo{ display:block; }
+  #filtroLinhaProdutos{
+    display:none;
+    width:100%;
+    align-items:center;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+    gap:8px 10px;
+  }
+  body.modo-filtro #filtroLinhaProdutos{ display:flex; }
+  .produtos-toolbar{
+    display:flex;
+    flex-direction:column;
+    gap:0.75rem;
+  }
+  @media (min-width:640px){
+    .produtos-toolbar{ flex-direction:row; align-items:center; justify-content:space-between; gap:1.25rem; }
+  }
   #buscaInput{
     background:rgba(255,255,255,.92); color:#111;
     border:1.5px solid rgba(214,167,92,.45); border-radius:9999px; padding:9px 12px;
@@ -506,25 +529,11 @@
     padding: 0 !important; margin: 0 !important; height: 0 !important; border: 0 !important; overflow: hidden !important;
   }
   body.modo-filtro main .text-center > .bg-gradient-to-r{ margin-top: 6px !important; }
-  body.modo-filtro #barraFiltros{ padding-top: 6px !important; padding-bottom: 6px !important; margin-bottom: 6px !important; }
+  body.modo-filtro #filtroLojasTopo{ padding-top: 6px !important; padding-bottom: 6px !important; margin-bottom: 6px !important; }
 
   /* Logo mais largo na faixa do card (com alturas reduzidas) */
   .card-selo{ padding: 2px 6px !important; min-height: 24px; border-radius: .5rem; }
   .card-selo:hover .card-logo{ transform: none !important; }
-
-  /* ===================== Identidade por loja (borda/sombra) ===================== */
-  .card-compact[data-tipo="mercadolivre"]{ border-color:#ffe100; box-shadow:0 2px 10px rgba(255,225,0,.08); }
-  .card-compact[data-tipo="amazon"]{ border-color:#232f3e; box-shadow:0 2px 10px rgba(35,47,62,.08); }
-  .card-compact[data-tipo="magalu"]{ border-color:#2563eb; box-shadow:0 2px 10px rgba(37,99,235,.08); }
-  .card-compact[data-tipo="shopee"]{ border-color:#ee4d2d; box-shadow:0 2px 10px rgba(238,77,45,.08); }
-  .card-compact[data-tipo="petz"]{ border-color:#00a3ff; box-shadow:0 2px 10px rgba(0,163,255,.08); }
-  .card-compact[data-tipo="cobasi"]{ border-color:#0ea5a4; box-shadow:0 2px 10px rgba(14,165,164,.08); }
-  .card-compact[data-tipo="petlove"]{ border-color:#00AEEF; box-shadow:0 2px 10px rgba(0,174,239,.08); }
-  .card-compact[data-tipo="americanas"]{ border-color:#D50000; box-shadow:0 2px 10px rgba(213,0,0,.08); }
-  .card-compact[data-tipo="aliexpress"]{ border-color:#FF5A00; box-shadow:0 2px 10px rgba(255,90,0,.08); }
-  .card-compact[data-tipo="carrefour"]{ border-color:#005EB8; box-shadow:0 2px 10px rgba(0,94,184,.08); }
-  .card-compact[data-tipo="casasbahia"]{ border-color:#0033A0; box-shadow:0 2px 10px rgba(0,51,160,.08); }
-  .card-compact[data-tipo="ponto"]{ border-color:#111; box-shadow:0 2px 10px rgba(0,0,0,.08); }
 
   /* ===================== HOVERCARD / TOOLTIP GRANDE ===================== */
   #hoverTip{
@@ -779,10 +788,17 @@
 
     body.modo-filtro main.space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; }
     body.modo-filtro main .text-center > .bg-gradient-to-r { margin-top: 0 !important; }
-    body.modo-filtro #barraFiltros { margin-bottom: 0 !important; padding-bottom: 4px !important; }
 
-    #barraFiltros{ padding: 8px 10px !important; gap: 8px !important; border-radius: 14px; }
-    #barraFiltros .f-controls{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap: 8px 10px; }
+    #filtroLinhaProdutos{
+      padding: 8px 10px !important;
+      border-radius: 16px;
+      border:1px solid rgba(214,167,92,.25);
+      background:rgba(255,255,255,.9);
+      box-shadow:0 6px 16px rgba(0,0,0,.08);
+    }
+    #filtroLinhaProdutos .f-controls{
+      display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap: 8px 10px;
+    }
 
     .search-wrap{ position:relative; min-width: 240px; max-width: 680px; width:100%; }
     .search-wrap .icon{ position:absolute; left:12px; top:50%; transform:translateY(-50%); width:18px; height:18px; opacity:.65; pointer-events:auto; }
@@ -813,7 +829,7 @@
     #filtroOrigem label{ margin:0 !important; }
 
     @media (max-width:1024px){
-      #barraFiltros{ padding:8px !important; gap:6px !important; }
+      #filtroLinhaProdutos{ padding:8px !important; }
       .search-wrap input, .select-pill{ height:38px; }
     }
     @media (max-width:640px){ .search-wrap{ min-width: 100%; } }
@@ -855,6 +871,10 @@
       </button>
     </div>
   </header>
+
+  <!-- Faixa fixa para botões de lojas no topo (preenchido via JS) -->
+  <div id="filtroLojasTopo"
+       class="filtro-lojas-slot max-w-6xl mx-auto px-3 sm:px-4"></div>
 
   <!-- =========================================================
        SELO MULTIMARCAS — CARROSSEL INFINITO (logos locais) — menores
@@ -907,14 +927,19 @@
        LISTA DE PRODUTOS
        ========================================================= -->
   <main class="p-2 space-y-4 max-w-6xl mx-auto">
-    <section id="secListaProdutos" class="text-center">
-      <div
-        class="bg-gradient-to-r from-[var(--marrom)] via-[#3a2518] to-[var(--marrom)]
-               text-[var(--bege)] font-bold text-[13px] sm:text-[14px] tracking-wide
-               flex items-center justify-center gap-2 py-1 rounded-md mt-3 mb-2
-               shadow-md border border-[var(--marrom)]/40">
-        <span>📦</span>
-        <span>Todos os Produtos para Cães e Gatos</span>
+    <section id="secListaProdutos" class="text-center space-y-2">
+      <div class="produtos-toolbar text-center sm:text-left">
+        <div
+          class="bg-gradient-to-r from-[var(--marrom)] via-[#3a2518] to-[var(--marrom)]
+                 text-[var(--bege)] font-bold text-[13px] sm:text-[14px] tracking-wide
+                 flex items-center justify-center sm:justify-start gap-2 py-1 rounded-md mt-3
+                 shadow-md border border-[var(--marrom)]/40">
+          <span>📦</span>
+          <span>Todos os Produtos para Cães e Gatos</span>
+        </div>
+
+        <div id="filtroLinhaProdutos"
+             class="produtos-filter-slot w-full"></div>
       </div>
 
       <div id="listaProdutos" class="faixa-geral"></div>
