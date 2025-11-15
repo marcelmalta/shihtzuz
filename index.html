@@ -344,6 +344,11 @@
     .pitch-line-mobile{
       display:flex !important;
       width:100%;
+      flex-wrap:wrap;
+      gap:.15rem;
+      text-align:center;
+      line-height:1.15;
+      font-size:11.5px;
     }
     .hdr-inner{
       grid-template-columns: minmax(0,1fr) max-content !important;
@@ -356,6 +361,17 @@
   }
   @media (min-width:768px){
     .pitch-line-mobile{ display:none !important; }
+  }
+  @media (max-width:640px){
+    .hdr-pitch.smartPitch{
+      white-space:normal;
+      overflow:visible;
+      text-overflow:initial;
+    }
+    .pitch-line-mobile .claim{
+      white-space:normal;
+      display:inline;
+    }
   }
   /* Modo filtro (esconde banners) */
   #bannerA{ transition: all .35s ease; }
