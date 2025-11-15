@@ -334,26 +334,24 @@
   #listaProdutos .card-compare-cta{ display:none !important; }
   .pitch-line-mobile{
     display:none;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
+  }
+  .pitch-line-mobile .claim--mobile{
     font-weight:800;
     font-size:12px;
-    letter-spacing:.18px;
-    line-height:1.25;
-    gap:.15rem;
+    letter-spacing:.15px;
+    line-height:1.3;
+    display:inline-block;
+    max-width:100%;
   }
   @media (max-width:767px){
     .pitch-line-desktop{ display:none !important; }
     .pitch-line-mobile{
       display:flex !important;
       width:100%;
-      flex-wrap:wrap;
-      gap:.2rem;
-      padding-top:.15rem;
-      padding-bottom:.2rem;
-      font-size:11.5px;
+      padding:.15rem 0 .2rem;
     }
     .hdr-inner{
       grid-template-columns: minmax(0,1fr) !important;
@@ -376,24 +374,14 @@
       overflow:visible;
       text-overflow:initial;
     }
-    .pitch-line-mobile .claim{
-      white-space:normal;
-      display:inline;
-    }
-    .pitch-line-mobile .dash{
-      display:none;
-    }
-    .pitch-line-mobile .brandMark{
-      font-size:1.05rem;
-    }
-    .pitch-line-mobile .claim .highlight,
-    .pitch-line-mobile .claim .muted{
-      display:inline;
+    .pitch-line-mobile .claim--mobile{
+      font-size:11px;
+      padding:0 .25rem;
     }
   }
   @media (max-width:420px){
-    .pitch-line-mobile{
-      font-size:10.5px;
+    .pitch-line-mobile .claim--mobile{
+      font-size:10px;
     }
   }
   /* Modo filtro (esconde banners) */
@@ -1047,12 +1035,8 @@
           </span>
         </div>
         <div class="pitch-line-mobile" aria-hidden="true">
-          <span class="brandMark">ShihTzu&nbsp;Shop</span>
-          <span class="dash">—</span>
-          <span class="claim">
-            Compare preços <span class="muted">do mesmo produto</span>
-            <span class="highlight">em várias lojas</span>, filtre por categoria/preço
-            <span class="muted">e encontre a</span> <span class="highlight">melhor oferta</span>.
+          <span class="claim claim--mobile">
+            Compare preços do mesmo produto em várias lojas
           </span>
         </div>
       </div>
