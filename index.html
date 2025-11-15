@@ -334,10 +334,15 @@
   #listaProdutos .card-compare-cta{ display:none !important; }
   .pitch-line-mobile{
     display:none;
+    flex-direction:column;
     justify-content:center;
-    font-weight:900;
-    font-size:13px;
-    letter-spacing:.2px;
+    align-items:center;
+    text-align:center;
+    font-weight:800;
+    font-size:12px;
+    letter-spacing:.18px;
+    line-height:1.25;
+    gap:.15rem;
   }
   @media (max-width:767px){
     .pitch-line-desktop{ display:none !important; }
@@ -345,18 +350,21 @@
       display:flex !important;
       width:100%;
       flex-wrap:wrap;
-      gap:.15rem;
-      text-align:center;
-      line-height:1.15;
+      gap:.2rem;
+      padding-top:.15rem;
+      padding-bottom:.2rem;
       font-size:11.5px;
     }
     .hdr-inner{
-      grid-template-columns: minmax(0,1fr) max-content !important;
-      gap:.25rem !important;
+      grid-template-columns: minmax(0,1fr) !important;
+      gap:.15rem !important;
+      padding-top:.35rem;
+      padding-bottom:.35rem;
     }
     .hdr-pitch.smartPitch{
       justify-content:center;
       text-align:center;
+      max-width:100%;
     }
   }
   @media (min-width:768px){
@@ -371,6 +379,21 @@
     .pitch-line-mobile .claim{
       white-space:normal;
       display:inline;
+    }
+    .pitch-line-mobile .dash{
+      display:none;
+    }
+    .pitch-line-mobile .brandMark{
+      font-size:1.05rem;
+    }
+    .pitch-line-mobile .claim .highlight,
+    .pitch-line-mobile .claim .muted{
+      display:inline;
+    }
+  }
+  @media (max-width:420px){
+    .pitch-line-mobile{
+      font-size:10.5px;
     }
   }
   /* Modo filtro (esconde banners) */
