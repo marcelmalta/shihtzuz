@@ -107,7 +107,7 @@
 })();
 
 /* ================== IDENTIDADE POR LOJA ================== */
-const LOGO_BASE_URL = "https://pub-2d0d5179217b4c9898495dd1236b5ae8.r2.dev/";
+const LOGO_BASE_URL = "logos/";
 const STORE_META = {
   shopee: {
     nome:"Shopee",
