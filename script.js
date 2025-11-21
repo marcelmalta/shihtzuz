@@ -811,13 +811,7 @@ function renderBanner(containerId, tipos) {
     card.appendChild(seloWrap);
     attachLogoFallback(seloWrap.querySelector("img"));
 
-    const showFireBadge = p.descontoPercent && p.descontoPercent >= 15;
-    const badgeHtml = showFireBadge
-      ? `<div class="best-price-badge">🔥 OFERTA TOP</div>`
-      : ``;
-
     card.insertAdjacentHTML("beforeend", `
-      ${badgeHtml}
       <div class="flex flex-col justify-between h-full w-full">
           <div class="mt-1">
             <h2 class="font-semibold text-center banner-title text-gray-800 leading-tight mb-1 line-clamp-2 min-h-[2.4em]">${p.nome}</h2>
@@ -835,12 +829,21 @@ function renderBanner(containerId, tipos) {
             <p class="card-price font-black leading-none mb-2">${fmt(finalPrice)}</p>
 
             <!-- BOTÃO DE AÇÃO (NOVO) -->
-            <button class="cta-compare w-full py-1.5 rounded-md text-white text-[10px] sm:text-[11px] font-bold uppercase tracking-wide shadow-sm">
+           <button class="cta-compare w-full py-1.5 rounded-md text-white text-[10px] sm:text-[11px] font-bold uppercase tracking-wide shadow-sm">
                Comparar 🔍
             </button>
           </div>
       </div>
     `);
+
+    const compareBtn = card.querySelector(".cta-compare");
+    if (compareBtn){
+      compareBtn.addEventListener("click", (evt)=>{
+        evt.stopPropagation();
+        evt.preventDefault();
+        abrirComparador(p);
+      });
+    }
 
     card.addEventListener("click", () => openModal(p));
     faixa.appendChild(card);
@@ -855,7 +858,7 @@ function normalizeKey(obj){
   let name = (obj.nome || "").toLowerCase();
 
   name = name.replace(/\([^)]*\)/g, " ");
-  name = name.replace(/[—–\-]/g, " ");
+  name = name.replace(/[-–—]/g, " ");
   name = name.replace(/\b(pp|p|m|g|gg|xg|xl|xxl|preto|branco|bege|azul|rosa|vermelho)\b/g, " ");
   name = name.replace(/\b(\d+(?:,\d+)?)\b(?!\s*(kg|mg|ml|comprimid))/g, " ");
   name = name.replace(/\s+/g, " ").trim();
@@ -913,13 +916,7 @@ function renderLista(lista) {
     card.appendChild(seloWrap);
     attachLogoFallback(seloWrap.querySelector("img"));
 
-    const showFireBadge = p.descontoPercent && p.descontoPercent >= 15;
-    const badgeHtml = showFireBadge
-      ? `<div class="best-price-badge">🔥 OFERTA TOP</div>`
-      : ``;
-
     card.insertAdjacentHTML("beforeend", `
-      ${badgeHtml}
       <div class="flex flex-col justify-between h-full w-full">
           <div class="mt-1">
             <h2 class="font-semibold text-center banner-title text-gray-800 leading-tight mb-1 line-clamp-2 min-h-[2.4em]">${p.nome}</h2>
@@ -943,6 +940,15 @@ function renderLista(lista) {
           </div>
       </div>
     `);
+
+    const compareBtn = card.querySelector(".cta-compare");
+    if (compareBtn){
+      compareBtn.addEventListener("click", (evt)=>{
+        evt.stopPropagation();
+        evt.preventDefault();
+        abrirComparador(p);
+      });
+    }
 
     card.addEventListener("click", ()=> openModal(p));
 

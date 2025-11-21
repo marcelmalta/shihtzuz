@@ -589,62 +589,64 @@
     background:linear-gradient(135deg,#ffffff 0%, #FFF8ED 100%);
     border:1px solid rgba(214,167,92,.45);
     width:min(90vw,720px);
-    max-height:80vh;\r\n    padding:16px 14px 18px;\r\n    overflow:hidden;\r\n    overflow-y:hidden;
+    max-height:78vh;
+    padding:14px 14px 16px;
+    overflow:hidden;
+    overflow-y:hidden;
   }
   .modal-content{
     display:grid;
-    grid-template-columns:minmax(0,1fr);
-    gap:.5rem 1rem;
+    grid-template-columns:minmax(0,240px) 1fr;
+    gap:.6rem .9rem;
     align-items:start;
   }
-  @media (min-width:768px){
+  @media (max-width:768px){
     .modal-content{
-      grid-template-columns:220px 1fr;
+      grid-template-columns:1fr;
     }
   }
-  .modal-media{\r\n    flex:0 0 220px;\r\n    max-width:240px;\r\n    width:100%;\r\n    padding:.45rem;\r\n    align-self:start;\r\n  }
+  .modal-media{
+    grid-column:1;
+    grid-row:1 / span 2;
+    max-width:100%;
+    width:100%;
+    padding:.35rem;
+    align-self:start;
+  }
   .modal-media img{
-    max-height:180px;
+    max-height:220px;
     width:100%;
     object-fit:contain;
     transition:transform .2s ease;
   }
   .modal-img-zoomable{ cursor:zoom-in; }
   .modal-img-zoomable:active{ transform:scale(.98); }
-  .modal-info{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:.35rem .6rem;
-    align-content:start;
-  }
-  .modal-info > *{
-    margin:0;
-  }
+  .modal-info{ display:contents; }
+  .modal-info > *{ margin:0; }
   .modal-store-row,
   #modalTitle,
   .modal-price-meta,
   #modalPrice,
   #modalParcelas,
-  .modal-meta,
-  #modalCouponBlock,
-  #modalDetails,
-  #modalLink,
-  #btnModalComparar{
-    grid-column:1 / -1;
+  .modal-meta{
+    grid-column:2;
   }
   #modalPrice{
     font-size:2rem;
     text-align:left;
   }
-  @media (max-width:640px){
-    .modal-info{
-      grid-template-columns:1fr;
-    }
-  }
   .modal-meta{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:0.25rem;
+  }
+  #modalSpecs,
+  #modalFreteInfo,
+  #modalCouponBlock,
+  #modalDetails,
+  #modalLink,
+  #btnModalComparar{
+    grid-column:1 / -1;
   }
   .modal-meta .meta-item{
     background:#fff;
@@ -784,19 +786,26 @@
       max-height:78vh;
     }
     .modal-content{
-      gap:.5rem;
-      flex-direction:column;
+      grid-template-columns:1fr;
+      gap:.55rem;
     }
     .modal-media{
       padding:0.35rem;
       max-width:100%;
-      flex:0 0 auto;
     }
     .modal-media img{
-      max-height:140px;
+      max-height:160px;
     }
     #modalPrice{
       font-size:1.5rem;
+    }
+    .modal-store-row,
+    #modalTitle,
+    .modal-price-meta,
+    #modalPrice,
+    #modalParcelas,
+    .modal-meta{
+      grid-column:1;
     }
     .modal-meta{
       grid-template-columns:repeat(2,minmax(0,1fr));
@@ -1384,7 +1393,7 @@
        ========================================================= -->
   <div id="productModal" class="fixed inset-0 hidden items-center justify-center z-50 modal-bg">
     <div id="modalBox"
-         class="modal-box rounded-2xl max-w-2xl w=[92%] sm:w-[90%]
+         class="modal-box rounded-2xl max-w-2xl w-[92%] sm:w-[90%]
                 overflow-y-auto max-h-[85vh] p-5 sm:p-6 shadow-2xl
                 transform scale-95 opacity-0 transition-all duration-300">
 
@@ -1436,7 +1445,7 @@
           <ul id="modalDetails" class="list-disc pl-4 text-xs sm:text-sm text-gray-700 space-y-1 text-left"></ul>
 
           <a id="modalLink" href="#" target="_blank"
-             class="mt-1 text-center py-2.5 rounded-md font-extrabold shadow-md transition-all">Comprar com seguran�a</a>
+             class="mt-1 text-center py-2.5 rounded-md font-extrabold shadow-md transition-all">Comprar com segurança</a>
           <button id="btnModalComparar" type="button" class="cmp-modal-btn">
             Comparar preços em outras lojas
           </button>
@@ -1484,8 +1493,6 @@
   <script src="script.js" defer></script>
 </body>
 </html>
-
-
 
 
 
