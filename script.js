@@ -1493,6 +1493,7 @@ function ativarFiltro(ativo){
 function autoScroll(containerId){
   const faixa = document.getElementById(containerId);
   if (!faixa || !faixa.parentElement) return;
+  if (window.innerWidth < 768) return; // evita auto-scroll no mobile
   const scroller = faixa.parentElement;
   let dir = 1;
   function loop(){
@@ -1952,5 +1953,3 @@ window.addEventListener("DOMContentLoaded", ()=>{
     if (secC) obs.observe(secC, { attributes:true, attributeFilter:["class"] });
   }
 });
-
-
