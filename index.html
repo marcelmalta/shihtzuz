@@ -189,8 +189,9 @@
   /* ===================== Mobile UX tweaks ===================== */
   @media (max-width:640px){
     /* menos elementos antes da dobra */
-    .ml-selo,
-    .banner-shelf{ display:none !important; }
+    .ml-selo{ display:none !important; }
+    /* carrossel continua visível no mobile */
+    .banner-shelf{ padding:6px 6px; }
     /* botão flutuante menos intrusivo */
     .btn-filter.btn-filter-float{
       animation:none;
