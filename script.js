@@ -797,6 +797,17 @@ function renderBanner(containerId, tipos) {
     const meta = STORE_META[p.tipo];
     const finalPrice = getFinalPrice(p);
     const prazoResumo = ""; // remove label para cards compactos
+    const detalhes = Array.isArray(p.detalhes) ? p.detalhes.slice(0, 2) : [];
+    const detalhesHtml = detalhes.length
+      ? `<p class="card-desc">• ${detalhes.join("  • ")}</p>`
+      : "";
+    const priceLine = `
+      <div class="card-price-row">
+        <p class="card-price font-black leading-none">${fmt(finalPrice)}</p>
+        ${p.desconto ? `<span class="card-off">${p.desconto}</span>` : ""}
+        ${p.precoAntigo ? `<span class="card-old">${fmt(p.precoAntigo)}</span>` : ""}
+      </div>
+    `;
 
     const card = document.createElement("div");
     card.className = "relative banner-card card-compact rounded-lg flex-shrink-0 cursor-pointer hover:scale-[1.03] transition";
@@ -812,14 +823,12 @@ function renderBanner(containerId, tipos) {
     attachLogoFallback(seloWrap.querySelector("img"));
 
     card.insertAdjacentHTML("beforeend", `
-      <div class="flex flex-col justify-between h-full w-full">
-          <div class="mt-1">
-            <h2 class="font-semibold text-center banner-title text-gray-800 leading-tight mb-1 line-clamp-2 min-h-[2.4em]">${p.nome}</h2>
-            ${p.specsLabel ? `<p class="card-specs text-[10px] text-gray-500 text-center mb-1">${p.specsLabel}</p>` : ""}
-          </div>
-
-          <div class="text-center mt-auto">
-            <p class="card-price font-black leading-none mb-2">${fmt(finalPrice)}</p>
+      <div class="card-body">
+          <div class="card-text mt-1">
+            <h2 class="font-semibold banner-title text-gray-800 leading-tight mb-1 line-clamp-2 min-h-[2.4em] text-left">${p.nome}</h2>
+            ${p.specsLabel ? `<p class="card-specs text-[10px] text-gray-500 mb-1">${p.specsLabel}</p>` : ""}
+            ${detalhesHtml}
+            ${priceLine}
           </div>
       </div>
     `);
@@ -877,6 +886,17 @@ function renderLista(lista) {
     const meta = STORE_META[p.tipo];
     const finalPrice = getFinalPrice(p);
     const prazoResumo = "";
+    const detalhes = Array.isArray(p.detalhes) ? p.detalhes.slice(0, 2) : [];
+    const detalhesHtml = detalhes.length
+      ? `<p class="card-desc">• ${detalhes.join("  • ")}</p>`
+      : "";
+    const priceLine = `
+      <div class="card-price-row">
+        <p class="card-price font-black leading-none">${fmt(finalPrice)}</p>
+        ${p.desconto ? `<span class="card-off">${p.desconto}</span>` : ""}
+        ${p.precoAntigo ? `<span class="card-old">${fmt(p.precoAntigo)}</span>` : ""}
+      </div>
+    `;
 
     const card = document.createElement("div");
     card.className = "relative card-geral card-compact";
@@ -897,14 +917,12 @@ function renderLista(lista) {
     attachLogoFallback(seloWrap.querySelector("img"));
 
     card.insertAdjacentHTML("beforeend", `
-      <div class="flex flex-col justify-between h-full w-full">
-          <div class="mt-1">
-            <h2 class="font-semibold text-center banner-title text-gray-800 leading-tight mb-1 line-clamp-2 min-h-[2.4em]">${p.nome}</h2>
-            ${p.specsLabel ? `<p class="card-specs text-[10px] text-gray-500 text-center mb-1">${p.specsLabel}</p>` : ""}
-          </div>
-
-          <div class="text-center mt-auto">
-            <p class="card-price font-black leading-none mb-2">${fmt(finalPrice)}</p>
+      <div class="card-body">
+          <div class="card-text mt-1">
+            <h2 class="font-semibold banner-title text-gray-800 leading-tight mb-1 line-clamp-2 min-h-[2.4em] text-left">${p.nome}</h2>
+            ${p.specsLabel ? `<p class="card-specs text-[10px] text-gray-500 mb-1">${p.specsLabel}</p>` : ""}
+            ${detalhesHtml}
+            ${priceLine}
           </div>
       </div>
     `);
