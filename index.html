@@ -6,7 +6,7 @@
        ========================================================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shihtzuz Shop ÔÇö Comparador de Pre├ºos para Pets</title>
+  <title>Shihtzuz Shop ÔÇö Comparador de Preºos para Pets</title>
 
   <!-- Favicon (PNG com fundo transparente) -->
   <link rel="icon" type="image/png" href="logos/petshopplus-favicon.png" sizes="64x64" />
@@ -17,10 +17,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- =========================================================
-       STYLES (CSS) ÔÇö IDs/Classes compat├¡veis com script.js
+       STYLES (CSS) ÔÇö IDs/Classes compat¡veis com script.js
        ========================================================= -->
   <style>
-  /* ===================== Base e vari├íveis ===================== */
+  /* ===================== Base e variíveis ===================== */
   html { scroll-behavior: smooth; }
   ::-webkit-scrollbar { height: 6px; width: 6px; }
   ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
@@ -43,7 +43,7 @@
   .hdr-inner{ min-height:48px; }
   @media (min-width:640px){ .hdr-inner{ min-height:56px; } }
 
-  /* Pitch em 1 linha que corta antes do bot├úo */
+  /* Pitch em 1 linha que corta antes do botúo */
   .hdr-pitch.smartPitch{
     min-width:0; display:flex; align-items:center; gap:.5ch;
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
@@ -65,7 +65,7 @@
     border-radius:6px; z-index:-1;
   }
 
-  /* Tema Black + Gold (met├ílico) p/ header e pitch */
+  /* Tema Black + Gold (metílico) p/ header e pitch */
   :root{ --gold-1:#d4af37; --gold-2:#f3d478; --gold-3:#b8891a; --black-true:#0a0a0a; }
   #hdr{ border-bottom:1px solid rgba(0,0,0,.12); }
   .hdr-pitch.smartPitch{ color:#111; text-shadow:0 0 0 rgba(0,0,0,0); }
@@ -92,7 +92,7 @@
     border-radius:6px; z-index:-1;
   }
 
-  /* Bot├úo ÔÇ£Filtrar/CompararÔÇØ */
+  /* Botúo ÔÇ£Filtrar/CompararÔÇØ */
   .btn-filter{
     position:relative;
     display:inline-flex; align-items:center; gap:.45rem;
@@ -112,7 +112,7 @@
   }
   .btn-filter .lbl-lg{ display:none; }   /* mobile: curto */
   .btn-filter .lbl-sm{ display:inline; }
-  @media (min-width:640px){              /* ÔëÑ tablet: r├│tulo longo */
+  @media (min-width:640px){              /* ÔëÑ tablet: rtulo longo */
     .btn-filter{ font-size:13px; padding:.55rem 1.2rem; }
     .btn-filter .lbl-lg{ display:inline; }
     .btn-filter .lbl-sm{ display:none; }
@@ -190,9 +190,9 @@
   @media (max-width:640px){
     /* menos elementos antes da dobra */
     .ml-selo{ display:none !important; }
-    /* carrossel continua vis├¡vel no mobile */
+    /* carrossel continua vis¡vel no mobile */
     .banner-shelf{ padding:6px 6px; }
-    /* bot├úo flutuante menos intrusivo */
+    /* botúo flutuante menos intrusivo */
     .btn-filter.btn-filter-float{
       animation:none;
       box-shadow:0 12px 22px rgba(0,0,0,.25);
@@ -230,7 +230,7 @@
   @keyframes shimmer{ 100% { transform: translateX(100%); } }
 
   /* =========================================================
-     CARDS ÔÇö vers├úo COMPACTA (imagem 40/48/56px)
+     CARDS ÔÇö versúo COMPACTA (imagem 40/48/56px)
      ========================================================= */
   #listaProdutos{
     display:grid;
@@ -450,7 +450,7 @@
   transform:translateY(0);
   box-shadow:0 4px 10px rgba(99,102,241,.35);
 }
-  /* A├º├Áes (bot├Áes mini) */
+  /* AºÁes (botÁes mini) */
   .card-actions-mini{ margin-top:5px; display:flex; gap:4px; justify-content:center; align-items:center; }
   .btn-mini{ padding:3px 6px; border-radius:6px; border:1px solid #e5e7eb; background:#fff; font-size:9.5px; font-weight:800; }
   .btn-mini:hover{ background:#f9fafb; }
@@ -626,7 +626,7 @@
   #filtroOrigem label.ativo[data-src="amazon"]{ background:linear-gradient(145deg,#ff9900,#232f3e); color:#fff; border-color:#232f3e; }
   #filtroOrigem label.ativo[data-src="mercadolivre"]{ background:linear-gradient(145deg,#fff6a6,#ffe600); color:#0b4ea2; border-color:#ffe600; }
 
-  /* ====== AUTOCOMPLETE / SUGEST├òES (at├® 8 itens) ====== */
+  /* ====== AUTOCOMPLETE / SUGESTòES (at® 8 itens) ====== */
   .ac-list{
     position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:55;
     background:#fff; border:1px solid rgba(214,167,92,.35); border-radius:12px;
@@ -1424,12 +1424,26 @@
     .banner-card.card-compact .card-img-wrap{ min-height:88px; }
     .banner-card.card-compact .card-body{ width:100%; }
   </style>
+
+  <!-- Pequenos ajustes de tipografia (evita queda de peso/altura em títulos e botões) -->
+  <style id="typography-fix">
+    .hdr-pitch.smartPitch,
+    .hdr-pitch.smartPitch .claim{ font-size:13px; font-weight:600; letter-spacing:.01em; }
+    @media (max-width:640px){
+      .hdr-pitch.smartPitch,
+      .hdr-pitch.smartPitch .claim{ font-size:12px; }
+    }
+    .produtos-headline .bg-gradient-to-r{
+      font-size:14px; font-weight:700; letter-spacing:.02em;
+    }
+    .btn-filter{ font-weight:900; letter-spacing:.04em; }
+  </style>
 </head>
 
 <body class="bg-[var(--bege)] text-gray-900 font-sans">
 
   <!-- =========================================================
-       HEADER (compacto, 1 linha, sem p├¡lulas; texto 2-linhas no desktop)
+       HEADER (compacto, 1 linha, sem p¡lulas; texto 2-linhas no desktop)
        ========================================================= -->
   <header id="hdr" class="sticky top-0 z-50 bg-white border-b border-black/10">
     <div class="hdr-inner max-w-6xl mx-auto pl-4 pr-3 lg:pl-1 h-12 sm:h-14 grid items-center"
@@ -1440,15 +1454,15 @@
           <span class="brandMark">Shihtzuz&nbsp;Shop</span>
           <span class="dash">ÔÇö</span>
           <span class="claim claim--lg">
-            N├úo pague caro! ­ƒøæ Encontramos o <span class="highlight">menor pre├ºo</span> 
-            de Simparic, Ra├º├Áes e mais na Shopee, Amazon e Petlove.
+            Núo pague caro! øæ Encontramos o <span class="highlight">menor preºo</span> 
+            de Simparic, RaºÁes e mais na Shopee, Amazon e Petlove.
             <span class="muted">Economize agora.</span>
           </span>
         </div>
                         <div class="pitch-line-mobile" aria-hidden="true">
           <span class="brandMark">Shihtzuz&nbsp;Shop</span>
           <span class="claim claim--mobile">
-            ­ƒøæ N├úo pague caro! Compare pre├ºos e ache a <span class="text-green-700 font-black">oferta mais barata</span> hoje.
+            øæ Núo pague caro! Compare preºos e ache a <span class="text-green-700 font-black">oferta mais barata</span> hoje.
           </span>
         </div>
       </div>
@@ -1456,7 +1470,7 @@
     </div>
   </header>
 
-  <!-- Faixa fixa para bot├Áes de lojas no topo (preenchido via JS) -->
+  <!-- Faixa fixa para botÁes de lojas no topo (preenchido via JS) -->
   <div id="filtroLojasTopo"
        class="filtro-lojas-slot max-w-6xl mx-auto px-3 sm:px-4"></div>
 
@@ -1482,7 +1496,7 @@
         <img src="logos/casasbahia.svg"   class="h-5" alt="Casas Bahia" />
         <img src="logos/ponto.svg"        class="h-5" alt="Ponto" />
       </div>
-      <!-- Bloco B (c├│pia) para loop cont├¡nuo -->
+      <!-- Bloco B (cpia) para loop cont¡nuo -->
       <div class="flex items-center gap-7 px-4">
         <img src="logos/shopee.svg"       class="h-5" alt="Shopee" />
         <img src="logos/petlove.svg"      class="h-5" alt="Petlove" />
@@ -1518,8 +1532,8 @@
                  text-[var(--bege)] font-bold text-[13px] sm:text-[14px] tracking-wide
                  flex items-center justify-center sm:justify-start gap-2 py-1 rounded-md mt-3
                  shadow-md border border-[var(--marrom)]/40">
-          <span>­ƒôª</span>
-          <span>Todos os Produtos para C├úes e Gatos</span>
+          <span>ôª</span>
+          <span>Todos os Produtos para Cúes e Gatos</span>
         </div>
       </div>
 
@@ -1532,16 +1546,16 @@
     </section>
   </main>
 
-  <!-- ======================= COMPARADOR (mesmo GTIN em v├írias lojas) ======================= -->
+  <!-- ======================= COMPARADOR (mesmo GTIN em vírias lojas) ======================= -->
   <section id="secComparador" class="hidden mt-3 max-w-6xl mx-auto px-2">
     <h2 class="text-sm sm:text-base font-bold text-white bg-black py-1.5 px-3 rounded-md text-center shadow-md">
-      ­ƒöÄ Comparador ÔÇö mesmo produto em v├írias lojas
+      öÄ Comparador ÔÇö mesmo produto em vírias lojas
     </h2>
     <div id="listaComparativos" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 mt-3"></div>
   </section>
 
   <!-- =========================================================
-       MODAL ├ÜNICO PADRONIZADO
+       MODAL ÜNICO PADRONIZADO
        ========================================================= -->
   <div id="productModal" class="fixed inset-0 hidden items-center justify-center z-50 modal-bg">
     <div id="modalBox"
@@ -1597,9 +1611,9 @@
           <ul id="modalDetails" class="list-disc pl-4 text-xs sm:text-sm text-gray-700 space-y-1 text-left"></ul>
 
           <a id="modalLink" href="#" target="_blank"
-             class="mt-1 text-center py-2.5 rounded-md font-extrabold shadow-md transition-all">Comprar com seguran├ºa</a>
+             class="mt-1 text-center py-2.5 rounded-md font-extrabold shadow-md transition-all">Comprar com seguranºa</a>
           <button id="btnModalComparar" type="button" class="cmp-modal-btn">
-            Comparar pre├ºos em outras lojas
+            Comparar preºos em outras lojas
           </button>
         </div>
       </div>
@@ -1608,8 +1622,8 @@
 
   <div id="modalImagePreview" class="hidden">
     <div class="preview-box">
-      <button id="modalZoomClose" type="button">├ù</button>
-      <img id="modalZoomImg" src="" alt="Pr├®via ampliada" />
+      <button id="modalZoomClose" type="button">ù</button>
+      <img id="modalZoomImg" src="" alt="Pr®via ampliada" />
     </div>
   </div>
 
@@ -1632,11 +1646,11 @@
     <div class="tip-desc"></div>
   </div>
 
-  <!-- Bot├úo flutuante de filtros -->
+  <!-- Botúo flutuante de filtros -->
   <button id="btnBuscaFlutuante" class="btn-filter btn-filter-float" aria-label="Abrir filtros e comparador">
-    <span class="ico" aria-hidden="true">­ƒöÄ</span>
+    <span class="ico" aria-hidden="true">öÄ</span>
     <span class="lbl lbl-sm">Compare</span>
-    <span class="lbl lbl-lg">Comparar Pre├ºos</span>
+    <span class="lbl lbl-lg">Comparar Preºos</span>
   </button>
 
   <!-- =========================================================
