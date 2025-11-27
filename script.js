@@ -803,35 +803,42 @@ function renderBanner(containerId, tipos) {
       : "";
     const priceLine = `
       <div class="card-price-row">
-        <p class="card-price font-black leading-none">${fmt(finalPrice)}</p>
-        ${p.desconto ? `<span class="card-off">${p.desconto}</span>` : ""}
         ${p.precoAntigo ? `<span class="card-old">${fmt(p.precoAntigo)}</span>` : ""}
+        ${p.desconto ? `<span class="card-off">${p.desconto}</span>` : ""}
       </div>
+      <p class="card-price font-black leading-none">${fmt(finalPrice)}</p>
     `;
 
     const card = document.createElement("div");
     card.className = "relative banner-card card-compact rounded-lg flex-shrink-0 cursor-pointer hover:scale-[1.03] transition";
     card.dataset.tipo = p.tipo || "default";
 
+    const media = document.createElement("div");
+    media.className = "card-media";
     const imgWrap = buildImg(p.imagem, p.nome);
-    card.appendChild(imgWrap);
+    media.appendChild(imgWrap);
 
     const seloWrap = document.createElement("div");
-    seloWrap.className = "mt-1 card-selo";
+    seloWrap.className = "card-selo";
     seloWrap.innerHTML = `<img src="${meta.logo}" class="card-logo" alt="${meta.nome}">`;
-    card.appendChild(seloWrap);
     attachLogoFallback(seloWrap.querySelector("img"));
 
-    card.insertAdjacentHTML("beforeend", `
-      <div class="card-body">
-          <div class="card-text mt-1">
-            <h2 class="font-semibold banner-title text-gray-800 leading-tight mb-1 line-clamp-2 min-h-[2.4em] text-left">${p.nome}</h2>
-            ${p.specsLabel ? `<p class="card-specs text-[10px] text-gray-500 mb-1">${p.specsLabel}</p>` : ""}
-            ${detalhesHtml}
-            ${priceLine}
-          </div>
-      </div>
+    const body = document.createElement("div");
+    body.className = "card-body";
+
+    const text = document.createElement("div");
+    text.className = "card-text mt-1";
+    text.appendChild(seloWrap);
+    text.insertAdjacentHTML("beforeend", `
+        <h2 class="font-semibold banner-title text-gray-800 leading-tight mb-1 line-clamp-2 text-left">${p.nome}</h2>
+        ${p.specsLabel ? `<p class="card-specs text-[10px] text-gray-500 mb-1">${p.specsLabel}</p>` : ""}
+        ${detalhesHtml}
+        ${priceLine}
     `);
+
+    body.appendChild(text);
+    card.appendChild(media);
+    card.appendChild(body);
 
     // clique no card abre o comparador entre lojas
     card.addEventListener("click", () => abrirComparador(p));
@@ -892,10 +899,10 @@ function renderLista(lista) {
       : "";
     const priceLine = `
       <div class="card-price-row">
-        <p class="card-price font-black leading-none">${fmt(finalPrice)}</p>
-        ${p.desconto ? `<span class="card-off">${p.desconto}</span>` : ""}
         ${p.precoAntigo ? `<span class="card-old">${fmt(p.precoAntigo)}</span>` : ""}
+        ${p.desconto ? `<span class="card-off">${p.desconto}</span>` : ""}
       </div>
+      <p class="card-price font-black leading-none">${fmt(finalPrice)}</p>
     `;
 
     const card = document.createElement("div");
@@ -907,25 +914,32 @@ function renderLista(lista) {
     card.setAttribute("data-simkey", p.simKey);
     card.dataset.tipo = p.tipo || "default";
 
+    const media = document.createElement("div");
+    media.className = "card-media";
     const imgWrap = buildImg(p.imagem, p.nome);
-    card.appendChild(imgWrap);
+    media.appendChild(imgWrap);
 
     const seloWrap = document.createElement("div");
-    seloWrap.className = "card-selo mt-1";
+    seloWrap.className = "card-selo";
     seloWrap.innerHTML = `<img src="${meta.logo}" class="card-logo" alt="${meta.nome}">`;
-    card.appendChild(seloWrap);
     attachLogoFallback(seloWrap.querySelector("img"));
 
-    card.insertAdjacentHTML("beforeend", `
-      <div class="card-body">
-          <div class="card-text mt-1">
-            <h2 class="font-semibold banner-title text-gray-800 leading-tight mb-1 line-clamp-2 min-h-[2.4em] text-left">${p.nome}</h2>
-            ${p.specsLabel ? `<p class="card-specs text-[10px] text-gray-500 mb-1">${p.specsLabel}</p>` : ""}
-            ${detalhesHtml}
-            ${priceLine}
-          </div>
-      </div>
+    const body = document.createElement("div");
+    body.className = "card-body";
+
+    const text = document.createElement("div");
+    text.className = "card-text mt-1";
+    text.appendChild(seloWrap);
+    text.insertAdjacentHTML("beforeend", `
+        <h2 class="font-semibold banner-title text-gray-800 leading-tight mb-1 line-clamp-2 text-left">${p.nome}</h2>
+        ${p.specsLabel ? `<p class="card-specs text-[10px] text-gray-500 mb-1">${p.specsLabel}</p>` : ""}
+        ${detalhesHtml}
+        ${priceLine}
     `);
+
+    body.appendChild(text);
+    card.appendChild(media);
+    card.appendChild(body);
 
     // clique no card abre o comparador entre lojas
     card.addEventListener("click", ()=> abrirComparador(p));
