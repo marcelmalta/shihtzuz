@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <!-- =========================================================
@@ -6,7 +6,7 @@
        ========================================================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shihtzuz Shop — Comparador de Preços para Pets</title>
+  <title>Shihtzuz Shop ÔÇö Comparador de Pre├ºos para Pets</title>
 
   <!-- Favicon (PNG com fundo transparente) -->
   <link rel="icon" type="image/png" href="logos/petshopplus-favicon.png" sizes="64x64" />
@@ -17,10 +17,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- =========================================================
-       STYLES (CSS) — IDs/Classes compatíveis com script.js
+       STYLES (CSS) ÔÇö IDs/Classes compat├¡veis com script.js
        ========================================================= -->
   <style>
-  /* ===================== Base e variáveis ===================== */
+  /* ===================== Base e vari├íveis ===================== */
   html { scroll-behavior: smooth; }
   ::-webkit-scrollbar { height: 6px; width: 6px; }
   ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
@@ -38,12 +38,12 @@
   }
 
   /* =========================================================
-     HEADER COMPACTO — CONSOLIDADO (1 linha, sem logos no header)
+     HEADER COMPACTO ÔÇö CONSOLIDADO (1 linha, sem logos no header)
      ========================================================= */
   .hdr-inner{ min-height:48px; }
   @media (min-width:640px){ .hdr-inner{ min-height:56px; } }
 
-  /* Pitch em 1 linha que corta antes do botão */
+  /* Pitch em 1 linha que corta antes do bot├úo */
   .hdr-pitch.smartPitch{
     min-width:0; display:flex; align-items:center; gap:.5ch;
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
@@ -65,7 +65,7 @@
     border-radius:6px; z-index:-1;
   }
 
-  /* Tema Black + Gold (metálico) p/ header e pitch */
+  /* Tema Black + Gold (met├ílico) p/ header e pitch */
   :root{ --gold-1:#d4af37; --gold-2:#f3d478; --gold-3:#b8891a; --black-true:#0a0a0a; }
   #hdr{ border-bottom:1px solid rgba(0,0,0,.12); }
   .hdr-pitch.smartPitch{ color:#111; text-shadow:0 0 0 rgba(0,0,0,0); }
@@ -92,7 +92,7 @@
     border-radius:6px; z-index:-1;
   }
 
-  /* Botão “Filtrar/Comparar” */
+  /* Bot├úo ÔÇ£Filtrar/CompararÔÇØ */
   .btn-filter{
     position:relative;
     display:inline-flex; align-items:center; gap:.45rem;
@@ -112,7 +112,7 @@
   }
   .btn-filter .lbl-lg{ display:none; }   /* mobile: curto */
   .btn-filter .lbl-sm{ display:inline; }
-  @media (min-width:640px){              /* ≥ tablet: rótulo longo */
+  @media (min-width:640px){              /* ÔëÑ tablet: r├│tulo longo */
     .btn-filter{ font-size:13px; padding:.55rem 1.2rem; }
     .btn-filter .lbl-lg{ display:inline; }
     .btn-filter .lbl-sm{ display:none; }
@@ -190,9 +190,9 @@
   @media (max-width:640px){
     /* menos elementos antes da dobra */
     .ml-selo{ display:none !important; }
-    /* carrossel continua visível no mobile */
+    /* carrossel continua vis├¡vel no mobile */
     .banner-shelf{ padding:6px 6px; }
-    /* botão flutuante menos intrusivo */
+    /* bot├úo flutuante menos intrusivo */
     .btn-filter.btn-filter-float{
       animation:none;
       box-shadow:0 12px 22px rgba(0,0,0,.25);
@@ -230,7 +230,7 @@
   @keyframes shimmer{ 100% { transform: translateX(100%); } }
 
   /* =========================================================
-     CARDS — versão COMPACTA (imagem 40/48/56px)
+     CARDS ÔÇö vers├úo COMPACTA (imagem 40/48/56px)
      ========================================================= */
   #listaProdutos{
     display:grid;
@@ -450,7 +450,7 @@
   transform:translateY(0);
   box-shadow:0 4px 10px rgba(99,102,241,.35);
 }
-  /* Ações (botões mini) */
+  /* A├º├Áes (bot├Áes mini) */
   .card-actions-mini{ margin-top:5px; display:flex; gap:4px; justify-content:center; align-items:center; }
   .btn-mini{ padding:3px 6px; border-radius:6px; border:1px solid #e5e7eb; background:#fff; font-size:9.5px; font-weight:800; }
   .btn-mini:hover{ background:#f9fafb; }
@@ -587,7 +587,7 @@
     border:1.5px solid rgba(214,167,92,.45); border-radius:9999px; padding:9px 12px;
   }
 
-  /* Origem (marcas) — estados ativos principais */
+  /* Origem (marcas) ÔÇö estados ativos principais */
   #filtroOrigem{
     display:grid; grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
     gap:8px; width:100%;
@@ -626,7 +626,7 @@
   #filtroOrigem label.ativo[data-src="amazon"]{ background:linear-gradient(145deg,#ff9900,#232f3e); color:#fff; border-color:#232f3e; }
   #filtroOrigem label.ativo[data-src="mercadolivre"]{ background:linear-gradient(145deg,#fff6a6,#ffe600); color:#0b4ea2; border-color:#ffe600; }
 
-  /* ====== AUTOCOMPLETE / SUGESTÕES (até 8 itens) ====== */
+  /* ====== AUTOCOMPLETE / SUGEST├òES (at├® 8 itens) ====== */
   .ac-list{
     position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:55;
     background:#fff; border:1px solid rgba(214,167,92,.35); border-radius:12px;
@@ -941,7 +941,7 @@
     color:#0f172a;
   }
 
-  /* Carrossel de logos (selo multimarcas) — logos menores */
+  /* Carrossel de logos (selo multimarcas) ÔÇö logos menores */
   .ml-selo{
     overflow:hidden;\r\n    overflow-y:hidden; position:relative;
     border-bottom-color:rgba(255,255,255,.08);
@@ -959,7 +959,7 @@
   .logos-container img:hover { transform:scale(1.1); }
   @keyframes slide { from { transform:translateX(0); } to { transform:translateX(-50%); } }
 
-  /* Overrides — banners somem no modo filtro */
+  /* Overrides ÔÇö banners somem no modo filtro */
   body.modo-filtro section:has(#bannerA){
     padding: 0 !important; margin: 0 !important; height: 0 !important; border: 0 !important; overflow: hidden !important;
   }
@@ -1175,7 +1175,7 @@
     transition:background .15s ease, color .15s ease;
   }
   .cmp-modal-btn::before{
-    content:"⇄";
+    content:"Ôçä";
     font-size:1rem;
   }
   .cmp-modal-btn:hover{
@@ -1351,12 +1351,80 @@
     #filtroCategoria { height: 40px; font-weight: 600; }
     #filtroOrigem label .texto{ display:none !important; }
   </style>
+
+  <!-- =========================================================
+       Override cards (igual ao tooltip)
+       ========================================================= -->
+  <style id="cards-tooltip-override">
+    .card-compact{
+      min-height:128px;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(0,0,0,.08);
+      background:#fff;
+      box-shadow:0 18px 40px rgba(15,23,42,.18);
+      gap:12px;
+      align-items:stretch;
+    }
+    .card-compact .card-media{
+      flex:0 0 34%;
+      max-width:110px;
+    }
+    .card-compact .card-img-wrap{
+      min-height:88px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.06);
+      background:#f3f4f6;
+    }
+    @media (min-width:640px){ .card-compact .card-img-wrap{ min-height:96px; } }
+    @media (max-width:640px){
+      .card-compact{ min-height:118px; padding:10px; gap:10px; }
+      .card-compact .card-media{ flex-basis:34%; max-width:104px; }
+      .card-compact .card-img-wrap{ min-height:80px; }
+    }
+    .card-logo-row{ display:flex; align-items:center; gap:6px; margin-bottom:2px; }
+    .card-compact .card-selo{ display:none; }
+    .card-compact .card-logo{ height:22px; }
+    .card-compact .card-body{ gap:6px; }
+    .card-text{ gap:4px; }
+    .card-compact .banner-title{
+      font-size:13px; line-height:1.25; margin-top:0; -webkit-line-clamp:2;
+    }
+    @media (max-width:640px){
+      .card-compact .banner-title{ font-size:12px; }
+    }
+    .card-compact .card-specs{ display:none !important; }
+    .card-compact .card-old{
+      font-size:11px; color:#6b7280; text-decoration:line-through; line-height:1.1;
+    }
+    .card-compact .card-price{
+      font-size:20px; font-weight:1000; line-height:1.05; margin-top:4px;
+      background:transparent; padding:0; box-shadow:none;
+    }
+    .card-compact .card-off{
+      font-size:11px; letter-spacing:.15px; margin-left:6px;
+      background:transparent; padding:0; box-shadow:none; color:#047857;
+    }
+    .card-price-row{ margin-top:2px; }
+    .card-desc{
+      font-size:12px; color:#374151; line-height:1.32; margin-top:8px;
+    }
+    /* Banner cards com mesmo layout */
+    .banner-card.card-compact{
+      min-height:0; padding:12px; width:13.5rem;
+      flex-direction:row; align-items:stretch; gap:12px;
+    }
+    @media (min-width:640px){ .banner-card.card-compact{ width:14.5rem; } }
+    .banner-card.card-compact .card-media{ flex:0 0 34%; max-width:110px; }
+    .banner-card.card-compact .card-img-wrap{ min-height:88px; }
+    .banner-card.card-compact .card-body{ width:100%; }
+  </style>
 </head>
 
 <body class="bg-[var(--bege)] text-gray-900 font-sans">
 
   <!-- =========================================================
-       HEADER (compacto, 1 linha, sem pílulas; texto 2-linhas no desktop)
+       HEADER (compacto, 1 linha, sem p├¡lulas; texto 2-linhas no desktop)
        ========================================================= -->
   <header id="hdr" class="sticky top-0 z-50 bg-white border-b border-black/10">
     <div class="hdr-inner max-w-6xl mx-auto pl-4 pr-3 lg:pl-1 h-12 sm:h-14 grid items-center"
@@ -1365,17 +1433,17 @@
       <div class="hdr-pitch smartPitch smartPitch--2lines" aria-label="Comparador multilojas com filtros.">
                         <div class="pitch-line-desktop">
           <span class="brandMark">Shihtzuz&nbsp;Shop</span>
-          <span class="dash">—</span>
+          <span class="dash">ÔÇö</span>
           <span class="claim claim--lg">
-            Não pague caro! 🛑 Encontramos o <span class="highlight">menor preço</span> 
-            de Simparic, Rações e mais na Shopee, Amazon e Petlove.
+            N├úo pague caro! ­ƒøæ Encontramos o <span class="highlight">menor pre├ºo</span> 
+            de Simparic, Ra├º├Áes e mais na Shopee, Amazon e Petlove.
             <span class="muted">Economize agora.</span>
           </span>
         </div>
                         <div class="pitch-line-mobile" aria-hidden="true">
           <span class="brandMark">Shihtzuz&nbsp;Shop</span>
           <span class="claim claim--mobile">
-            🛑 Não pague caro! Compare preços e ache a <span class="text-green-700 font-black">oferta mais barata</span> hoje.
+            ­ƒøæ N├úo pague caro! Compare pre├ºos e ache a <span class="text-green-700 font-black">oferta mais barata</span> hoje.
           </span>
         </div>
       </div>
@@ -1383,12 +1451,12 @@
     </div>
   </header>
 
-  <!-- Faixa fixa para botões de lojas no topo (preenchido via JS) -->
+  <!-- Faixa fixa para bot├Áes de lojas no topo (preenchido via JS) -->
   <div id="filtroLojasTopo"
        class="filtro-lojas-slot max-w-6xl mx-auto px-3 sm:px-4"></div>
 
   <!-- =========================================================
-       SELO MULTIMARCAS — CARROSSEL INFINITO (logos locais) — menores
+       SELO MULTIMARCAS ÔÇö CARROSSEL INFINITO (logos locais) ÔÇö menores
        ========================================================= -->
   <section
     class="ml-selo bg-gradient-to-r from-[#fff3d6] via-[#b3e5fc] to-[#ffecb3]
@@ -1409,7 +1477,7 @@
         <img src="logos/casasbahia.svg"   class="h-5" alt="Casas Bahia" />
         <img src="logos/ponto.svg"        class="h-5" alt="Ponto" />
       </div>
-      <!-- Bloco B (cópia) para loop contínuo -->
+      <!-- Bloco B (c├│pia) para loop cont├¡nuo -->
       <div class="flex items-center gap-7 px-4">
         <img src="logos/shopee.svg"       class="h-5" alt="Shopee" />
         <img src="logos/petlove.svg"      class="h-5" alt="Petlove" />
@@ -1428,7 +1496,7 @@
   </section>
 
   <!-- =========================================================
-       BANNERS (A e B) — preenchidos pelo script.js
+       BANNERS (A e B) ÔÇö preenchidos pelo script.js
        ========================================================= -->
   <section class="banner-shelf bg-white py-2 px-2 overflow-x-auto flex gap-3 scrollbar-thin scrollbar-thumb-gray-300">
     <div id="bannerA" class="flex gap-2 w-full"></div>
@@ -1445,8 +1513,8 @@
                  text-[var(--bege)] font-bold text-[13px] sm:text-[14px] tracking-wide
                  flex items-center justify-center sm:justify-start gap-2 py-1 rounded-md mt-3
                  shadow-md border border-[var(--marrom)]/40">
-          <span>📦</span>
-          <span>Todos os Produtos para Cães e Gatos</span>
+          <span>­ƒôª</span>
+          <span>Todos os Produtos para C├úes e Gatos</span>
         </div>
       </div>
 
@@ -1459,16 +1527,16 @@
     </section>
   </main>
 
-  <!-- ======================= COMPARADOR (mesmo GTIN em várias lojas) ======================= -->
+  <!-- ======================= COMPARADOR (mesmo GTIN em v├írias lojas) ======================= -->
   <section id="secComparador" class="hidden mt-3 max-w-6xl mx-auto px-2">
     <h2 class="text-sm sm:text-base font-bold text-white bg-black py-1.5 px-3 rounded-md text-center shadow-md">
-      🔎 Comparador — mesmo produto em várias lojas
+      ­ƒöÄ Comparador ÔÇö mesmo produto em v├írias lojas
     </h2>
     <div id="listaComparativos" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 mt-3"></div>
   </section>
 
   <!-- =========================================================
-       MODAL ÚNICO PADRONIZADO
+       MODAL ├ÜNICO PADRONIZADO
        ========================================================= -->
   <div id="productModal" class="fixed inset-0 hidden items-center justify-center z-50 modal-bg">
     <div id="modalBox"
@@ -1478,7 +1546,7 @@
 
       <button id="closeModal"
               class="absolute top-2 right-3 text-gray-700 hover:text-black
-                     text-2xl font-bold bg-white/80 rounded-full p-2 sm:p-2.5 shadow-md">✖</button>
+                     text-2xl font-bold bg-white/80 rounded-full p-2 sm:p-2.5 shadow-md">Ô£û</button>
 
       <div class="modal-content">
         <div class="modal-media flex items-center justify-center bg-white rounded-2xl p-3 border border-yellow-200 shadow-inner">
@@ -1524,9 +1592,9 @@
           <ul id="modalDetails" class="list-disc pl-4 text-xs sm:text-sm text-gray-700 space-y-1 text-left"></ul>
 
           <a id="modalLink" href="#" target="_blank"
-             class="mt-1 text-center py-2.5 rounded-md font-extrabold shadow-md transition-all">Comprar com segurança</a>
+             class="mt-1 text-center py-2.5 rounded-md font-extrabold shadow-md transition-all">Comprar com seguran├ºa</a>
           <button id="btnModalComparar" type="button" class="cmp-modal-btn">
-            Comparar preços em outras lojas
+            Comparar pre├ºos em outras lojas
           </button>
         </div>
       </div>
@@ -1535,8 +1603,8 @@
 
   <div id="modalImagePreview" class="hidden">
     <div class="preview-box">
-      <button id="modalZoomClose" type="button">×</button>
-      <img id="modalZoomImg" src="" alt="Prévia ampliada" />
+      <button id="modalZoomClose" type="button">├ù</button>
+      <img id="modalZoomImg" src="" alt="Pr├®via ampliada" />
     </div>
   </div>
 
@@ -1559,11 +1627,11 @@
     <div class="tip-desc"></div>
   </div>
 
-  <!-- Botão flutuante de filtros -->
+  <!-- Bot├úo flutuante de filtros -->
   <button id="btnBuscaFlutuante" class="btn-filter btn-filter-float" aria-label="Abrir filtros e comparador">
-    <span class="ico" aria-hidden="true">🔎</span>
+    <span class="ico" aria-hidden="true">­ƒöÄ</span>
     <span class="lbl lbl-sm">Compare</span>
-    <span class="lbl lbl-lg">Comparar Preços</span>
+    <span class="lbl lbl-lg">Comparar Pre├ºos</span>
   </button>
 
   <!-- =========================================================
@@ -1572,3 +1640,4 @@
   <script src="script.js" defer></script>
 </body>
 </html>
+
