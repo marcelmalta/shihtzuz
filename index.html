@@ -233,24 +233,22 @@
      CARDS ÔÇö versúo COMPACTA (imagem 40/48/56px)
      ========================================================= */
   #listaProdutos{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
-    grid-auto-rows:1fr;
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
     gap:12px;
-    padding-bottom:8px;
+    padding:0 8px 8px 8px;
+    scroll-snap-type:x mandatory;
     transition: all .35s ease;
   }
+  #listaProdutos > .card-geral{ scroll-snap-align:start; min-width:240px; }
   @media (max-width:1023px){
-    #listaProdutos{
-      grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
-      gap:10px;
-    }
+    #listaProdutos{ gap:10px; }
+    #listaProdutos > .card-geral{ min-width:220px; }
   }
   @media (max-width:640px){
-    #listaProdutos{
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:10px;
-    }
+    #listaProdutos{ gap:10px; padding-inline:6px; }
+    #listaProdutos > .card-geral{ min-width:210px; }
   }
 
   .card-compact{
@@ -457,7 +455,7 @@
 
   /* Responsivo */
   @media (max-width:640px){
-    #listaProdutos{ gap:4px; justify-content:center; }
+    #listaProdutos{ justify-content:flex-start; }
   }
 
   .ml-selo{ transition: all .3s ease; }
@@ -530,15 +528,7 @@
     opacity:0; transform: translateY(-16px) scale(.96);
     height:0; margin:0; padding:0; overflow:hidden; pointer-events:auto;
   }
-  .banner-shelf{ transition: all .35s ease; }
-  body.comparador-focus .banner-shelf{
-    opacity:0; transform: translateY(-16px) scale(.94);
-    max-height:0; margin:0; padding-top:0; padding-bottom:0;
-    overflow:hidden;\r\n    overflow-y:hidden; pointer-events:auto;
-  }
-  body.comparador-focus #bannerA{
-    opacity:0;
-  }
+  .banner-shelf{ display:none !important; }
 
   /* Barra de filtros dividida (inserida via JS) */
   #filtroLojasTopo{
@@ -575,13 +565,7 @@
   .produtos-actions .cmp-modal-btn{
     margin-top:0;
   }
-  .produtos-headline{
-    margin-top:.4rem;
-  }
-  .produtos-headline > *{
-    margin-top:0 !important;
-  }
-  body.modo-filtro .produtos-headline{ display:none; }
+  .produtos-headline{ display:none; }
   #buscaInput{
     background:rgba(255,255,255,.92); color:#111;
     border:1.5px solid rgba(214,167,92,.45); border-radius:9999px; padding:9px 12px;

@@ -1915,7 +1915,6 @@ function renderComparador(grupo, baseProduct){
 /* ===================== INIT ===================== */
 window.addEventListener("DOMContentLoaded", ()=>{
   // conteúdo padrão
-  renderBanner("bannerA", ["shopee","amazon","magalu","americanas","aliexpress","petlove","mercadolivre","petz","cobasi","carrefour","casasbahia","ponto"]);
   renderLista(produtos);
   criarBarraFiltros();
   // mover barra de filtros para junto dos botões de lojas no topo (mobile-friendly)
@@ -1929,7 +1928,6 @@ window.addEventListener("DOMContentLoaded", ()=>{
     }
   })();
   setupAutocomplete();
-  autoScroll("bannerA");
   document.body.classList.remove("modo-filtro");
 
   // Índice de GTIN para comparador por código
