@@ -596,15 +596,17 @@
     #filtroOrigem label .texto{ display:inline; }
     #filtroOrigem label img.filtro-logo{ height:24px; }
   }
-  @media (max-width:640px){
-    #filtroOrigem label{
-      padding:6px 10px;
-      height:38px;
+    @media (max-width:640px){
+      #filtroOrigem{ gap:4px; grid-template-columns: repeat(5, minmax(0,1fr)); }
+      #filtroOrigem label{
+        padding:5px 8px;
+        height:32px;
+        border-radius:12px;
+      }
+      #filtroOrigem label img.filtro-logo{
+        height:16px;
+      }
     }
-    #filtroOrigem label img.filtro-logo{
-      height:18px;
-    }
-  }
   #filtroOrigem label.ativo[data-src="shopee"]{ background:linear-gradient(145deg,#ee4d2d,#ff8a70); color:#fff; border-color:#ee4d2d; }
   #filtroOrigem label.ativo[data-src="petlove"]{ background:linear-gradient(145deg,#00AEEF,#b3ecff); color:#00324a; border-color:#00AEEF; }
   #filtroOrigem label.ativo[data-src="amazon"]{ background:linear-gradient(145deg,#ff9900,#232f3e); color:#fff; border-color:#232f3e; }
@@ -1220,9 +1222,9 @@
     #filtroOrigem label img.filtro-logo{ height:22px; width:auto; max-width:92%; object-fit:contain; }
 
     @media (max-width:640px){
-      #filtroOrigem{ grid-template-columns: repeat(4, minmax(0,1fr)); gap:6px; }
-      #filtroOrigem label{ padding:6px 10px; height:34px; border-radius:12px; }
-      #filtroOrigem label img.filtro-logo{ height:18px; }
+      #filtroOrigem{ grid-template-columns: repeat(5, minmax(0,1fr)); gap:4px; }
+      #filtroOrigem label{ padding:5px 8px; height:32px; border-radius:12px; }
+      #filtroOrigem label img.filtro-logo{ height:16px; }
     }
     @media (min-width:641px) and (max-width:1024px){
       #filtroOrigem{ grid-template-columns: repeat(4, minmax(0,1fr)); gap:12px; }
@@ -1425,7 +1427,7 @@
     #filtroLojasTopo{ display:flex !important; }
     #filtroLinhaProdutos{ display:flex !important; }
     @media (max-width:640px){
-      #filtroLojasTopo{ gap:4px; padding-left:8px !important; padding-right:8px !important; }
+      #filtroLojasTopo{ gap:2px; padding-left:6px !important; padding-right:6px !important; }
       #filtroLojasTopo #filtroLinhaProdutos{ margin-top:0 !important; }
     }
   </style>
