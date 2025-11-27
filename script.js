@@ -683,10 +683,15 @@ function buildImg(src, alt, opts = "") {
   const extraImgClass = config.imgClass || config.className || "";
   const extraWrapClass = config.wrapClass || "";
   const wrap = document.createElement("div");
-  const heights = variant === "compact"
-    ? { desktop: 44, tablet: 38, mobile: 30 }
-    : { desktop: 56, tablet: 48, mobile: 40 };
-  // Alturas responsivas mais baixas (compactas)
+  const heights =
+    variant === "card"
+      ? { desktop: 108, tablet: 100, mobile: 88 }
+      : variant === "banner"
+        ? { desktop: 90, tablet: 82, mobile: 72 }
+        : variant === "compact"
+          ? { desktop: 44, tablet: 38, mobile: 30 }
+          : { desktop: 56, tablet: 48, mobile: 40 };
+  // Alturas responsivas de acordo com o contexto
   const applyHeight = () => {
     if (window.innerWidth >= 1024) wrap.style.height = `${heights.desktop}px`;
     else if (window.innerWidth >= 640) wrap.style.height = `${heights.tablet}px`;
@@ -799,7 +804,7 @@ function renderBanner(containerId, tipos) {
     const prazoResumo = ""; // remove label para cards compactos
     const detalhes = Array.isArray(p.detalhes) ? p.detalhes.slice(0, 2) : [];
     const detalhesHtml = detalhes.length
-      ? `<p class="card-desc">• ${detalhes.join("  • ")}</p>`
+      ? `<p class="card-desc">&bull; ${detalhes.join("  &bull; ")}</p>`
       : "";
     const priceLine = `
       <div class="card-price-row">
@@ -815,7 +820,7 @@ function renderBanner(containerId, tipos) {
 
     const media = document.createElement("div");
     media.className = "card-media";
-    const imgWrap = buildImg(p.imagem, p.nome);
+    const imgWrap = buildImg(p.imagem, p.nome, { variant: "banner" });
     media.appendChild(imgWrap);
 
     const seloWrap = document.createElement("div");
@@ -827,7 +832,7 @@ function renderBanner(containerId, tipos) {
     body.className = "card-body";
 
     const text = document.createElement("div");
-    text.className = "card-text mt-1";
+    text.className = "card-text";
     text.appendChild(seloWrap);
     text.insertAdjacentHTML("beforeend", `
         <h2 class="font-semibold banner-title text-gray-800 leading-tight mb-1 line-clamp-2 text-left">${p.nome}</h2>
@@ -895,7 +900,7 @@ function renderLista(lista) {
     const prazoResumo = "";
     const detalhes = Array.isArray(p.detalhes) ? p.detalhes.slice(0, 2) : [];
     const detalhesHtml = detalhes.length
-      ? `<p class="card-desc">• ${detalhes.join("  • ")}</p>`
+      ? `<p class="card-desc">&bull; ${detalhes.join("  &bull; ")}</p>`
       : "";
     const priceLine = `
       <div class="card-price-row">
@@ -916,7 +921,7 @@ function renderLista(lista) {
 
     const media = document.createElement("div");
     media.className = "card-media";
-    const imgWrap = buildImg(p.imagem, p.nome);
+    const imgWrap = buildImg(p.imagem, p.nome, { variant: "card" });
     media.appendChild(imgWrap);
 
     const seloWrap = document.createElement("div");
@@ -928,7 +933,7 @@ function renderLista(lista) {
     body.className = "card-body";
 
     const text = document.createElement("div");
-    text.className = "card-text mt-1";
+    text.className = "card-text";
     text.appendChild(seloWrap);
     text.insertAdjacentHTML("beforeend", `
         <h2 class="font-semibold banner-title text-gray-800 leading-tight mb-1 line-clamp-2 text-left">${p.nome}</h2>
