@@ -823,18 +823,15 @@ function renderBanner(containerId, tipos) {
     const imgWrap = buildImg(p.imagem, p.nome, { variant: "banner" });
     media.appendChild(imgWrap);
 
-    const seloWrap = document.createElement("div");
-    seloWrap.className = "card-selo";
-    seloWrap.innerHTML = `<img src="${meta.logo}" class="card-logo" alt="${meta.nome}">`;
-    attachLogoFallback(seloWrap.querySelector("img"));
-
     const body = document.createElement("div");
     body.className = "card-body";
 
     const text = document.createElement("div");
     text.className = "card-text";
-    text.appendChild(seloWrap);
     text.insertAdjacentHTML("beforeend", `
+        <div class="card-logo-row">
+          <img src="${meta.logo}" class="card-logo" alt="${meta.nome}">
+        </div>
         <h2 class="font-semibold banner-title text-gray-800 leading-tight mb-1 line-clamp-2 text-left">${p.nome}</h2>
         ${p.specsLabel ? `<p class="card-specs text-[10px] text-gray-500 mb-1">${p.specsLabel}</p>` : ""}
         ${detalhesHtml}
@@ -924,18 +921,15 @@ function renderLista(lista) {
     const imgWrap = buildImg(p.imagem, p.nome, { variant: "card" });
     media.appendChild(imgWrap);
 
-    const seloWrap = document.createElement("div");
-    seloWrap.className = "card-selo";
-    seloWrap.innerHTML = `<img src="${meta.logo}" class="card-logo" alt="${meta.nome}">`;
-    attachLogoFallback(seloWrap.querySelector("img"));
-
     const body = document.createElement("div");
     body.className = "card-body";
 
     const text = document.createElement("div");
     text.className = "card-text";
-    text.appendChild(seloWrap);
     text.insertAdjacentHTML("beforeend", `
+        <div class="card-logo-row">
+          <img src="${meta.logo}" class="card-logo" alt="${meta.nome}">
+        </div>
         <h2 class="font-semibold banner-title text-gray-800 leading-tight mb-1 line-clamp-2 text-left">${p.nome}</h2>
         ${p.specsLabel ? `<p class="card-specs text-[10px] text-gray-500 mb-1">${p.specsLabel}</p>` : ""}
         ${detalhesHtml}
