@@ -1430,6 +1430,28 @@
     }
   </style>
 
+  <!-- Lista de produtos em grid (multi-linhas) usando o mesmo card do carrossel -->
+  <style id="lista-grid-override">
+    #listaProdutos{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+      padding:8px;
+      overflow:visible;
+      scroll-snap-type:none;
+    }
+    #listaProdutos > .card-geral{
+      min-width:0;
+      scroll-snap-align:unset;
+    }
+    @media (max-width:1023px){
+      #listaProdutos{ grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px; }
+    }
+    @media (max-width:640px){
+      #listaProdutos{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:8px; padding-inline:6px; }
+    }
+  </style>
+
   <!-- Pequenos ajustes de tipografia (evita queda de peso/altura em títulos e botões) -->
   <style id="typography-fix">
     .hdr-pitch.smartPitch,

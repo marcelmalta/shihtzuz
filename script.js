@@ -410,6 +410,166 @@ const PRODUTOS_BASE = [
         }
       }
     ]
+  },
+  {
+    gtin: "7897930881226",
+    nome: "Bravecto MSD 1000 mg 4,4–10 kg — 1 comprimido",
+    brand: "MSD",
+    specs: {
+      doseMg: 1000,
+      faixaPeso: "4,4–10 kg",
+      unidadesPorKit: 1,
+      tipoUnidade: "comprimido mastigável"
+    },
+    descricaoPadrao: [
+      "Proteção contra pulgas e carrapatos por até 12 semanas.",
+      "Comprimido mastigável sabor carne para cães de 4,4 a 10 kg.",
+      "Dose única mensal com rápida ação."
+    ],
+    ofertas: [
+      {
+        tipo: "shopee",
+        precoAntigo: 189.90,
+        precoFinal: 129.90,
+        descontoPercent: 32,
+        parcelas: "3x R$ 43,30",
+        rating: 4.9,
+        reviews: 8200,
+        imagem: "https://http2.mlstatic.com/D_NQ_NP_2X_795281-MLB72321177243_102023-F.webp",
+        link: "#"
+      },
+      {
+        tipo: "amazon",
+        precoAntigo: 199.90,
+        precoFinal: 149.90,
+        descontoPercent: 25,
+        parcelas: "2x R$ 74,95",
+        rating: 4.9,
+        reviews: 5400,
+        imagem: "https://http2.mlstatic.com/D_NQ_NP_2X_795281-MLB72321177243_102023-F.webp",
+        link: "#"
+      }
+    ]
+  },
+  {
+    gtin: "7896200701834",
+    nome: "NexGard 28 mg 4–10 kg — 1 unidade",
+    brand: "Boehringer",
+    specs: {
+      doseMg: 28,
+      faixaPeso: "4–10 kg",
+      unidadesPorKit: 1,
+      tipoUnidade: "tablete mastigável"
+    },
+    descricaoPadrao: [
+      "Controle de pulgas e carrapatos por 30 dias.",
+      "Tablete palatável para cães de 4 a 10 kg.",
+      "Ação rápida nas primeiras horas."
+    ],
+    ofertas: [
+      {
+        tipo: "petlove",
+        precoAntigo: 155.00,
+        precoFinal: 119.90,
+        descontoPercent: 23,
+        parcelas: "3x R$ 39,97",
+        rating: 4.8,
+        reviews: 2100,
+        imagem: "https://http2.mlstatic.com/D_NQ_NP_2X_807045-MLB72174136457_102023-F.webp",
+        link: "#"
+      },
+      {
+        tipo: "mercadolivre",
+        precoAntigo: 165.00,
+        precoFinal: 129.00,
+        descontoPercent: 22,
+        parcelas: "4x R$ 32,25",
+        rating: 4.9,
+        reviews: 9800,
+        imagem: "https://http2.mlstatic.com/D_NQ_NP_2X_807045-MLB72174136457_102023-F.webp",
+        link: "#"
+      }
+    ]
+  },
+  {
+    gtin: "7896004001009",
+    nome: "Ração Golden Special Cães Adultos Frango e Carne 15kg",
+    brand: "Golden",
+    specs: {
+      unidadesPorKit: 1,
+      tipoUnidade: "saco",
+      pesoLiquidoKg: 15,
+      faixaPeso: "Cães adultos"
+    },
+    descricaoPadrao: [
+      "Ração premium sabor frango e carne para cães adultos.",
+      "Pacote econômico de 15kg.",
+      "Equilíbrio de proteínas e fibras para saúde diária."
+    ],
+    ofertas: [
+      {
+        tipo: "magalu",
+        precoAntigo: 159.90,
+        precoFinal: 139.90,
+        descontoPercent: 12,
+        parcelas: "3x R$ 46,63",
+        rating: 4.8,
+        reviews: 460,
+        imagem: "https://a-static.mlcdn.com.br/800x560/racao-golden-special-caes-adultos-frango-e-carne-15kg/zagodao2/d18a621f12bf11ef8c3042010a180051/8c35a38dcd54b66ea336ad1e4c4d71bc.jpeg",
+        link: "#"
+      },
+      {
+        tipo: "carrefour",
+        precoAntigo: 149.90,
+        precoFinal: 129.90,
+        descontoPercent: 13,
+        parcelas: "2x R$ 64,95",
+        rating: 4.7,
+        reviews: 310,
+        imagem: "https://a-static.mlcdn.com.br/800x560/racao-golden-special-caes-adultos-frango-e-carne-15kg/zagodao2/d18a621f12bf11ef8c3042010a180051/8c35a38dcd54b66ea336ad1e4c4d71bc.jpeg",
+        link: "#"
+      }
+    ]
+  },
+  {
+    gtin: "7898010000011",
+    nome: "Areia Sanitária Pipicat Multi-Cat 12kg",
+    brand: "Kelco",
+    specs: {
+      unidadesPorKit: 1,
+      tipoUnidade: "saco",
+      pesoLiquidoKg: 12,
+      faixaPeso: "Gatos"
+    },
+    descricaoPadrao: [
+      "Areia sanitária aglomerante para múltiplos gatos.",
+      "Controle de odores com grãos finos.",
+      "Pacote de 12kg com alta absorção."
+    ],
+    ofertas: [
+      {
+        tipo: "americanas",
+        precoAntigo: 69.90,
+        precoFinal: 59.90,
+        descontoPercent: 14,
+        parcelas: "2x R$ 29,95",
+        rating: 4.6,
+        reviews: 530,
+        imagem: "https://http2.mlstatic.com/D_NQ_NP_2X_704099-MLB45678723044_042021-F.webp",
+        link: "#"
+      },
+      {
+        tipo: "shopee",
+        precoAntigo: 62.90,
+        precoFinal: 55.90,
+        descontoPercent: 11,
+        parcelas: "2x R$ 27,95",
+        rating: 4.7,
+        reviews: 2100,
+        imagem: "https://http2.mlstatic.com/D_NQ_NP_2X_704099-MLB45678723044_042021-F.webp",
+        link: "#"
+      }
+    ]
   }
 ];
 
