@@ -685,9 +685,9 @@ function buildImg(src, alt, opts = "") {
   const wrap = document.createElement("div");
   const heights =
     variant === "card"
-      ? { desktop: 108, tablet: 100, mobile: 88 }
+      ? { desktop: 88, tablet: 82, mobile: 74 }
       : variant === "banner"
-        ? { desktop: 90, tablet: 82, mobile: 72 }
+        ? { desktop: 88, tablet: 82, mobile: 74 }
         : variant === "compact"
           ? { desktop: 44, tablet: 38, mobile: 30 }
           : { desktop: 56, tablet: 48, mobile: 40 };
@@ -820,7 +820,7 @@ function renderBanner(containerId, tipos) {
 
     const media = document.createElement("div");
     media.className = "card-media";
-    const imgWrap = buildImg(p.imagem, p.nome, { variant: "banner" });
+    const imgWrap = buildImg(p.imagem, p.nome, { variant: "card" });
     media.appendChild(imgWrap);
 
     const body = document.createElement("div");
