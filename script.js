@@ -1917,6 +1917,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
   // conteúdo padrão
   renderBanner("bannerA", ["shopee","amazon","magalu","americanas","aliexpress","petlove","mercadolivre","petz","cobasi","carrefour","casasbahia","ponto"]);
   renderLista(produtos);
+  criarBarraFiltros();
   // mover barra de filtros para junto dos botões de lojas no topo (mobile-friendly)
   (function mergeFiltros(){
     const topo = document.getElementById("filtroLojasTopo");
@@ -1924,9 +1925,9 @@ window.addEventListener("DOMContentLoaded", ()=>{
     if (topo && barra && !topo.contains(barra)){
       topo.appendChild(barra);
       topo.style.display = "flex";
+      barra.style.display = "flex";
     }
   })();
-  criarBarraFiltros();
   setupAutocomplete();
   autoScroll("bannerA");
   document.body.classList.remove("modo-filtro");
