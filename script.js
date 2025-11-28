@@ -1438,17 +1438,34 @@ function criarBarraFiltros(){
                 class="clear hidden absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full border grid place-items-center leading-none">&times;</button>
       </div>
 
-      <select id="filtroPreco" class="select-pill px-3 py-1.5 rounded-full border h-10">
-        <option value="">Pre\u00E7o</option>
-        <option value="0">At\u00E9 R$ 50</option>
-        <option value="1">R$ 50\u2013R$ 150</option>
-        <option value="2">+ R$ 150</option>
-      </select>
+      <div class="filters-compact relative">
+        <input type="checkbox" id="toggleFiltros" class="filters-toggle" />
+        <label for="toggleFiltros" class="filter-chip select-pill px-3 py-1.5 rounded-full border h-10 flex items-center gap-2">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+            <path d="M3 5h18M6 12h12M10 19h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="filter-chip-label">Filtros</span>
+        </label>
+        <div class="filters-panel">
+          <label class="filters-field">
+            <span>Pre\u00E7o</span>
+            <select id="filtroPreco" class="select-pill px-3 py-1.5 rounded-full border h-10">
+              <option value="">Pre\u00E7o</option>
+              <option value="0">At\u00E9 R$ 50</option>
+              <option value="1">R$ 50\u2013R$ 150</option>
+              <option value="2">+ R$ 150</option>
+            </select>
+          </label>
 
-      <select id="filtroCategoria" class="px-3 py-1.5 rounded-full border min-w-[180px] md:min-w-[160px] sm:min-w-[140px] h-10 font-semibold">
-        <option value="">Categoria</option>
-        <option>Roupas</option><option>Acess\u00F3rios</option><option>Higiene</option><option>Camas</option><option>Ra\u00E7\u00F5es</option>
-      </select>
+          <label class="filters-field">
+            <span>Categoria</span>
+            <select id="filtroCategoria" class="px-3 py-1.5 rounded-full border min-w-[180px] md:min-w-[160px] sm:min-w-[140px] h-10 font-semibold">
+              <option value="">Categoria</option>
+              <option>Roupas</option><option>Acess\u00F3rios</option><option>Higiene</option><option>Camas</option><option>Ra\u00E7\u00F5es</option>
+            </select>
+          </label>
+        </div>
+      </div>
     </div>
   `;
 
@@ -1461,9 +1478,14 @@ function criarBarraFiltros(){
   });
   if (clear) clear.addEventListener("click", ()=>{ busca.value = ""; showClear(); aplicarFiltros(); });
 
+  const toggleFiltros = linhaSlot.querySelector("#toggleFiltros");
+
   ["filtroPreco","filtroCategoria"].forEach(id=>{
     const elx = linhaSlot.querySelector(`#${id}`);
-    if (elx) elx.addEventListener("change", aplicarFiltros);
+    if (elx) elx.addEventListener("change", ()=>{
+      aplicarFiltros();
+      if (toggleFiltros && window.innerWidth <= 640) toggleFiltros.checked = false;
+    });
   });
 
   lojasSlot.querySelectorAll(".origemCheck").forEach(chk=>{
